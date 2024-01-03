@@ -1,27 +1,27 @@
-/*  BaseFXML - a JavaFX application 'framework' that uses Maven, FXML and CSS.
+/*  PDFBookGen - a JavaFX application 'framework' that uses Maven, FXML and CSS.
  *
  *  Copyright 2022 Philip Lockett.
  *
- *  This file is part of BaseFXML.
+ *  This file is part of PDFBookGen.
  *
- *  BaseFXML is free software: you can redistribute it and/or modify
+ *  PDFBookGen is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  BaseFXML is distributed in the hope that it will be useful,
+ *  PDFBookGen is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with BaseFXML.  If not, see <https://www.gnu.org/licenses/>.
+ *  along with PDFBookGen.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 /*
  * Boilerplate code responsible for launching the JavaFX application. 
  */
-package phillockett65.BaseFXML;
+package phillockett65.PDFBookGen;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -49,7 +49,7 @@ public class App extends Application {
 
         scene.getStylesheets().add(App.class.getResource("application.css").toExternalForm());
 
-        stage.setTitle("BaseFXML");
+        stage.setTitle("PDFBookGen");
         stage.setOnCloseRequest(e -> Platform.exit());
         stage.resizableProperty().setValue(false);
         stage.setScene(scene);

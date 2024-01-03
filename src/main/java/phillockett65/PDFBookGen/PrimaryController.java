@@ -1,28 +1,28 @@
-/*  BaseFXML - a JavaFX application 'framework' that uses Maven, FXML and CSS.
+/*  PDFBookGen - a JavaFX application 'framework' that uses Maven, FXML and CSS.
  *
  *  Copyright 2022 Philip Lockett.
  *
- *  This file is part of BaseFXML.
+ *  This file is part of PDFBookGen.
  *
- *  BaseFXML is free software: you can redistribute it and/or modify
+ *  PDFBookGen is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  BaseFXML is distributed in the hope that it will be useful,
+ *  PDFBookGen is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with BaseFXML.  If not, see <https://www.gnu.org/licenses/>.
+ *  along with PDFBookGen.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 /*
  * PrimaryController is the class that is responsible for centralizing control.
  * It is instantiated by the FXML loader creates the Model.
  */
-package phillockett65.BaseFXML;
+package phillockett65.PDFBookGen;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

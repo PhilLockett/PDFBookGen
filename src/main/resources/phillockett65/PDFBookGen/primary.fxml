@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" prefWidth="332.0" spacing="8.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="phillockett65.BaseFXML.PrimaryController">
+   <children>
+      <TitledPane text="Text Boxes">
+         <content>
+            <VBox spacing="4.0">
+               <children>
+                  <HBox spacing="4.0">
+                     <children>
+                        <Label text="Enter Text:" />
+                        <TextField fx:id="myTextField" onKeyTyped="#myTextFieldKeyTyped" />
+                     </children>
+                  </HBox>
+                  <TextArea fx:id="myTextArea" onKeyTyped="#myTextAreaKeyTyped" prefHeight="100.0" prefWidth="200.0" />
+               </children>
+            </VBox>
+         </content>
+      </TitledPane>
+      <TitledPane layoutX="30.0" layoutY="137.0" text="Check Boxes and Radio Buttons">
+         <content>
+            <GridPane hgap="4.0" vgap="2.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <CheckBox fx:id="firstCheckBox" mnemonicParsing="false" onAction="#firstCheckBoxActionPerformed" text="First Check Box" />
+                  <CheckBox fx:id="secondCheckBox" mnemonicParsing="false" onAction="#secondCheckBoxActionPerformed" text="Second Check Box" GridPane.rowIndex="1" />
+                  <CheckBox fx:id="thirdCheckBox" mnemonicParsing="false" onAction="#thirdCheckBoxActionPerformed" text="Third Check Box" GridPane.rowIndex="2" />
+                  <RadioButton fx:id="firstRadioButton" mnemonicParsing="false" onAction="#myRadioButtonActionPerformed" text="First Radio Button" GridPane.columnIndex="1">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="myToggleGroup" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="secondRadioButton" mnemonicParsing="false" onAction="#myRadioButtonActionPerformed" text="Second Radio Button" toggleGroup="$myToggleGroup" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <RadioButton fx:id="thirdRadioButton" mnemonicParsing="false" onAction="#myRadioButtonActionPerformed" text="Third Radio Button" toggleGroup="$myToggleGroup" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+               </children>
+            </GridPane>
+         </content>
+      </TitledPane>
+      <TitledPane text="Selections">
+         <content>
+            <GridPane hgap="4.0" vgap="4.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="128.3333740234375" minWidth="10.0" prefWidth="91.00000000000001" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="175.00000000000003" minWidth="10.0" prefWidth="175.00000000000003" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Choice Box:" GridPane.halignment="RIGHT" />
+                  <ChoiceBox fx:id="myChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" />
+                  <Label text="Combo Box:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                  <ComboBox fx:id="myComboBox" onAction="#myComboBoxActionPerformed" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label text="Color Picker:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                  <ColorPicker fx:id="myColourPicker" onAction="#myColourPickerActionPerformed" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+               </children>
+            </GridPane>
+         </content>
+      </TitledPane>
+      <TitledPane text="Spinners">
+         <content>
+            <GridPane hgap="4.0" vgap="4.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Int Spinner with wrap:" GridPane.halignment="RIGHT" />
+                  <Label text="Double Spinner:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                  <Label text="String Spinner:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                  <Spinner fx:id="intSpinner" GridPane.columnIndex="1" />
+                  <Spinner fx:id="doubleSpinner" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Spinner fx:id="daySpinner" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+               </children>
+            </GridPane>
+         </content>
+      </TitledPane>
+      <HBox>
+         <children>
+            <Label fx:id="statusLabel" text="Ready">
+               <font>
+                  <Font size="14.0" />
+               </font></Label>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button fx:id="clearDataButton" onAction="#clearDataButtonActionPerformed" text="Clear Data" />
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+   </padding>
+</VBox>

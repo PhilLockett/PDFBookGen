@@ -259,10 +259,10 @@ public class PrimaryController {
      */
 
     @FXML
-    private Spinner<Integer> intSpinner;
-    
+    private Spinner<Integer> firstPageSpinner;
+
     @FXML
-    private Spinner<Double> doubleSpinner;
+    private Spinner<Integer> lastPageSpinner;
     
     @FXML
     private Spinner<String> daySpinner;
@@ -271,27 +271,27 @@ public class PrimaryController {
      * Initialize "Page Range" panel.
      */
     private void initializeSpinners() {
-        intSpinner.setValueFactory(model.getIntegerSVF());
-        doubleSpinner.setValueFactory(model.getDoubleSVF());
-        daySpinner.setValueFactory(model.getDaySpinnerSVF());
+        firstPageSpinner.setValueFactory(model.getFirstPageSVF());
+        firstPageSpinner.getValueFactory().wrapAroundProperty().set(false);
+        firstPageSpinner.setTooltip(new Tooltip("Select first page to include in generated document"));
 
-        intSpinner.getValueFactory().wrapAroundProperty().set(true);
-        daySpinner.getValueFactory().wrapAroundProperty().set(true);
-
-        intSpinner.setTooltip(new Tooltip("Select integer"));
-        doubleSpinner.setTooltip(new Tooltip("Select double"));
-        daySpinner.setTooltip(new Tooltip("Select your favourite day"));
-        
-        intSpinner.valueProperty().addListener( (v, oldValue, newValue) -> {
+        firstPageSpinner.valueProperty().addListener( (v, oldValue, newValue) -> {
             // System.out.println("intSpinner.Listener(" + newValue + "))");
-            model.setInteger(newValue);
+            model.setFirstPage(newValue);
         });
 
-        doubleSpinner.valueProperty().addListener( (v, oldValue, newValue) -> {
+        lastPageSpinner.setValueFactory(model.getLastPageSVF());
+        lastPageSpinner.getValueFactory().wrapAroundProperty().set(false);
+        lastPageSpinner.setTooltip(new Tooltip("Select last page to include in generated document"));
+
+        lastPageSpinner.valueProperty().addListener( (v, oldValue, newValue) -> {
             // System.out.println("doubleSpinner.Listener(" + newValue + "))");
-            model.setDouble(newValue);
+            model.setLastPage(newValue);
         });
-
+        
+                daySpinner.setValueFactory(model.getDaySpinnerSVF());
+                daySpinner.setTooltip(new Tooltip("Select your favourite day"));
+        
         daySpinner.valueProperty().addListener( (v, oldValue, newValue) -> {
             // System.out.println("daySpinner.Listener(" + newValue + "))");
             model.setDay(newValue);

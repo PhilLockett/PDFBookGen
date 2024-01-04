@@ -111,9 +111,9 @@
               </rowConstraints>
                <children>
                   <Label text="First Page:" GridPane.halignment="RIGHT" />
-                  <Spinner fx:id="intSpinner" GridPane.columnIndex="1" />
+                  <Spinner fx:id="firstPageSpinner" GridPane.columnIndex="1" />
                   <Label text="Last Page:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-                  <Spinner fx:id="doubleSpinner" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Spinner fx:id="lastPageSpinner" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Label text="String Spinner:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
                   <Spinner fx:id="daySpinner" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>

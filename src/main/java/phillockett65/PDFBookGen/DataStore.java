@@ -45,8 +45,8 @@ public class DataStore implements Serializable {
     private Integer pageSizeIndex;
     private Integer sigSizeIndex;
 
-    private Integer myInteger;
-    private Double myDouble;
+    private Integer firstPage;
+    private Integer lastPage;
     private Integer day;
 
 
@@ -77,14 +77,14 @@ public class DataStore implements Serializable {
 
     public Integer getPageSizeIndex() { return pageSizeIndex; }
     public void setPageSizeIndex(Integer index) { this.pageSizeIndex = index; }
-
     public Integer getSigSizeIndex() { return sigSizeIndex; }
     public void setSigSizeIndex(Integer index) { this.sigSizeIndex = index; }
 
-    public Integer getMyInteger() { return myInteger; }
-    public void setMyInteger(Integer myInteger) { this.myInteger = myInteger; }
-    public Double getMyDouble() { return myDouble; }
-    public void setMyDouble(Double myDouble) { this.myDouble = myDouble; }
+    public Integer getFirstPage() { return firstPage; }
+    public void setFirstPage(Integer value) { this.firstPage = value; }
+    public Integer getLastPage() { return lastPage; }
+    public void setLastPage(Integer value) { this.lastPage = value; }
+
     public Integer getDay() { return day; }
     public void setDay(Integer day) { this.day = day; }
 
@@ -105,8 +105,8 @@ public class DataStore implements Serializable {
         System.out.println("radioSelection = " + radioSelection);
         System.out.println("pageSizeIndex = " + pageSizeIndex);
         System.out.println("sigSizeIndex = " + sigSizeIndex);
-        System.out.println("myInteger = " + myInteger);
-        System.out.println("myDouble = " + myDouble);
+        System.out.println("firstPage = " + firstPage);
+        System.out.println("lastPage = " + lastPage);
         System.out.println("day = " + day);
     }
 

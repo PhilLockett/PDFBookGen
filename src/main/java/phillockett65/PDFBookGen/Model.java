@@ -94,8 +94,8 @@ public class Model {
 
         setSecondRadio();
 
-        setInteger(10);
-        setDouble(1.0);
+        setFirstPage(1);
+        setLastPage(1);
         setDayIndex(1);
 
         setPageSizeIndex(7);
@@ -133,8 +133,8 @@ public class Model {
         data.setPageSizeIndex(getPageSizeIndex());
         data.setSigSizeIndex(getSigSizeIndex());
 
-        data.setMyInteger(getInteger());
-        data.setMyDouble(getDouble());
+        data.setFirstPage(getFirstPage());
+        data.setLastPage(getLastPage());
         data.setDay(getDayIndex());
     
         if (!DataStore.writeData(data, getSettingsFile())) {
@@ -174,8 +174,8 @@ public class Model {
         setPageSizeIndex(data.getPageSizeIndex());
         setSigSizeIndex(data.getSigSizeIndex());
     
-        setInteger(data.getMyInteger());
-        setDouble(data.getMyDouble());
+        setFirstPage(data.getFirstPage());
+        setLastPage(data.getLastPage());
         setDayIndex(data.getDay());
     
         return true;
@@ -276,22 +276,20 @@ public class Model {
      * Support code for "Spinners" panel.
      */
 
-    private SpinnerValueFactory<Integer> integerSVF;
+    private SpinnerValueFactory<Integer> firstPageSVF;
+    public SpinnerValueFactory<Integer> getFirstPageSVF() { return firstPageSVF; }
+    public int getFirstPage() { return firstPageSVF.getValue(); }
+    public void setFirstPage(int value) { firstPageSVF.setValue(value); }
 
-    private SpinnerValueFactory<Double>  doubleSVF;
-
+    private SpinnerValueFactory<Integer>  lastPageSVF;
+    public SpinnerValueFactory<Integer> getLastPageSVF() { return lastPageSVF; }
+    public int getLastPage() { return lastPageSVF.getValue(); }
+    public void setLastPage(int value) { lastPageSVF.setValue(value); }
+    
     private ObservableList<String> daysOfWeekList = FXCollections.observableArrayList();
     private ListSpinner day;
 
-    public SpinnerValueFactory<Integer> getIntegerSVF() { return integerSVF; }
-    public SpinnerValueFactory<Double> getDoubleSVF() { return doubleSVF; }
     public SpinnerValueFactory<String> getDaySpinnerSVF() { return day.getSVF(); }
-
-    public int getInteger() { return integerSVF.getValue(); }
-    public double getDouble() { return doubleSVF.getValue(); }
-    public void setInteger(int value) { integerSVF.setValue(value); }
-    public void setDouble(double value) { doubleSVF.setValue(value); }
-
     public String getDay() { return day.getCurrent(); }
     public int getDayIndex() { return day.getIndex(); }
     public void setDay(String value) { day.setCurrent(value); }
@@ -302,8 +300,8 @@ public class Model {
      * Initialize "Spinners" panel.
      */
     private void initializeSpinners() {
-        integerSVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 10);
-        doubleSVF = new SpinnerValueFactory.DoubleSpinnerValueFactory(1.0, 20.0, 1.0, 0.2);
+        firstPageSVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 1);
+        lastPageSVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 1);
 
         daysOfWeekList.add("Monday");
         daysOfWeekList.add("Tuesday");

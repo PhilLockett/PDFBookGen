@@ -96,7 +96,6 @@ public class Model {
 
         setFirstPage(1);
         setLastPage(1);
-        setDayIndex(1);
 
         setPageSizeIndex(7);
         setSigSizeIndex(0);
@@ -135,7 +134,6 @@ public class Model {
 
         data.setFirstPage(getFirstPage());
         data.setLastPage(getLastPage());
-        data.setDay(getDayIndex());
     
         if (!DataStore.writeData(data, getSettingsFile())) {
             data.dump();
@@ -176,7 +174,6 @@ public class Model {
     
         setFirstPage(data.getFirstPage());
         setLastPage(data.getLastPage());
-        setDayIndex(data.getDay());
     
         return true;
     }
@@ -285,16 +282,6 @@ public class Model {
     public SpinnerValueFactory<Integer> getLastPageSVF() { return lastPageSVF; }
     public int getLastPage() { return lastPageSVF.getValue(); }
     public void setLastPage(int value) { lastPageSVF.setValue(value); }
-    
-    private ObservableList<String> daysOfWeekList = FXCollections.observableArrayList();
-    private ListSpinner day;
-
-    public SpinnerValueFactory<String> getDaySpinnerSVF() { return day.getSVF(); }
-    public String getDay() { return day.getCurrent(); }
-    public int getDayIndex() { return day.getIndex(); }
-    public void setDay(String value) { day.setCurrent(value); }
-    public void setDayIndex(int value) { day.setIndex(value); }
-    public void incrementDay(int step) { day.increment(step); }
 
     /**
      * Initialize "Spinners" panel.
@@ -302,16 +289,6 @@ public class Model {
     private void initializeSpinners() {
         firstPageSVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 1);
         lastPageSVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 1);
-
-        daysOfWeekList.add("Monday");
-        daysOfWeekList.add("Tuesday");
-        daysOfWeekList.add("Wednesday");
-        daysOfWeekList.add("Thursday");
-        daysOfWeekList.add("Friday");
-        daysOfWeekList.add("Saturday");
-        daysOfWeekList.add("Sunday");
-
-        day = new ListSpinner(daysOfWeekList);
     }
 
 

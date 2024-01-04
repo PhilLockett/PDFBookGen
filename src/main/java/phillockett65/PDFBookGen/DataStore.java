@@ -47,7 +47,6 @@ public class DataStore implements Serializable {
 
     private Integer firstPage;
     private Integer lastPage;
-    private Integer day;
 
 
 
@@ -85,9 +84,6 @@ public class DataStore implements Serializable {
     public Integer getLastPage() { return lastPage; }
     public void setLastPage(Integer value) { this.lastPage = value; }
 
-    public Integer getDay() { return day; }
-    public void setDay(Integer day) { this.day = day; }
-
 
 
     /************************************************************************
@@ -107,7 +103,6 @@ public class DataStore implements Serializable {
         System.out.println("sigSizeIndex = " + sigSizeIndex);
         System.out.println("firstPage = " + firstPage);
         System.out.println("lastPage = " + lastPage);
-        System.out.println("day = " + day);
     }
 
 

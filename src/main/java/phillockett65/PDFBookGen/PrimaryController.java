@@ -245,7 +245,7 @@ public class PrimaryController {
             setPageCountString();
         });
 
-        pageSizeChoiceBox.setTooltip(new Tooltip("Page size of the generated PDF document"));
+        pageSizeChoiceBox.setTooltip(new Tooltip("Paper size of the generated PDF document"));
         sigSizeChoiceBox.setTooltip(new Tooltip("Number of sheets of paper in each Signature"));
         sigLabel.setTooltip(new Tooltip("Number of pages from the source document in each Signature"));
 
@@ -263,9 +263,6 @@ public class PrimaryController {
 
     @FXML
     private Spinner<Integer> lastPageSpinner;
-    
-    @FXML
-    private Spinner<String> daySpinner;
 
     /**
      * Initialize "Page Range" panel.
@@ -287,14 +284,6 @@ public class PrimaryController {
         lastPageSpinner.valueProperty().addListener( (v, oldValue, newValue) -> {
             // System.out.println("doubleSpinner.Listener(" + newValue + "))");
             model.setLastPage(newValue);
-        });
-        
-                daySpinner.setValueFactory(model.getDaySpinnerSVF());
-                daySpinner.setTooltip(new Tooltip("Select your favourite day"));
-        
-        daySpinner.valueProperty().addListener( (v, oldValue, newValue) -> {
-            // System.out.println("daySpinner.Listener(" + newValue + "))");
-            model.setDay(newValue);
         });
 
     }

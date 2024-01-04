@@ -88,7 +88,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="Output Page Size:" GridPane.halignment="RIGHT" />
+                  <Label text="Output Paper Size:" GridPane.halignment="RIGHT" />
                   <ChoiceBox fx:id="pageSizeChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" />
                   <Label text="Signature Size:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
                   <ChoiceBox fx:id="sigSizeChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
@@ -114,8 +114,6 @@
                   <Spinner fx:id="firstPageSpinner" GridPane.columnIndex="1" />
                   <Label text="Last Page:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
                   <Spinner fx:id="lastPageSpinner" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label text="String Spinner:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
-                  <Spinner fx:id="daySpinner" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
             </GridPane>
          </content>

@@ -243,7 +243,11 @@ public class Model {
 
     private int pageCount = 50;
     public int getPageCount() { return pageCount; }
-    public void setPageCount(int value) { pageCount = value; }
+    public void setPageCount(int value) {
+        pageCount = value;
+        firstPageSVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, value, 1);
+        lastPageSVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, value, value);
+    }
 
     private SpinnerValueFactory<Integer> firstPageSVF;
     public SpinnerValueFactory<Integer> getFirstPageSVF() { return firstPageSVF; }

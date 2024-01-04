@@ -139,9 +139,9 @@ public class PrimaryController {
      * Initialize "File Names" panel.
      */
     private void initializeTextBoxes() {
-        sourceDocumentTextField.setTooltip(new Tooltip("Source document"));
+        sourceDocumentTextField.setTooltip(new Tooltip("Source PDF document"));
         outputFileNameTextField.setTooltip(new Tooltip("Name of generated output file, .pdf will be added automatically"));
-        browseButton.setTooltip(new Tooltip("Select source document .pdf"));
+        browseButton.setTooltip(new Tooltip("Select source PDF document"));
     }
 
 
@@ -236,6 +236,14 @@ public class PrimaryController {
     @FXML
     private Label countLabel;
 
+    @FXML
+    private Button generateButton;
+
+    @FXML
+    void generateButtonActionPerformed(ActionEvent event) {
+        setStatusMessage("Generating.");
+    }
+
 
     private void setTotalPageCountMessage() {
         countLabel.setText(String.valueOf(model.getTotalPageCount()));
@@ -247,25 +255,26 @@ public class PrimaryController {
     private void initializeSpinners() {
         firstPageSpinner.setValueFactory(model.getFirstPageSVF());
         firstPageSpinner.getValueFactory().wrapAroundProperty().set(false);
-        firstPageSpinner.setTooltip(new Tooltip("Select first page to include in the generated document"));
-
+        
         firstPageSpinner.valueProperty().addListener( (v, oldValue, newValue) -> {
             // System.out.println("intSpinner.Listener(" + newValue + "))");
             model.setFirstPage(newValue);
             setTotalPageCountMessage();
         });
-
+        
         lastPageSpinner.setValueFactory(model.getLastPageSVF());
         lastPageSpinner.getValueFactory().wrapAroundProperty().set(false);
-        lastPageSpinner.setTooltip(new Tooltip("Select last page to include in the generated document"));
-
+        
         lastPageSpinner.valueProperty().addListener( (v, oldValue, newValue) -> {
             // System.out.println("doubleSpinner.Listener(" + newValue + "))");
             model.setLastPage(newValue);
             setTotalPageCountMessage();
         });
-
+        
+        firstPageSpinner.setTooltip(new Tooltip("Select first page of source document to include in the generated document"));
+        lastPageSpinner.setTooltip(new Tooltip("Select last page of source document to include in the generated document"));
         countLabel.setTooltip(new Tooltip("Number of pages from the source document to include in the generated document"));
+        generateButton.setTooltip(new Tooltip("Generate the PDF document in booklet form"));
 
         setTotalPageCountMessage();
     }

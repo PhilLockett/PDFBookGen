@@ -29,12 +29,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Spinner;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Tooltip;
@@ -98,7 +95,6 @@ public class PrimaryController {
      */
     public void syncUI() {
         myTextField.setText(model.getMyText());
-        myTextArea.setText(model.getMyBigText());
 
         firstCheckBox.setSelected(model.isFirstCheck());
         secondCheckBox.setSelected(model.isSecondCheck());
@@ -108,9 +104,7 @@ public class PrimaryController {
         secondRadioButton.setSelected(model.isSecondRadio());
         thirdRadioButton.setSelected(model.isThirdRadio());
 
-        myChoiceBox.setValue(model.getMonth());
-        myComboBox.setValue(model.getBestDay());
-        myColourPicker.setValue(model.getMyColour());
+        pageSizeChoiceBox.setValue(model.getMonth());
     }
 
 
@@ -122,8 +116,6 @@ public class PrimaryController {
     @FXML
     private TextField myTextField;
     
-    @FXML
-    private TextArea myTextArea;
 
     @FXML
     void myTextFieldKeyTyped(KeyEvent event) {
@@ -132,21 +124,11 @@ public class PrimaryController {
     }
 
 
-    @FXML
-    void myTextAreaKeyTyped(KeyEvent event) {
-        // System.out.println("myTextAreaKeyTyped() " + event.toString());
-        model.setMyBigText(myTextArea.getText());
-    }
-
     /**
      * Initialize "Text Boxes" panel.
      */
     private void initializeTextBoxes() {
-        myTextArea.setPromptText("Add multi line text here.");
-        myTextArea.setWrapText(true);
-
-        myTextField.setTooltip(new Tooltip("Add some text"));
-        myTextArea.setTooltip(new Tooltip("Add lots of text"));
+        myTextField.setTooltip(new Tooltip("Name of generated output file, .pdf will be added automatically"));
     }
 
 
@@ -235,47 +217,25 @@ public class PrimaryController {
      */
 
     @FXML
-    private ChoiceBox<String> myChoiceBox;
-
-    @FXML
-    private ComboBox<String> myComboBox;
-    
-    @FXML
-    private ColorPicker myColourPicker;
-
-    @FXML
-    void myComboBoxActionPerformed(ActionEvent event) {
-        // System.out.println("baseDirectoryComboBoxActionPerformed() " + event.toString());
-
-        model.setBestDay(myComboBox.getValue());
-    }
-
-    @FXML
-    void myColourPickerActionPerformed(ActionEvent event) {
-        model.setMyColour(myColourPicker.getValue());
-        myTextField.setText(model.getMyColourString());
-    }
+    private ChoiceBox<String> pageSizeChoiceBox;
 
     /**
      * Initialize "Selections" panel.
      */
     private void initializeSelections() {
-        myChoiceBox.setItems(model.getMonthList());
-        myComboBox.setItems(model.getBestDayList());
+        pageSizeChoiceBox.setItems(model.getMonthList());
 
-        myChoiceBox.getSelectionModel().selectedItemProperty().addListener( (v, oldValue, newValue) -> {
+        pageSizeChoiceBox.getSelectionModel().selectedItemProperty().addListener( (v, oldValue, newValue) -> {
             model.setMonth(newValue);
         });
 
-        myChoiceBox.setTooltip(new Tooltip("Select from a choice box"));
-        myComboBox.setTooltip(new Tooltip("Select from a combo box"));
-        myColourPicker.setTooltip(new Tooltip("Select a Colour"));
+        pageSizeChoiceBox.setTooltip(new Tooltip("Select from a choice box"));
     }
 
 
 
     /************************************************************************
-     * Support code for "Spinners" panel.
+     * Support code for "Page Range" panel.
      */
 
     @FXML
@@ -288,7 +248,7 @@ public class PrimaryController {
     private Spinner<String> daySpinner;
 
     /**
-     * Initialize "Spinners" panel.
+     * Initialize "Page Range" panel.
      */
     private void initializeSpinners() {
         intSpinner.setValueFactory(model.getIntegerSVF());

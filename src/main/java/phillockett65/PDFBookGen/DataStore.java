@@ -31,13 +31,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-import javafx.scene.paint.Color;
-
 public class DataStore implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String myText;
-    private String myBigText;
 
     private Boolean firstCheck;
     private Boolean secondCheck;
@@ -46,10 +43,6 @@ public class DataStore implements Serializable {
     private Integer radioSelection;
 
     private Integer monthIndex;
-    private Integer bestDayIndex;
-    private Double red;
-    private Double green;
-    private Double blue;
 
     private Integer myInteger;
     private Double myDouble;
@@ -66,8 +59,6 @@ public class DataStore implements Serializable {
 
     public String getMyText() { return myText; }
     public void setMyText(String myText) { this.myText = myText; }
-    public String getMyBigText() { return myBigText; }
-    public void setMyBigText(String myBigText) { this.myBigText = myBigText; }
 
     public Boolean getFirstCheck() { return firstCheck; }
     public void setFirstCheck(Boolean firstCheck) { this.firstCheck = firstCheck; }
@@ -85,14 +76,6 @@ public class DataStore implements Serializable {
 
     public Integer getMonthIndex() { return monthIndex; }
     public void setMonthIndex(Integer monthIndex) { this.monthIndex = monthIndex; }
-    public Integer getBestDayIndex() { return bestDayIndex; }
-    public void setBestDayIndex(Integer bestDayIndex) { this.bestDayIndex = bestDayIndex; }
-    public Color getMyColour() { return Color.color(red, green, blue); }
-    public void setMyColour(Color colour) {
-        red = colour.getRed();
-        green = colour.getGreen();
-        blue = colour.getBlue();
-    }
 
     public Integer getMyInteger() { return myInteger; }
     public void setMyInteger(Integer myInteger) { this.myInteger = myInteger; }
@@ -112,14 +95,11 @@ public class DataStore implements Serializable {
       */
       public void dump() {
         System.out.println("myText = " + myText);
-        System.out.println("myBigText = " + myBigText);
         System.out.println("firstCheck = " + firstCheck);
         System.out.println("secondCheck = " + secondCheck);
         System.out.println("thirdCheck = " + thirdCheck);
         System.out.println("radioSelection = " + radioSelection);
         System.out.println("monthIndex = " + monthIndex);
-        System.out.println("bestDayIndex = " + bestDayIndex);
-        System.out.println("Colour = RGB(" + red + ", " + green + ", " + blue + ")");
         System.out.println("myInteger = " + myInteger);
         System.out.println("myDouble = " + myDouble);
         System.out.println("day = " + day);

@@ -27,7 +27,6 @@ package phillockett65.PDFBookGen;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.SpinnerValueFactory;
-import javafx.scene.paint.Color;
 
 public class Model {
 
@@ -37,15 +36,6 @@ public class Model {
     /************************************************************************
      * General support code.
      */
-
-    /**
-     * Convert a real colour value (0.0 to 1.0) to an int (0 too 256).
-     * @param value to convert.
-     * @return converted value.
-     */
-    private int colourRealToInt(double value) {
-        return (int)(value * 256);
-    }
 
     /**
      * @return the file path of the settings data file.
@@ -97,7 +87,6 @@ public class Model {
      */
     public void defaultSettings() {
         setMyText("Hello World");
-        setMyBigText("");
 
         setFirstCheck(true);
         setSecondCheck(false);
@@ -110,8 +99,6 @@ public class Model {
         setDayIndex(1);
 
         setMonthIndex(6);
-        setBestDayIndex(0);
-        setMyColour(Color.RED);
     }
 
 
@@ -128,7 +115,6 @@ public class Model {
         DataStore data = new DataStore();
 
         data.setMyText(getMyText());
-        data.setMyBigText(getMyBigText());
 
         data.setFirstCheck(isFirstCheck());
         data.setSecondCheck(isSecondCheck());
@@ -144,8 +130,6 @@ public class Model {
             data.setThirdRadio();
 
         data.setMonthIndex(getMonthIndex());
-        data.setBestDayIndex(getBestDayIndex());
-        data.setMyColour(getMyColour());
 
         data.setMyInteger(getInteger());
         data.setMyDouble(getDouble());
@@ -171,7 +155,6 @@ public class Model {
             return false;
 
         setMyText(data.getMyText());
-        setMyBigText(data.getMyBigText());
 
         setFirstCheck(data.getFirstCheck());
         setSecondCheck(data.getSecondCheck());
@@ -187,8 +170,6 @@ public class Model {
             setThirdRadio();
 
         setMonthIndex(data.getMonthIndex());
-        setBestDayIndex(data.getBestDayIndex());
-        setMyColour(data.getMyColour());
     
         setInteger(data.getMyInteger());
         setDouble(data.getMyDouble());
@@ -200,19 +181,16 @@ public class Model {
 
 
     /************************************************************************
-     * Support code for "Text Boxes" panel.
+     * Support code for "File Names" panel.
      */
 
     private String myText;
-    private String myBigText;
 
     public void setMyText(String text) { myText = text; }
     public String getMyText() { return myText; }
-    public void setMyBigText(String text) { myBigText = text; }
-    public String getMyBigText() { return myBigText; }
 
     /**
-     * Initialize "Text Boxes" panel.
+     * Initialize "File Names" panel.
      */
     private void initializeTextBoxes() {
     }
@@ -262,10 +240,6 @@ public class Model {
     private int monthIndex;
     private ObservableList<String> monthList = FXCollections.observableArrayList();
 
-    private int bestDayIndex;
-    private ObservableList<String> bestDayList = FXCollections.observableArrayList();
-
-    private Color myColour;
 
     public ObservableList<String> getMonthList() { return monthList; }
     public void setMonth(String value) { monthIndex = monthList.indexOf(value); }
@@ -273,40 +247,11 @@ public class Model {
     public void setMonthIndex(int value) { monthIndex = value; }
     public int getMonthIndex() { return monthIndex; }
 
-    public ObservableList<String> getBestDayList() { return bestDayList; }
-    public void setBestDay(String value) { bestDayIndex = bestDayList.indexOf(value); }
-    public String getBestDay() { return bestDayList.get(bestDayIndex); }
-    public void setBestDayIndex(int value) { bestDayIndex = value; }
-    public int getBestDayIndex() { return bestDayIndex; }
-
-    public Color getMyColour() { return myColour; }
-    public void setMyColour(Color colour) { myColour = colour; }
-
-    /**
-     * @return myColour as a displayable RGB string.
-     */
-    public String getMyColourString() {
-        return String.format("rgb(%d, %d, %d)",
-                colourRealToInt(myColour.getRed()),
-                colourRealToInt(myColour.getGreen()),
-                colourRealToInt(myColour.getBlue()));
-    }
 
     /**
      * Initialize "Selections" panel.
      */
     private void initializeSelections() {
-        bestDayList.add("New Year");
-        bestDayList.add("Good Friday");
-        bestDayList.add("Easter Monday");
-        bestDayList.add("Victoria Day");
-        bestDayList.add("Canada Day");
-        bestDayList.add("Civic Holiday");
-        bestDayList.add("Labour Day");
-        bestDayList.add("Thanksgiving Day");
-        bestDayList.add("Remembrance Day");
-        bestDayList.add("Christmas Day");
-        bestDayList.add("Boxing Day");
 
         monthList.addAll("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
     }

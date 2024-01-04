@@ -260,6 +260,7 @@ public class PrimaryController {
             // System.out.println("intSpinner.Listener(" + newValue + "))");
             model.setFirstPage(newValue);
             setTotalPageCountMessage();
+            lastPageSpinner.setValueFactory(model.getLastPageSVF());
         });
         
         lastPageSpinner.setValueFactory(model.getLastPageSVF());
@@ -269,6 +270,7 @@ public class PrimaryController {
             // System.out.println("doubleSpinner.Listener(" + newValue + "))");
             model.setLastPage(newValue);
             setTotalPageCountMessage();
+            firstPageSpinner.setValueFactory(model.getFirstPageSVF());
         });
         
         firstPageSpinner.setTooltip(new Tooltip("Select first page of source document to include in the generated document"));

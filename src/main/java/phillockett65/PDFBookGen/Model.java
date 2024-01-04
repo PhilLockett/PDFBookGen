@@ -92,6 +92,7 @@ public class Model {
         setRotateCheck(true);
         setPadCheck(false);
 
+        setPageCount(100);
         setFirstPage(1);
         setLastPage(1);
 
@@ -240,16 +241,34 @@ public class Model {
      * Support code for "Spinners" panel.
      */
 
+    private int pageCount = 50;
+    public int getPageCount() { return pageCount; }
+    public void setPageCount(int value) { pageCount = value; }
+
     private SpinnerValueFactory<Integer> firstPageSVF;
     public SpinnerValueFactory<Integer> getFirstPageSVF() { return firstPageSVF; }
     public int getFirstPage() { return firstPageSVF.getValue(); }
-    public void setFirstPage(int value) { firstPageSVF.setValue(value); }
+    public void setFirstPage(int value) { firstPageSVF.setValue(value); setLastPageRange(value); }
+
+    private void setFirstPageRange(int value) {
+        int current = getFirstPage();
+        if (current > value)
+            current = value;
+        firstPageSVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, value, current);
+    }
 
     private SpinnerValueFactory<Integer>  lastPageSVF;
     public SpinnerValueFactory<Integer> getLastPageSVF() { return lastPageSVF; }
     public int getLastPage() { return lastPageSVF.getValue(); }
-    public void setLastPage(int value) { lastPageSVF.setValue(value); }
+    public void setLastPage(int value) { lastPageSVF.setValue(value); setFirstPageRange(value); }
     public int getTotalPageCount() { return getLastPage()-getFirstPage()+1; }
+
+    private void setLastPageRange(int value) {
+        int current = getLastPage();
+        if (current < value)
+            current = value;
+        lastPageSVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(value, getPageCount(), current);
+    }
 
     /**
      * Initialize "Spinners" panel.

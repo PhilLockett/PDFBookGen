@@ -40,7 +40,7 @@
                         <TextField fx:id="sourceDocumentTextField" editable="false" onKeyTyped="#sourceDocumentTextFieldKeyTyped" GridPane.columnIndex="1" GridPane.columnSpan="2" />
                         <Label text="Output File Name:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
                         <TextField fx:id="outputFileNameTextField" onKeyTyped="#outputFileNameTextFieldKeyTyped" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Button mnemonicParsing="false" text="Browse..." GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <Button fx:id="browseButton" mnemonicParsing="false" onAction="#browseButtonActionPerformed" text="Browse..." GridPane.columnIndex="2" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
                </children>

@@ -116,6 +116,14 @@ public class PrimaryController {
      */
 
     @FXML
+    private Button browseButton;
+
+    @FXML
+    void browseButtonActionPerformed(ActionEvent event) {
+        setStatusMessage("File selected.");
+    }
+
+    @FXML
     private TextField sourceDocumentTextField;
 
     @FXML
@@ -140,6 +148,7 @@ public class PrimaryController {
     private void initializeTextBoxes() {
         sourceDocumentTextField.setTooltip(new Tooltip("Source document"));
         outputFileNameTextField.setTooltip(new Tooltip("Name of generated output file, .pdf will be added automatically"));
+        browseButton.setTooltip(new Tooltip("Select Source document .pdf"));
     }
 
 

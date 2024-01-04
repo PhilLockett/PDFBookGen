@@ -34,7 +34,8 @@ import java.io.Serializable;
 public class DataStore implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String myText;
+    private String sourceDocument;
+    private String outputFileName;
 
     private Boolean firstCheck;
     private Boolean secondCheck;
@@ -57,8 +58,10 @@ public class DataStore implements Serializable {
     public DataStore() {
     }
 
-    public String getMyText() { return myText; }
-    public void setMyText(String myText) { this.myText = myText; }
+    public String getSourceDocument() { return sourceDocument; }
+    public void setSourceDocument(String text) { this.sourceDocument = text; }
+    public String getOutputFileName() { return outputFileName; }
+    public void setOutputFileName(String text) { this.outputFileName = text; }
 
     public Boolean getFirstCheck() { return firstCheck; }
     public void setFirstCheck(Boolean firstCheck) { this.firstCheck = firstCheck; }
@@ -94,7 +97,7 @@ public class DataStore implements Serializable {
       * Print data store on the command line.
       */
       public void dump() {
-        System.out.println("myText = " + myText);
+        System.out.println("myText = " + outputFileName);
         System.out.println("firstCheck = " + firstCheck);
         System.out.println("secondCheck = " + secondCheck);
         System.out.println("thirdCheck = " + thirdCheck);

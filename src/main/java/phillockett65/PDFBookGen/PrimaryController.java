@@ -94,7 +94,8 @@ public class PrimaryController {
      * in the initialisation.
      */
     public void syncUI() {
-        myTextField.setText(model.getMyText());
+        sourceDocumentTextField.setText(model.getSourceDocument());
+        outputFileNameTextField.setText(model.getOutputFileName());
 
         firstCheckBox.setSelected(model.isFirstCheck());
         secondCheckBox.setSelected(model.isSecondCheck());
@@ -111,25 +112,34 @@ public class PrimaryController {
 
 
     /************************************************************************
-     * Support code for "Text Boxes" panel.
+     * Support code for "File Names" panel.
      */
 
     @FXML
-    private TextField myTextField;
-    
+    private TextField sourceDocumentTextField;
 
     @FXML
-    void myTextFieldKeyTyped(KeyEvent event) {
-        // System.out.println("myTextFieldKeyTyped() " + event.toString());
-        model.setMyText(myTextField.getText());
+    void sourceDocumentTextFieldKeyTyped(KeyEvent event) {
+        // System.out.println("sourceDocumentTextFieldKeyTyped() " + event.toString());
+        model.setOutputFileName(sourceDocumentTextField.getText());
+    }
+
+    @FXML
+    private TextField outputFileNameTextField;
+
+    @FXML
+    void outputFileNameTextFieldKeyTyped(KeyEvent event) {
+        // System.out.println("outputFileNameTextFieldKeyTyped() " + event.toString());
+        model.setOutputFileName(outputFileNameTextField.getText());
     }
 
 
     /**
-     * Initialize "Text Boxes" panel.
+     * Initialize "File Names" panel.
      */
     private void initializeTextBoxes() {
-        myTextField.setTooltip(new Tooltip("Name of generated output file, .pdf will be added automatically"));
+        sourceDocumentTextField.setTooltip(new Tooltip("Source document"));
+        outputFileNameTextField.setTooltip(new Tooltip("Name of generated output file, .pdf will be added automatically"));
     }
 
 

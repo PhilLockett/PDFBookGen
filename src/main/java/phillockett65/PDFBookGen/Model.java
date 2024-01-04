@@ -86,7 +86,8 @@ public class Model {
      * Set all attributes to the default values.
      */
     public void defaultSettings() {
-        setMyText("Hello World");
+        setSourceDocument(".");
+        setOutputFileName("Enter filename");
 
         setFirstCheck(true);
         setSecondCheck(false);
@@ -114,7 +115,7 @@ public class Model {
     public boolean writeData() {
         DataStore data = new DataStore();
 
-        data.setMyText(getMyText());
+        data.setOutputFileName(getOutputFileName());
 
         data.setFirstCheck(isFirstCheck());
         data.setSecondCheck(isSecondCheck());
@@ -154,7 +155,8 @@ public class Model {
         if (data == null)
             return false;
 
-        setMyText(data.getMyText());
+        setSourceDocument(data.getSourceDocument());
+        setOutputFileName(data.getOutputFileName());
 
         setFirstCheck(data.getFirstCheck());
         setSecondCheck(data.getSecondCheck());
@@ -184,10 +186,15 @@ public class Model {
      * Support code for "File Names" panel.
      */
 
-    private String myText;
+    private String sourceDocument;
 
-    public void setMyText(String text) { myText = text; }
-    public String getMyText() { return myText; }
+    public void setSourceDocument(String text) { sourceDocument = text; }
+    public String getSourceDocument() { return sourceDocument; }
+
+    private String outputFileName;
+
+    public void setOutputFileName(String text) { outputFileName = text; }
+    public String getOutputFileName() { return outputFileName; }
 
     /**
      * Initialize "File Names" panel.

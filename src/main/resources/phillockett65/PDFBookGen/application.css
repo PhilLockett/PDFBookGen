@@ -23,9 +23,9 @@
     -fx-background-color: #e8e8e8;
 }
 .text-field:readonly{
-    -fx-text-fill: white;
+    -fx-text-fill: black;
     -fx-font-weight: bold;
-    -fx-background-color: #808080;
+    -fx-background-color: #B0B0B0;
 }
 .combo-box{
     -fx-font-weight: bold;

@@ -114,6 +114,8 @@
                   <Spinner fx:id="firstPageSpinner" GridPane.columnIndex="1" />
                   <Label text="Last Page:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
                   <Spinner fx:id="lastPageSpinner" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label text="Total Page Count:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                  <Label fx:id="countLabel" text="1" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
             </GridPane>
          </content>

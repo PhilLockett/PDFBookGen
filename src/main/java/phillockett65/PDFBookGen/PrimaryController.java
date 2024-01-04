@@ -229,6 +229,7 @@ public class PrimaryController {
     private void setPageCountString() {
         sigLabel.setText("(" + model.getSigPageCount() + " pages)");
     }
+
     /**
      * Initialize "Selections" panel.
      */
@@ -264,28 +265,41 @@ public class PrimaryController {
     @FXML
     private Spinner<Integer> lastPageSpinner;
 
+    @FXML
+    private Label countLabel;
+
+
+    private void setTotalPageCountString() {
+        countLabel.setText(String.valueOf(model.getTotalPageCount()));
+    }
+
     /**
      * Initialize "Page Range" panel.
      */
     private void initializeSpinners() {
         firstPageSpinner.setValueFactory(model.getFirstPageSVF());
         firstPageSpinner.getValueFactory().wrapAroundProperty().set(false);
-        firstPageSpinner.setTooltip(new Tooltip("Select first page to include in generated document"));
+        firstPageSpinner.setTooltip(new Tooltip("Select first page to include in the generated document"));
 
         firstPageSpinner.valueProperty().addListener( (v, oldValue, newValue) -> {
             // System.out.println("intSpinner.Listener(" + newValue + "))");
             model.setFirstPage(newValue);
+            setTotalPageCountString();
         });
 
         lastPageSpinner.setValueFactory(model.getLastPageSVF());
         lastPageSpinner.getValueFactory().wrapAroundProperty().set(false);
-        lastPageSpinner.setTooltip(new Tooltip("Select last page to include in generated document"));
+        lastPageSpinner.setTooltip(new Tooltip("Select last page to include in the generated document"));
 
         lastPageSpinner.valueProperty().addListener( (v, oldValue, newValue) -> {
             // System.out.println("doubleSpinner.Listener(" + newValue + "))");
             model.setLastPage(newValue);
+            setTotalPageCountString();
         });
 
+        countLabel.setTooltip(new Tooltip("Number of pages from the source document to include in the generated document"));
+
+        setTotalPageCountString();
     }
 
 

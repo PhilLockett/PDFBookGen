@@ -104,7 +104,8 @@ public class PrimaryController {
         secondRadioButton.setSelected(model.isSecondRadio());
         thirdRadioButton.setSelected(model.isThirdRadio());
 
-        pageSizeChoiceBox.setValue(model.getMonth());
+        pageSizeChoiceBox.setValue(model.getPageSize());
+        sigSizeChoiceBox.setValue(model.getSigSize());
     }
 
 
@@ -219,17 +220,36 @@ public class PrimaryController {
     @FXML
     private ChoiceBox<String> pageSizeChoiceBox;
 
+    @FXML
+    private ChoiceBox<String> sigSizeChoiceBox;
+
+    @FXML
+    private Label sigLabel;
+
+    private void setPageCountString() {
+        sigLabel.setText("(" + model.getSigPageCount() + " pages)");
+    }
     /**
      * Initialize "Selections" panel.
      */
     private void initializeSelections() {
-        pageSizeChoiceBox.setItems(model.getMonthList());
+        pageSizeChoiceBox.setItems(model.getPageSizeList());
+        sigSizeChoiceBox.setItems(model.getSigSizeList());
 
         pageSizeChoiceBox.getSelectionModel().selectedItemProperty().addListener( (v, oldValue, newValue) -> {
-            model.setMonth(newValue);
+            model.setPageSize(newValue);
         });
 
-        pageSizeChoiceBox.setTooltip(new Tooltip("Select from a choice box"));
+        sigSizeChoiceBox.getSelectionModel().selectedItemProperty().addListener( (v, oldValue, newValue) -> {
+            model.setSigSize(newValue);
+            setPageCountString();
+        });
+
+        pageSizeChoiceBox.setTooltip(new Tooltip("Page size of the generated PDF document"));
+        sigSizeChoiceBox.setTooltip(new Tooltip("Number of sheets of paper in each Signature"));
+        sigLabel.setTooltip(new Tooltip("Number of pages from the source document in each Signature"));
+
+        setPageCountString();
     }
 
 

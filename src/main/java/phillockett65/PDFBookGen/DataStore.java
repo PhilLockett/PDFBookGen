@@ -42,7 +42,8 @@ public class DataStore implements Serializable {
 
     private Integer radioSelection;
 
-    private Integer monthIndex;
+    private Integer pageSizeIndex;
+    private Integer sigSizeIndex;
 
     private Integer myInteger;
     private Double myDouble;
@@ -74,8 +75,11 @@ public class DataStore implements Serializable {
     public boolean isThirdRadio() { return radioSelection == 3; }
     public void setThirdRadio() { radioSelection =  3; }
 
-    public Integer getMonthIndex() { return monthIndex; }
-    public void setMonthIndex(Integer monthIndex) { this.monthIndex = monthIndex; }
+    public Integer getPageSizeIndex() { return pageSizeIndex; }
+    public void setPageSizeIndex(Integer index) { this.pageSizeIndex = index; }
+
+    public Integer getSigSizeIndex() { return sigSizeIndex; }
+    public void setSigSizeIndex(Integer index) { this.sigSizeIndex = index; }
 
     public Integer getMyInteger() { return myInteger; }
     public void setMyInteger(Integer myInteger) { this.myInteger = myInteger; }
@@ -99,7 +103,8 @@ public class DataStore implements Serializable {
         System.out.println("secondCheck = " + secondCheck);
         System.out.println("thirdCheck = " + thirdCheck);
         System.out.println("radioSelection = " + radioSelection);
-        System.out.println("monthIndex = " + monthIndex);
+        System.out.println("pageSizeIndex = " + pageSizeIndex);
+        System.out.println("sigSizeIndex = " + sigSizeIndex);
         System.out.println("myInteger = " + myInteger);
         System.out.println("myDouble = " + myDouble);
         System.out.println("day = " + day);

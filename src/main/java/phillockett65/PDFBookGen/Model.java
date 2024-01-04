@@ -98,7 +98,8 @@ public class Model {
         setDouble(1.0);
         setDayIndex(1);
 
-        setMonthIndex(6);
+        setPageSizeIndex(7);
+        setSigSizeIndex(0);
     }
 
 
@@ -129,7 +130,8 @@ public class Model {
         if (isThirdRadio())
             data.setThirdRadio();
 
-        data.setMonthIndex(getMonthIndex());
+        data.setPageSizeIndex(getPageSizeIndex());
+        data.setSigSizeIndex(getSigSizeIndex());
 
         data.setMyInteger(getInteger());
         data.setMyDouble(getDouble());
@@ -169,7 +171,8 @@ public class Model {
         if (data.isThirdRadio())
             setThirdRadio();
 
-        setMonthIndex(data.getMonthIndex());
+        setPageSizeIndex(data.getPageSizeIndex());
+        setSigSizeIndex(data.getSigSizeIndex());
     
         setInteger(data.getMyInteger());
         setDouble(data.getMyDouble());
@@ -237,15 +240,25 @@ public class Model {
      * Support code for "Selections" panel.
      */
 
-    private int monthIndex;
-    private ObservableList<String> monthList = FXCollections.observableArrayList();
+    private int pageSizeIndex;
+    private ObservableList<String> pageSizeList = FXCollections.observableArrayList();
+    
+    private int sigSizeIndex;
+    private ObservableList<String> sigSizeList = FXCollections.observableArrayList();
 
+    public ObservableList<String> getPageSizeList() { return pageSizeList; }
+    public void setPageSize(String value) { pageSizeIndex = pageSizeList.indexOf(value); }
+    public String getPageSize() { return pageSizeList.get(pageSizeIndex); }
+    public void setPageSizeIndex(int value) { pageSizeIndex = value; }
+    public int getPageSizeIndex() { return pageSizeIndex; }
 
-    public ObservableList<String> getMonthList() { return monthList; }
-    public void setMonth(String value) { monthIndex = monthList.indexOf(value); }
-    public String getMonth() { return monthList.get(monthIndex); }
-    public void setMonthIndex(int value) { monthIndex = value; }
-    public int getMonthIndex() { return monthIndex; }
+    public ObservableList<String> getSigSizeList() { return sigSizeList; }
+    public void setSigSize(String value) { sigSizeIndex = sigSizeList.indexOf(value); }
+    public String getSigSize() { return sigSizeList.get(sigSizeIndex); }
+    public void setSigSizeIndex(int value) { sigSizeIndex = value; }
+    public int getSigSizeIndex() { return sigSizeIndex; }
+    public int getSigSheetCount() { return getSigSizeIndex() + 1; }
+    public int getSigPageCount() { return getSigSheetCount() * 4; }
 
 
     /**
@@ -253,7 +266,8 @@ public class Model {
      */
     private void initializeSelections() {
 
-        monthList.addAll("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+        pageSizeList.addAll("A0", "A1", "A2", "A3", "A4", "A5", "A6", "Letter", "Legal");
+        sigSizeList.addAll("1 Sheet", "2 Sheets", "3 Sheets", "4 Sheets", "5 Sheets", "6 Sheets");
     }
 
 

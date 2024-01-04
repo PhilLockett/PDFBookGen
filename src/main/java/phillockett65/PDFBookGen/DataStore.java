@@ -37,11 +37,8 @@ public class DataStore implements Serializable {
     private String sourceDocument;
     private String outputFileName;
 
-    private Boolean firstCheck;
-    private Boolean secondCheck;
-    private Boolean thirdCheck;
-
-    private Integer radioSelection;
+    private Boolean rotateCheck;
+    private Boolean padCheck;
 
     private Integer pageSizeIndex;
     private Integer sigSizeIndex;
@@ -63,19 +60,10 @@ public class DataStore implements Serializable {
     public String getOutputFileName() { return outputFileName; }
     public void setOutputFileName(String text) { this.outputFileName = text; }
 
-    public Boolean getFirstCheck() { return firstCheck; }
-    public void setFirstCheck(Boolean firstCheck) { this.firstCheck = firstCheck; }
-    public Boolean getSecondCheck() { return secondCheck; }
-    public void setSecondCheck(Boolean secondCheck) { this.secondCheck = secondCheck; }
-    public Boolean getThirdCheck() { return thirdCheck; }
-    public void setThirdCheck(Boolean thirdCheck) { this.thirdCheck = thirdCheck; }
-
-    public boolean isFirstRadio() { return radioSelection == 1; }
-    public void setFirstRadio() { radioSelection =  1; }
-    public boolean isSecondRadio() { return radioSelection == 2; }
-    public void setSecondRadio() { radioSelection =  2; }
-    public boolean isThirdRadio() { return radioSelection == 3; }
-    public void setThirdRadio() { radioSelection =  3; }
+    public Boolean isRotateCheck() { return rotateCheck; }
+    public void setRotateCheck(Boolean check) { this.rotateCheck = check; }
+    public Boolean isPadCheck() { return padCheck; }
+    public void setPadCheck(Boolean check) { this.padCheck = check; }
 
     public Integer getPageSizeIndex() { return pageSizeIndex; }
     public void setPageSizeIndex(Integer index) { this.pageSizeIndex = index; }
@@ -97,11 +85,9 @@ public class DataStore implements Serializable {
       * Print data store on the command line.
       */
       public void dump() {
-        System.out.println("myText = " + outputFileName);
-        System.out.println("firstCheck = " + firstCheck);
-        System.out.println("secondCheck = " + secondCheck);
-        System.out.println("thirdCheck = " + thirdCheck);
-        System.out.println("radioSelection = " + radioSelection);
+        System.out.println("outputFileName = " + outputFileName);
+        System.out.println("rotateCheck = " + rotateCheck);
+        System.out.println("padCheck = " + padCheck);
         System.out.println("pageSizeIndex = " + pageSizeIndex);
         System.out.println("sigSizeIndex = " + sigSizeIndex);
         System.out.println("firstPage = " + firstPage);

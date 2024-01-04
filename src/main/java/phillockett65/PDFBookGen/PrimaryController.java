@@ -30,10 +30,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyEvent;
 
@@ -97,13 +95,8 @@ public class PrimaryController {
         sourceDocumentTextField.setText(model.getSourceDocument());
         outputFileNameTextField.setText(model.getOutputFileName());
 
-        firstCheckBox.setSelected(model.isFirstCheck());
-        secondCheckBox.setSelected(model.isSecondCheck());
-        thirdCheckBox.setSelected(model.isThirdCheck());
-
-        firstRadioButton.setSelected(model.isFirstRadio());
-        secondRadioButton.setSelected(model.isSecondRadio());
-        thirdRadioButton.setSelected(model.isThirdRadio());
+        rotateCheckBox.setSelected(model.isRotateCheck());
+        padCheckBox.setSelected(model.isPadCheck());
 
         pageSizeChoiceBox.setValue(model.getPageSize());
         sigSizeChoiceBox.setValue(model.getSigSize());
@@ -148,7 +141,7 @@ public class PrimaryController {
     private void initializeTextBoxes() {
         sourceDocumentTextField.setTooltip(new Tooltip("Source document"));
         outputFileNameTextField.setTooltip(new Tooltip("Name of generated output file, .pdf will be added automatically"));
-        browseButton.setTooltip(new Tooltip("Select Source document .pdf"));
+        browseButton.setTooltip(new Tooltip("Select source document .pdf"));
     }
 
 
@@ -158,76 +151,32 @@ public class PrimaryController {
      */
 
     @FXML
-    private CheckBox firstCheckBox;
+    private CheckBox rotateCheckBox;
 
     @FXML
-    private CheckBox secondCheckBox;
+    private CheckBox padCheckBox;
 
     @FXML
-    private CheckBox thirdCheckBox;
-
-    @FXML
-    private ToggleGroup myToggleGroup;
-
-    @FXML
-    private RadioButton firstRadioButton;
-
-    @FXML
-    private RadioButton secondRadioButton;
-
-    @FXML
-    private RadioButton thirdRadioButton;
-
-    @FXML
-    void firstCheckBoxActionPerformed(ActionEvent event) {
-        model.setFirstCheck(firstCheckBox.isSelected());
-        final String state = model.isFirstCheck() ? "selected." : "unselected.";
-        setStatusMessage("First check box " + state);
+    void rotateCheckBoxActionPerformed(ActionEvent event) {
+        model.setRotateCheck(rotateCheckBox.isSelected());
+        final String state = model.isRotateCheck() ? "selected." : "unselected.";
+        setStatusMessage("Rotate check box is " + state);
     }
 
     @FXML
-    void secondCheckBoxActionPerformed(ActionEvent event) {
-        model.setSecondCheck(secondCheckBox.isSelected());
-        final String state = model.isSecondCheck() ? "selected." : "unselected.";
-        setStatusMessage("Second check box " + state);
+    void padCheckBoxActionPerformed(ActionEvent event) {
+        model.setPadCheck(padCheckBox.isSelected());
+        final String state = model.isPadCheck() ? "selected." : "unselected.";
+        setStatusMessage("Pad check box is " + state);
     }
 
-    @FXML
-    void thirdCheckBoxActionPerformed(ActionEvent event) {
-        model.setThirdCheck(thirdCheckBox.isSelected());
-        final String state = model.isThirdCheck() ? "selected." : "unselected.";
-        setStatusMessage("Third check box " + state);
-    }
-
-    @FXML
-    void myRadioButtonActionPerformed(ActionEvent event) {
-        if (firstRadioButton.isSelected()) {
-            model.setFirstRadio();
-            setStatusMessage("First radio button selected.");
-        }
-        else
-        if (secondRadioButton.isSelected()) {
-            model.setSecondRadio();
-            setStatusMessage("Second radio button selected.");
-        }
-        else
-        if (thirdRadioButton.isSelected()) {
-            model.setThirdRadio();
-            setStatusMessage("Third radio button selected.");
-        }
-    }
 
     /**
      * Initialize "Check Boxes and Radio Buttons" panel.
      */
     private void initializeCheckBoxes() {
-        firstCheckBox.setTooltip(new Tooltip("First check box"));
-        secondCheckBox.setTooltip(new Tooltip("Second check box"));
-        thirdCheckBox.setTooltip(new Tooltip("Third check box"));
-
-        firstRadioButton.setTooltip(new Tooltip("First radio button"));
-        secondRadioButton.setTooltip(new Tooltip("Second radio button"));
-        thirdRadioButton.setTooltip(new Tooltip("Third radio button"));
+        rotateCheckBox.setTooltip(new Tooltip("Rotate reverse side of sheet 180 degrees"));
+        padCheckBox.setTooltip(new Tooltip("Pad out document with blank pages to ensure final signature is complete"));
     }
 
 
@@ -266,8 +215,8 @@ public class PrimaryController {
         });
 
         pageSizeChoiceBox.setTooltip(new Tooltip("Paper size of the generated PDF document"));
-        sigSizeChoiceBox.setTooltip(new Tooltip("Number of sheets of paper in each Signature"));
-        sigLabel.setTooltip(new Tooltip("Number of pages from the source document in each Signature"));
+        sigSizeChoiceBox.setTooltip(new Tooltip("Number of sheets of paper in each signature"));
+        sigLabel.setTooltip(new Tooltip("Number of pages from the source document in each signature"));
 
         setPageCountMessage();
     }

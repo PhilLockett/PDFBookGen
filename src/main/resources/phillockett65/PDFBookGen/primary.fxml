@@ -5,11 +5,9 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -60,16 +58,8 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <CheckBox fx:id="firstCheckBox" mnemonicParsing="false" onAction="#firstCheckBoxActionPerformed" text="Rotate Reverse Side of Sheet" />
-                  <CheckBox fx:id="secondCheckBox" mnemonicParsing="false" onAction="#secondCheckBoxActionPerformed" text="Pad Signature with Blank Pages" GridPane.rowIndex="1" />
-                  <CheckBox fx:id="thirdCheckBox" mnemonicParsing="false" onAction="#thirdCheckBoxActionPerformed" text="Third Check Box" GridPane.rowIndex="2" />
-                  <RadioButton fx:id="firstRadioButton" mnemonicParsing="false" onAction="#myRadioButtonActionPerformed" text="First Radio Button" GridPane.columnIndex="1">
-                     <toggleGroup>
-                        <ToggleGroup fx:id="myToggleGroup" />
-                     </toggleGroup>
-                  </RadioButton>
-                  <RadioButton fx:id="secondRadioButton" mnemonicParsing="false" onAction="#myRadioButtonActionPerformed" text="Second Radio Button" toggleGroup="$myToggleGroup" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <RadioButton fx:id="thirdRadioButton" mnemonicParsing="false" onAction="#myRadioButtonActionPerformed" text="Third Radio Button" toggleGroup="$myToggleGroup" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <CheckBox fx:id="rotateCheckBox" mnemonicParsing="false" onAction="#rotateCheckBoxActionPerformed" text="Rotate Reverse Side of Sheet" />
+                  <CheckBox fx:id="padCheckBox" mnemonicParsing="false" onAction="#padCheckBoxActionPerformed" text="Pad Signature with Blank Pages" GridPane.rowIndex="1" />
                </children>
             </GridPane>
          </content>

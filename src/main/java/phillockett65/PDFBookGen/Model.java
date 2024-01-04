@@ -89,11 +89,8 @@ public class Model {
         setSourceDocument(".");
         setOutputFileName("Enter filename");
 
-        setFirstCheck(true);
-        setSecondCheck(false);
-        setThirdCheck(false);
-
-        setSecondRadio();
+        setRotateCheck(true);
+        setPadCheck(false);
 
         setFirstPage(1);
         setLastPage(1);
@@ -117,18 +114,8 @@ public class Model {
 
         data.setOutputFileName(getOutputFileName());
 
-        data.setFirstCheck(isFirstCheck());
-        data.setSecondCheck(isSecondCheck());
-        data.setThirdCheck(isThirdCheck());
-
-        if (isFirstRadio())
-            data.setFirstRadio();
-        else
-        if (isSecondRadio())
-            data.setSecondRadio();
-        else
-        if (isThirdRadio())
-            data.setThirdRadio();
+        data.setRotateCheck(isRotateCheck());
+        data.setPadCheck(isPadCheck());
 
         data.setPageSizeIndex(getPageSizeIndex());
         data.setSigSizeIndex(getSigSizeIndex());
@@ -158,18 +145,8 @@ public class Model {
         setSourceDocument(data.getSourceDocument());
         setOutputFileName(data.getOutputFileName());
 
-        setFirstCheck(data.getFirstCheck());
-        setSecondCheck(data.getSecondCheck());
-        setThirdCheck(data.getThirdCheck());
-
-        if (data.isFirstRadio())
-            setFirstRadio();
-        else
-        if (data.isSecondRadio())
-            setSecondRadio();
-        else
-        if (data.isThirdRadio())
-            setThirdRadio();
+        setRotateCheck(data.isRotateCheck());
+        setPadCheck(data.isPadCheck());
 
         setPageSizeIndex(data.getPageSizeIndex());
         setSigSizeIndex(data.getSigSizeIndex());
@@ -187,12 +164,10 @@ public class Model {
      */
 
     private String sourceDocument;
-
     public void setSourceDocument(String text) { sourceDocument = text; }
     public String getSourceDocument() { return sourceDocument; }
 
     private String outputFileName;
-
     public void setOutputFileName(String text) { outputFileName = text; }
     public String getOutputFileName() { return outputFileName; }
 
@@ -208,29 +183,14 @@ public class Model {
      * Support code for "Check Boxes and Radio Buttons" panel.
      */
 
-    private boolean firstCheck;
-    private boolean secondCheck;
-    private boolean thirdCheck;
+    private boolean rotateCheck;
+    public void setRotateCheck(boolean state) { rotateCheck = state; }
+    public boolean isRotateCheck() { return rotateCheck; }
+    
+    private boolean padCheck;
+    public void setPadCheck(boolean state) { padCheck = state; }
+    public boolean isPadCheck() { return padCheck; }
 
-    private enum RadioSelection { FIRST, SECOND, THIRD };
-
-    private RadioSelection radioSelected;
-
-    public void setFirstCheck(boolean state) { firstCheck = state; }
-    public void setSecondCheck(boolean state) { secondCheck = state; }
-    public void setThirdCheck(boolean state) { thirdCheck = state; }
-
-    public boolean isFirstCheck() { return firstCheck; }
-    public boolean isSecondCheck() { return secondCheck; }
-    public boolean isThirdCheck() { return thirdCheck; }
-
-    public void setFirstRadio() { radioSelected = RadioSelection.FIRST; }
-    public void setSecondRadio() { radioSelected = RadioSelection.SECOND; }
-    public void setThirdRadio() { radioSelected = RadioSelection.THIRD; }
-
-    public boolean isFirstRadio() { return radioSelected == RadioSelection.FIRST; }
-    public boolean isSecondRadio() { return radioSelected == RadioSelection.SECOND; }
-    public boolean isThirdRadio() { return radioSelected == RadioSelection.THIRD; }
 
     /**
      * Initialize "Check Boxes and Radio Buttons" panel.
@@ -247,14 +207,14 @@ public class Model {
     private int pageSizeIndex;
     private ObservableList<String> pageSizeList = FXCollections.observableArrayList();
     
-    private int sigSizeIndex;
-    private ObservableList<String> sigSizeList = FXCollections.observableArrayList();
-
     public ObservableList<String> getPageSizeList() { return pageSizeList; }
     public void setPageSize(String value) { pageSizeIndex = pageSizeList.indexOf(value); }
     public String getPageSize() { return pageSizeList.get(pageSizeIndex); }
     public void setPageSizeIndex(int value) { pageSizeIndex = value; }
     public int getPageSizeIndex() { return pageSizeIndex; }
+
+    private int sigSizeIndex;
+    private ObservableList<String> sigSizeList = FXCollections.observableArrayList();
 
     public ObservableList<String> getSigSizeList() { return sigSizeList; }
     public void setSigSize(String value) { sigSizeIndex = sigSizeList.indexOf(value); }

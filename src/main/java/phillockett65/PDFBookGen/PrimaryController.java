@@ -236,7 +236,7 @@ public class PrimaryController {
     @FXML
     private Label sigLabel;
 
-    private void setPageCountString() {
+    private void setPageCountMessage() {
         sigLabel.setText("(" + model.getSigPageCount() + " pages)");
     }
 
@@ -253,14 +253,14 @@ public class PrimaryController {
 
         sigSizeChoiceBox.getSelectionModel().selectedItemProperty().addListener( (v, oldValue, newValue) -> {
             model.setSigSize(newValue);
-            setPageCountString();
+            setPageCountMessage();
         });
 
         pageSizeChoiceBox.setTooltip(new Tooltip("Paper size of the generated PDF document"));
         sigSizeChoiceBox.setTooltip(new Tooltip("Number of sheets of paper in each Signature"));
         sigLabel.setTooltip(new Tooltip("Number of pages from the source document in each Signature"));
 
-        setPageCountString();
+        setPageCountMessage();
     }
 
 
@@ -279,7 +279,7 @@ public class PrimaryController {
     private Label countLabel;
 
 
-    private void setTotalPageCountString() {
+    private void setTotalPageCountMessage() {
         countLabel.setText(String.valueOf(model.getTotalPageCount()));
     }
 
@@ -294,7 +294,7 @@ public class PrimaryController {
         firstPageSpinner.valueProperty().addListener( (v, oldValue, newValue) -> {
             // System.out.println("intSpinner.Listener(" + newValue + "))");
             model.setFirstPage(newValue);
-            setTotalPageCountString();
+            setTotalPageCountMessage();
         });
 
         lastPageSpinner.setValueFactory(model.getLastPageSVF());
@@ -304,12 +304,12 @@ public class PrimaryController {
         lastPageSpinner.valueProperty().addListener( (v, oldValue, newValue) -> {
             // System.out.println("doubleSpinner.Listener(" + newValue + "))");
             model.setLastPage(newValue);
-            setTotalPageCountString();
+            setTotalPageCountMessage();
         });
 
         countLabel.setTooltip(new Tooltip("Number of pages from the source document to include in the generated document"));
 
-        setTotalPageCountString();
+        setTotalPageCountMessage();
     }
 
 

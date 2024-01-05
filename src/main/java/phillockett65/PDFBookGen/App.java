@@ -1,6 +1,6 @@
-/*  PDFBookGen - a JavaFX application 'framework' that uses Maven, FXML and CSS.
+/*  PDFBookGen - a simple application to generate a booklet from of a PDF.
  *
- *  Copyright 2022 Philip Lockett.
+ *  Copyright 2024 Philip Lockett.
  *
  *  This file is part of PDFBookGen.
  *

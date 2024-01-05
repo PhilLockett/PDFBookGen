@@ -24,6 +24,8 @@
  */
 package phillockett65.PDFBookGen;
 
+import java.io.File;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.SpinnerValueFactory;
@@ -93,8 +95,8 @@ public class Model {
      * Set all attributes to the default values.
      */
     public void defaultSettings() {
-        setSourceDocument(".");
-        setOutputFileName("Enter filename");
+        setSourceFilePath("");
+        setOutputFileName("booklet");
 
         setRotateCheck(true);
         setPadCheck(false);
@@ -120,6 +122,7 @@ public class Model {
     public boolean writeData() {
         DataStore data = new DataStore();
 
+        data.setSourceDocument(getSourceFilePath());
         data.setOutputFileName(getOutputFileName());
 
         data.setRotateCheck(isRotateCheck());
@@ -150,7 +153,7 @@ public class Model {
         if (data == null)
             return false;
 
-        setSourceDocument(data.getSourceDocument());
+        setSourceFilePath(data.getSourceDocument());
         setOutputFileName(data.getOutputFileName());
 
         setRotateCheck(data.isRotateCheck());
@@ -172,12 +175,18 @@ public class Model {
      */
 
     private String sourceDocument;
-    public void setSourceDocument(String text) { sourceDocument = text; }
-    public String getSourceDocument() { return sourceDocument; }
+    public void setSourceFilePath(String text) { sourceDocument = text; }
+    public String getSourceFilePath() { return sourceDocument; }
+    public boolean isSourceFilePath() { return !sourceDocument.isBlank(); }
 
     private String outputFileName;
     public void setOutputFileName(String text) { outputFileName = text; }
     public String getOutputFileName() { return outputFileName; }
+    public String getOutputFilePath() {
+        File current = new File(getSourceFilePath());
+
+        return current.getParent() + "\\" + outputFileName + ".pdf";
+    }
 
     /**
      * Initialize "File Names" panel.

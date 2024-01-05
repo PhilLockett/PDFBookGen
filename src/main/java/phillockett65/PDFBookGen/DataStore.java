@@ -85,6 +85,7 @@ public class DataStore implements Serializable {
       * Print data store on the command line.
       */
       public void dump() {
+        System.out.println("sourceDocument = " + sourceDocument);
         System.out.println("outputFileName = " + outputFileName);
         System.out.println("rotateCheck = " + rotateCheck);
         System.out.println("padCheck = " + padCheck);

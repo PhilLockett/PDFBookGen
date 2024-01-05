@@ -101,6 +101,9 @@ public class PrimaryController {
         sourceDocumentTextField.setText(model.getSourceFilePath());
         outputFileNameTextField.setText(model.getOutputFileName());
 
+        syncFirstPageSpinner();
+        syncLastPageSpinner();
+
         rotateCheckBox.setSelected(model.isRotateCheck());
         padCheckBox.setSelected(model.isPadCheck());
 
@@ -286,28 +289,36 @@ public class PrimaryController {
         countLabel.setText(String.valueOf(model.getTotalPageCount()));
     }
 
+    private void syncFirstPageSpinner() {
+        firstPageSpinner.setValueFactory(model.getFirstPageSVF());
+    }
+
+    private void syncLastPageSpinner() {
+        lastPageSpinner.setValueFactory(model.getLastPageSVF());
+    }
+
     /**
      * Initialize "Page Range" panel.
      */
     private void initializeSpinners() {
-        firstPageSpinner.setValueFactory(model.getFirstPageSVF());
+        syncFirstPageSpinner();
         firstPageSpinner.getValueFactory().wrapAroundProperty().set(false);
         
         firstPageSpinner.valueProperty().addListener( (v, oldValue, newValue) -> {
             // System.out.println("intSpinner.Listener(" + newValue + "))");
             model.setFirstPage(newValue);
             setTotalPageCountMessage();
-            lastPageSpinner.setValueFactory(model.getLastPageSVF());
+            syncLastPageSpinner();
         });
-        
-        lastPageSpinner.setValueFactory(model.getLastPageSVF());
+
+        syncLastPageSpinner();
         lastPageSpinner.getValueFactory().wrapAroundProperty().set(false);
         
         lastPageSpinner.valueProperty().addListener( (v, oldValue, newValue) -> {
             // System.out.println("doubleSpinner.Listener(" + newValue + "))");
             model.setLastPage(newValue);
             setTotalPageCountMessage();
-            firstPageSpinner.setValueFactory(model.getFirstPageSVF());
+            syncFirstPageSpinner();
         });
         
         firstPageSpinner.setTooltip(new Tooltip("Select first page of source document to include in the generated document"));

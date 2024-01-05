@@ -175,7 +175,18 @@ public class Model {
      */
 
     private String sourceDocument;
-    public void setSourceFilePath(String text) { sourceDocument = text; }
+    public void setSourceFilePath(String text) {
+        sourceDocument = text;
+        setPageCount(fetchPageCount());
+    }
+
+    public int fetchPageCount() {
+        if (isSourceFilePath())
+            return PDFBook.getPDFPageCount(sourceDocument);
+
+        return 1;
+    }
+
     public String getSourceFilePath() { return sourceDocument; }
     public boolean isSourceFilePath() { return !sourceDocument.isBlank(); }
 

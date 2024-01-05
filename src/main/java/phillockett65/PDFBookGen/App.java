@@ -56,7 +56,7 @@ public class App extends Application {
 
         stage.show();
 
-        controller.init();
+        controller.init(stage);
     }
 
     @Override

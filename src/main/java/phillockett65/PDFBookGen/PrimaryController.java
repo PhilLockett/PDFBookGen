@@ -34,6 +34,7 @@ import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 
 
 public class PrimaryController {
@@ -72,10 +73,12 @@ public class PrimaryController {
     /**
      * Called by Application after the stage has been set. Completes any 
      * initialization dependent on other components being initialized.
+     * 
+     * @param mainController used to call the centralized controller.
      */
-    public void init() {
+    public void init(Stage primaryStage) {
         // System.out.println("PrimaryController init.");
-        model.init();
+        model.init(primaryStage);
         syncUI();
         setStatusMessage("Ready.");
     }

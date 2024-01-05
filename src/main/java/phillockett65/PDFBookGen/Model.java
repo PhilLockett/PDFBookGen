@@ -27,10 +27,13 @@ package phillockett65.PDFBookGen;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.SpinnerValueFactory;
+import javafx.stage.Stage;
 
 public class Model {
 
     private final static String DATAFILE = "Settings.dat";
+
+    private Stage stage;
 
 
     /************************************************************************
@@ -78,9 +81,13 @@ public class Model {
      * Called by the controller after the stage has been set. Completes any 
      * initialization dependent on other components being initialized.
      */
-    public void init() {
+    public void init(Stage primaryStage) {
         // System.out.println("Model init.");
+        
+        stage = primaryStage;
     }
+
+    public Stage getStage() { return stage; }
 
     /**
      * Set all attributes to the default values.

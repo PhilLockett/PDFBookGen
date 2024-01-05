@@ -105,7 +105,7 @@ public class Model {
         setFirstPage(1);
         setLastPage(1);
 
-        setPageSizeIndex(7);
+        setPaperSizeIndex(7);
         setSigSizeIndex(0);
     }
 
@@ -128,7 +128,7 @@ public class Model {
         data.setRotateCheck(isRotateCheck());
         data.setPadCheck(isPadCheck());
 
-        data.setPageSizeIndex(getPageSizeIndex());
+        data.setPaperSizeIndex(getPaperSizeIndex());
         data.setSigSizeIndex(getSigSizeIndex());
 
         data.setFirstPage(getFirstPage());
@@ -159,7 +159,7 @@ public class Model {
         setRotateCheck(data.isRotateCheck());
         setPadCheck(data.isPadCheck());
 
-        setPageSizeIndex(data.getPageSizeIndex());
+        setPaperSizeIndex(data.getPaperSizeIndex());
         setSigSizeIndex(data.getSigSizeIndex());
     
         setFirstPage(data.getFirstPage());
@@ -221,14 +221,14 @@ public class Model {
      * Support code for "Selections" panel.
      */
 
-    private int pageSizeIndex;
-    private ObservableList<String> pageSizeList = FXCollections.observableArrayList();
+    private int paperSizeIndex;
+    private ObservableList<String> paperSizeList = FXCollections.observableArrayList();
     
-    public ObservableList<String> getPageSizeList() { return pageSizeList; }
-    public void setPageSize(String value) { pageSizeIndex = pageSizeList.indexOf(value); }
-    public String getPageSize() { return pageSizeList.get(pageSizeIndex); }
-    public void setPageSizeIndex(int value) { pageSizeIndex = value; }
-    public int getPageSizeIndex() { return pageSizeIndex; }
+    public ObservableList<String> getPaperSizeList() { return paperSizeList; }
+    public void setPaperSize(String value) { paperSizeIndex = paperSizeList.indexOf(value); }
+    public String getPaperSize() { return paperSizeList.get(paperSizeIndex); }
+    public void setPaperSizeIndex(int value) { paperSizeIndex = value; }
+    public int getPaperSizeIndex() { return paperSizeIndex; }
 
     private int sigSizeIndex;
     private ObservableList<String> sigSizeList = FXCollections.observableArrayList();
@@ -247,7 +247,7 @@ public class Model {
      */
     private void initializeSelections() {
 
-        pageSizeList.addAll("A0", "A1", "A2", "A3", "A4", "A5", "A6", "Letter", "Legal");
+        paperSizeList.addAll("A0", "A1", "A2", "A3", "A4", "A5", "A6", "Letter", "Legal");
         sigSizeList.addAll("1 Sheet", "2 Sheets", "3 Sheets", "4 Sheets", "5 Sheets", "6 Sheets");
     }
 

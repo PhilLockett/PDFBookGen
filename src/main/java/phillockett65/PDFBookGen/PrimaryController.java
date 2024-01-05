@@ -104,7 +104,7 @@ public class PrimaryController {
         rotateCheckBox.setSelected(model.isRotateCheck());
         padCheckBox.setSelected(model.isPadCheck());
 
-        pageSizeChoiceBox.setValue(model.getPageSize());
+        paperSizeChoiceBox.setValue(model.getPaperSize());
         sigSizeChoiceBox.setValue(model.getSigSize());
     }
 
@@ -223,7 +223,7 @@ public class PrimaryController {
      */
 
     @FXML
-    private ChoiceBox<String> pageSizeChoiceBox;
+    private ChoiceBox<String> paperSizeChoiceBox;
 
     @FXML
     private ChoiceBox<String> sigSizeChoiceBox;
@@ -239,11 +239,11 @@ public class PrimaryController {
      * Initialize "Selections" panel.
      */
     private void initializeSelections() {
-        pageSizeChoiceBox.setItems(model.getPageSizeList());
+        paperSizeChoiceBox.setItems(model.getPaperSizeList());
         sigSizeChoiceBox.setItems(model.getSigSizeList());
 
-        pageSizeChoiceBox.getSelectionModel().selectedItemProperty().addListener( (v, oldValue, newValue) -> {
-            model.setPageSize(newValue);
+        paperSizeChoiceBox.getSelectionModel().selectedItemProperty().addListener( (v, oldValue, newValue) -> {
+            model.setPaperSize(newValue);
         });
 
         sigSizeChoiceBox.getSelectionModel().selectedItemProperty().addListener( (v, oldValue, newValue) -> {
@@ -251,7 +251,7 @@ public class PrimaryController {
             setPageCountMessage();
         });
 
-        pageSizeChoiceBox.setTooltip(new Tooltip("Paper size of the generated PDF document"));
+        paperSizeChoiceBox.setTooltip(new Tooltip("Paper size of the generated PDF document"));
         sigSizeChoiceBox.setTooltip(new Tooltip("Number of sheets of paper in each signature"));
         sigLabel.setTooltip(new Tooltip("Number of pages from the source document in each signature"));
 

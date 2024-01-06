@@ -38,7 +38,7 @@
                         <TextField fx:id="sourceDocumentTextField" editable="false" onKeyTyped="#sourceDocumentTextFieldKeyTyped" GridPane.columnIndex="1" GridPane.columnSpan="2" />
                         <Label text="Output File Name:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
                         <TextField fx:id="outputFileNameTextField" onKeyTyped="#outputFileNameTextFieldKeyTyped" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Button fx:id="browseButton" mnemonicParsing="false" onAction="#browseButtonActionPerformed" text="Browse..." GridPane.columnIndex="3" />
+                        <Button fx:id="browseButton" mnemonicParsing="false" onAction="#browseButtonActionPerformed" text="Browse..." GridPane.columnIndex="3" GridPane.halignment="RIGHT" />
                      </children>
                   </GridPane>
                </children>
@@ -75,7 +75,7 @@
                   <Label text="Signature Size:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
                   <ChoiceBox fx:id="sigSizeChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Label fx:id="sigLabel" text="(4 pages)" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <Button fx:id="generateButton" mnemonicParsing="false" onAction="#generateButtonActionPerformed" text="Generate" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                  <Button fx:id="generateButton" mnemonicParsing="false" onAction="#generateButtonActionPerformed" text="Generate" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
                </children>
             </GridPane>
          </content>

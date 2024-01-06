@@ -281,7 +281,11 @@ public class PrimaryController {
 
     @FXML
     void generateButtonActionPerformed(ActionEvent event) {
-        setStatusMessage("Generated: " + model.getOutputFilePath());
+        final boolean success = model.generate();
+        if (success)
+            setStatusMessage("Generated: " + model.getOutputFilePath());
+        else
+            setStatusMessage("Failed to generate: " + model.getOutputFilePath());
     }
 
 

@@ -26,6 +26,8 @@ package phillockett65.PDFBookGen;
 
 import java.io.File;
 
+import org.apache.pdfbox.pdmodel.common.PDRectangle;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.SpinnerValueFactory;
@@ -252,6 +254,29 @@ public class Model {
     public int getSigSheetCount() { return getSigSizeIndex() + 1; }
     public int getSigPageCount() { return getSigSheetCount() * 4; }
 
+    // Must match paperSizeList.
+    private PDRectangle[] paperSizeArray = { PDRectangle.A0, PDRectangle.A1, PDRectangle.A2, PDRectangle.A3, 
+        PDRectangle.A4, PDRectangle.A5, PDRectangle.A6, PDRectangle.LETTER, PDRectangle.LEGAL };
+
+    public PDRectangle getPDPaperSize() { return paperSizeArray[getPaperSizeIndex()]; }
+
+    // Use PDFBook object to generate booklet.
+    public boolean generate() {
+        PDFBook booklet = new PDFBook(getSourceFilePath(), getOutputFilePath());
+
+        booklet.setPageSize(getPDPaperSize());
+        booklet.setRotate(isRotateCheck());
+        booklet.setSheetCount(getSigSheetCount());
+
+        final int first = getFirstPage();
+        final int last = getLastPage();
+        booklet.setFirstPage(first-1);
+        booklet.setLastPage(last);
+
+        booklet.genBooklet();
+
+        return true;
+    }
 
     /**
      * Initialize "Selections" panel.

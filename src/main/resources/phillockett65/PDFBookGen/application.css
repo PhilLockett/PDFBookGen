@@ -52,13 +52,11 @@
     -fx-background-color: #9B4642;
     -fx-text-fill: #e8e8e8;
     -fx-font-weight: bold;
-    -fx-background-radius: 12;
 }
 .toggle-button:selected{
     -fx-background-color: green;
     -fx-text-fill: #e8e8e8;
     -fx-font-weight: bold;
-    -fx-background-radius: 12;
 }
 .toggle-button{
     -fx-background-color: red;

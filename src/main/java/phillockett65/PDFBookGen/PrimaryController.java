@@ -313,9 +313,9 @@ public class PrimaryController {
             syncFirstPageSpinner();
         });
         
-        firstPageSpinner.setTooltip(new Tooltip("Select first page of source document to include in the generated document"));
-        lastPageSpinner.setTooltip(new Tooltip("Select last page of source document to include in the generated document"));
-        countLabel.setTooltip(new Tooltip("Number of pages from the source document to include in the generated document"));
+        firstPageSpinner.setTooltip(new Tooltip("First page of source document to include in the generated document"));
+        lastPageSpinner.setTooltip(new Tooltip("Last page of source document to include in the generated document"));
+        countLabel.setTooltip(new Tooltip("Number of pages from the source document that will be included in the generated document"));
         generateButton.setTooltip(new Tooltip("Generate the PDF document in booklet form"));
 
         setTotalPageCountMessage();
@@ -349,7 +349,7 @@ public class PrimaryController {
      */
     private void initializeStatusLine() {
         statusLabel.setTooltip(new Tooltip("Current status"));
-        clearDataButton.setTooltip(new Tooltip("Reset data to default values"));
+        clearDataButton.setTooltip(new Tooltip("Caution! This irreversible action will reset the form data to default values"));
     }
 
 }

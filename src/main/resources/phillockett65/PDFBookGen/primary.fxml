@@ -72,7 +72,7 @@
                   <Label text="Signature Size:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
                   <ChoiceBox fx:id="sigSizeChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Label fx:id="sigLabel" text="(4 pages)" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <Button fx:id="generateButton" mnemonicParsing="false" onAction="#generateButtonActionPerformed" text="Generate" GridPane.columnIndex="3" GridPane.halignment="RIGHT" />
+                  <Button fx:id="generateButton" disable="true" mnemonicParsing="false" onAction="#generateButtonActionPerformed" text="Generate" GridPane.columnIndex="3" GridPane.halignment="RIGHT" />
                </children>
             </GridPane>
          </content>

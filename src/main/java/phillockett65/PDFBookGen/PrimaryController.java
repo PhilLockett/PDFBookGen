@@ -99,6 +99,8 @@ public class PrimaryController {
      */
     public void syncUI() {
         sourceDocumentTextField.setText(model.getSourceFilePath());
+        generateButton.setDisable(!model.isSourceFilePath());
+
         outputFileNameTextField.setText(model.getOutputFileName());
 
         syncFirstPageSpinner();

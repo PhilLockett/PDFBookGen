@@ -11,7 +11,7 @@
     -fx-text-fill: black;
 }
 .title{
-    -fx-background-color: #e8e8e8;
+    -fx-background-color: #B0B0B0;
     -fx-font-weight: bold;
 }
 
@@ -41,7 +41,7 @@
 }
 .content{
     -fx-background-color: #080808;
-	-fx-border-color: yellow;
+	-fx-border-color: #c0B0B0;
 	-fx-border-insets: 1;
 }
 .spinner{
@@ -49,7 +49,7 @@
 }
 
 .choice-box, .color-picker, .button{
-    -fx-background-color: #9B4642;
+    -fx-background-color: #81423F;
     -fx-text-fill: #e8e8e8;
     -fx-font-weight: bold;
 }
@@ -65,13 +65,13 @@
     -fx-background-radius: 12;
 }
 .context-menu{
-    -fx-background-color: #9B4642;
+    -fx-background-color: #81423F;
     -fx-text-fill: #e8e8e8;
     -fx-font-weight: bold;
 }
 
 .increment-arrow-button, .decrement-arrow-button{
-    -fx-background-color: #9B4642;
+    -fx-background-color: #81423F;
 }
 .increment-arrow, .decrement-arrow{
     -fx-background-color: #e8e8e8;
@@ -86,7 +86,7 @@
 }
 
 .progress-bar{
-    -fx-accent: #9B4642;
+    -fx-accent: #81423F;
 }
 
 .table-view{
@@ -94,7 +94,7 @@
     -fx-font-weight: bold;
 }
 .column-header, .filler{
-    -fx-background-color: #9B4642;
+    -fx-background-color: #81423F;
     -fx-font-weight: bold;
 }
 /*
@@ -104,8 +104,8 @@
 
 .list-cell:selected{
     -fx-text-fill: black;
-    -fx-background-color: #9B4642;
-    -fx-accent: #9B4642;
+    -fx-background-color: #81423F;
+    -fx-accent: #81423F;
 }
 .list-cell:even{
     -fx-background-color: #f8f8f8;

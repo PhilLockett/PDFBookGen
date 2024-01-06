@@ -9,7 +9,7 @@ CSS to render the GUI. Maven can be run from the command line as shown below.
 Maven resolves dependencies and builds the application independently of an IDE.
 
 ## Dependencies
-'PDFBookGen' is dependent on the following:
+'PDFBookGen' is dependent on the following in order to execute:
 
   * Java 15.0.1
   * Apache Maven 3.6.3
@@ -40,13 +40,13 @@ terms and techniques refer to:
 
 ## Implementation Summary
 For a "Signature Size" of "1 sheet" the document is processed in groups of 4 
-pages for each sheet of paper, where each page is captured as a BufferedImage. 
-The 4th page is rotated anti-clockwise and scaled to fit on the bottom half of 
-one side of the sheet. The 1st page is rotated anti-clockwise and scaled to 
-fit on the top half of the same side of the sheet. On the reverse side, the 
-2nd page is rotated clockwise and scaled to fit on the top half and the 3rd 
-page is rotated clockwise and scaled to fit on the bottom half. This process 
-is repeated for all groups of 4 pages in the source document.
+pages for each sheet of paper. The 4th page is rotated anti-clockwise and 
+scaled to fit on the bottom half of one side of the sheet. The 1st page is 
+rotated anti-clockwise and scaled to fit on the top half of the same side of 
+the sheet. On the reverse side, the 2nd page is rotated clockwise and scaled 
+to fit on the top half and the 3rd page is rotated clockwise and scaled to fit 
+on the bottom half. This process is repeated for all groups of 4 pages in the 
+source document.
 
 For a "Signature Size" of more than 1 sheet, more pages are grouped in 
 multiples of 4 and arranged in a similar, but more complex manner.

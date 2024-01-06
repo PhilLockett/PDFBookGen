@@ -101,7 +101,6 @@ public class Model {
         setOutputFileName("booklet");
 
         setRotateCheck(true);
-        setPadCheck(false);
 
         setPageCount(100);
         setFirstPage(1);
@@ -128,7 +127,6 @@ public class Model {
         data.setOutputFileName(getOutputFileName());
 
         data.setRotateCheck(isRotateCheck());
-        data.setPadCheck(isPadCheck());
 
         data.setPaperSizeIndex(getPaperSizeIndex());
         data.setSigSizeIndex(getSigSizeIndex());
@@ -159,7 +157,6 @@ public class Model {
         setOutputFileName(data.getOutputFileName());
 
         setRotateCheck(data.isRotateCheck());
-        setPadCheck(data.isPadCheck());
 
         setPaperSizeIndex(data.getPaperSizeIndex());
         setSigSizeIndex(data.getSigSizeIndex());
@@ -217,10 +214,6 @@ public class Model {
     public void setRotateCheck(boolean state) { rotateCheck = state; }
     public boolean isRotateCheck() { return rotateCheck; }
     
-    private boolean padCheck;
-    public void setPadCheck(boolean state) { padCheck = state; }
-    public boolean isPadCheck() { return padCheck; }
-
 
     /**
      * Initialize "Check Boxes and Radio Buttons" panel.
@@ -265,8 +258,8 @@ public class Model {
         PDFBook booklet = new PDFBook(getSourceFilePath(), getOutputFilePath());
 
         booklet.setPageSize(getPDPaperSize());
-        booklet.setRotate(isRotateCheck());
         booklet.setSheetCount(getSigSheetCount());
+        booklet.setRotate(isRotateCheck());
 
         final int first = getFirstPage();
         final int last = getLastPage();

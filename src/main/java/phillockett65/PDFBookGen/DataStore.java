@@ -38,7 +38,6 @@ public class DataStore implements Serializable {
     private String outputFileName;
 
     private Boolean rotateCheck;
-    private Boolean padCheck;
 
     private Integer paperSizeIndex;
     private Integer sigSizeIndex;
@@ -62,8 +61,6 @@ public class DataStore implements Serializable {
 
     public Boolean isRotateCheck() { return rotateCheck; }
     public void setRotateCheck(Boolean check) { this.rotateCheck = check; }
-    public Boolean isPadCheck() { return padCheck; }
-    public void setPadCheck(Boolean check) { this.padCheck = check; }
 
     public Integer getPaperSizeIndex() { return paperSizeIndex; }
     public void setPaperSizeIndex(Integer index) { this.paperSizeIndex = index; }
@@ -88,7 +85,6 @@ public class DataStore implements Serializable {
         System.out.println("sourceDocument = " + sourceDocument);
         System.out.println("outputFileName = " + outputFileName);
         System.out.println("rotateCheck = " + rotateCheck);
-        System.out.println("padCheck = " + padCheck);
         System.out.println("paperSizeIndex = " + paperSizeIndex);
         System.out.println("sigSizeIndex = " + sigSizeIndex);
         System.out.println("firstPage = " + firstPage);

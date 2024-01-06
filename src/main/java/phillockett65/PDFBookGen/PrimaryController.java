@@ -105,7 +105,6 @@ public class PrimaryController {
         syncLastPageSpinner();
 
         rotateCheckBox.setSelected(model.isRotateCheck());
-        padCheckBox.setSelected(model.isPadCheck());
 
         paperSizeChoiceBox.setValue(model.getPaperSize());
         sigSizeChoiceBox.setValue(model.getSigSize());
@@ -194,20 +193,10 @@ public class PrimaryController {
     private CheckBox rotateCheckBox;
 
     @FXML
-    private CheckBox padCheckBox;
-
-    @FXML
     void rotateCheckBoxActionPerformed(ActionEvent event) {
         model.setRotateCheck(rotateCheckBox.isSelected());
         final String state = model.isRotateCheck() ? "selected." : "unselected.";
         setStatusMessage("Rotate check box is " + state);
-    }
-
-    @FXML
-    void padCheckBoxActionPerformed(ActionEvent event) {
-        model.setPadCheck(padCheckBox.isSelected());
-        final String state = model.isPadCheck() ? "selected." : "unselected.";
-        setStatusMessage("Pad check box is " + state);
     }
 
 
@@ -216,7 +205,6 @@ public class PrimaryController {
      */
     private void initializeCheckBoxes() {
         rotateCheckBox.setTooltip(new Tooltip("Rotate reverse side of sheet 180 degrees"));
-        padCheckBox.setTooltip(new Tooltip("Pad out document with blank pages to ensure final signature is complete"));
     }
 
 
@@ -290,7 +278,7 @@ public class PrimaryController {
 
 
     private void setTotalPageCountMessage() {
-        countLabel.setText(String.valueOf(model.getTotalPageCount()));
+        countLabel.setText("Total Page Count: " + model.getTotalPageCount());
     }
 
     private void syncFirstPageSpinner() {

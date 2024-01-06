@@ -63,12 +63,10 @@
               </rowConstraints>
                <children>
                   <CheckBox fx:id="rotateCheckBox" mnemonicParsing="false" onAction="#rotateCheckBoxActionPerformed" text="Rotate Reverse Side of Sheet" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <CheckBox fx:id="padCheckBox" mnemonicParsing="false" onAction="#padCheckBoxActionPerformed" text="Pad Signature with Blank Pages" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                   <Label text="First Page:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
                   <Label text="Last Page:" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
                   <Spinner fx:id="firstPageSpinner" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <Spinner fx:id="lastPageSpinner" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <Label text="Total Page Count:" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
                   <Label fx:id="countLabel" text="1" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <Label text="Output Paper Size:" GridPane.halignment="RIGHT" />
                   <ChoiceBox fx:id="paperSizeChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" />

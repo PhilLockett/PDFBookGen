@@ -279,51 +279,6 @@ public class PDFBook {
         rotate = flip;
     }
 
-    /**
-     * Based on the SwingWorker example by "MadProgrammer" here:
-     * https://stackoverflow.com/questions/18835835/jprogressbar-not-updating
-     */
-    public class ProgressWorker extends SwingWorker<Object, Object> {
-
-        @Override
-        protected Object doInBackground() throws Exception {
-
-            try {
-                inputDoc = PDDocument.load(new File(sourcePDF));
-
-                try {
-                    outputDoc = new PDDocument();
-                    final int MAX = lastPage;
-                    final int COUNT = lastPage - firstPage;
-                    int last = firstPage;
-                    for (int first = last; first < MAX; first = last) {
-                        last += 4 * sheetCount;
-                        if (last > MAX) {
-                            last = MAX;
-                        }
-
-                        addPDPagesToPdf(first, last);
-                        setProgress(100 * (last - firstPage) / COUNT);
-                    }
-                    outputDoc.save(outputPDF);
-                    if (outputDoc != null) {
-                        outputDoc.close();
-                    }
-                } catch (IOException e) {
-                    System.out.println(e.getMessage());
-                }
-
-                if (inputDoc != null) {
-                    inputDoc.close();
-                }
-
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
-            }
-
-            return null;
-        }
-    }
 
     /**
      * Generate a booklet style PDF.

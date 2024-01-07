@@ -247,11 +247,14 @@ public class Model {
 
     public int getSigSheetCount() { return getSigSizeIndex() + 1; }
     public int getSigPageCount() { return getSigSheetCount() * 4; }
-    public int getCountOfFullSigs() { return getOutputPageCount() / getSigPageCount(); }        // Count of full signatures.
-    public int getSigCount() { return getCountOfFullSigs() + 1; }                               // Total signature count.
-    public int getLastSigPageCount() { return getOutputPageCount() % getSigPageCount(); }       // Source page count in last sig.
+
+    private int getFullSigCount() { return getOutputPageDiff() / getSigPageCount(); }           // Total signature count - 1.
+    public int getSigCount() { return getFullSigCount() + 1; }                                  // Total signature count.
+
+    private int getFullSigPageCount() { return getFullSigCount() * getSigPageCount(); }
+    public int getLastSigFirstPage() { return getFirstPage() + getFullSigPageCount(); }
+    public int getLastSigPageCount() { return getOutputPageCount() - getFullSigPageCount(); }   // Count of source pages in last sig.
     public int getLastSigBlankCount() { return getSigPageCount() - getLastSigPageCount(); }     // Blank pages in last sig.
-    public int getLastSigFirstPage() { return getFirstPage() + (getSigPageCount() * getCountOfFullSigs()); }
 
     // Must match paperSizeList.
     private PDRectangle[] paperSizeArray = { PDRectangle.A0, PDRectangle.A1, PDRectangle.A2, PDRectangle.A3, 
@@ -316,7 +319,8 @@ public class Model {
     public SpinnerValueFactory<Integer> getLastPageSVF() { return lastPageSVF; }
     public int getLastPage() { return lastPageSVF.getValue(); }
     public void setLastPage(int value) { lastPageSVF.setValue(value); setFirstPageRange(value); }
-    public int getOutputPageCount() { return getLastPage()-getFirstPage()+1; }
+    private int getOutputPageDiff() { return getLastPage()-getFirstPage(); }
+    public int getOutputPageCount() { return getOutputPageDiff() + 1; }
 
     private void setLastPageRange(int value) {
         int current = getLastPage();

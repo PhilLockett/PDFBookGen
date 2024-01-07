@@ -231,19 +231,19 @@ public class Model {
     private ObservableList<String> paperSizeList = FXCollections.observableArrayList();
     
     public ObservableList<String> getPaperSizeList() { return paperSizeList; }
-    public void setPaperSize(String value) { paperSizeIndex = paperSizeList.indexOf(value); }
-    public String getPaperSize() { return paperSizeList.get(paperSizeIndex); }
     public void setPaperSizeIndex(int value) { paperSizeIndex = value; }
     public int getPaperSizeIndex() { return paperSizeIndex; }
+    public void setPaperSize(String value) { setPaperSizeIndex(paperSizeList.indexOf(value)); }
+    public String getPaperSize() { return paperSizeList.get(getPaperSizeIndex()); }
 
     private int sigSizeIndex;
     private ObservableList<String> sigSizeList = FXCollections.observableArrayList();
 
     public ObservableList<String> getSigSizeList() { return sigSizeList; }
-    public void setSigSize(String value) { sigSizeIndex = sigSizeList.indexOf(value); }
-    public String getSigSize() { return sigSizeList.get(sigSizeIndex); }
     public void setSigSizeIndex(int value) { sigSizeIndex = value; }
     public int getSigSizeIndex() { return sigSizeIndex; }
+    public void setSigSize(String value) { setSigSizeIndex(sigSizeList.indexOf(value)); }
+    public String getSigSize() { return sigSizeList.get(getSigSizeIndex()); }
 
     public int getSigSheetCount() { return getSigSizeIndex() + 1; }
     public int getSigPageCount() { return getSigSheetCount() * 4; }

@@ -310,7 +310,7 @@ public class Model {
     public SpinnerValueFactory<Integer> getLastPageSVF() { return lastPageSVF; }
     public int getLastPage() { return lastPageSVF.getValue(); }
     public void setLastPage(int value) { lastPageSVF.setValue(value); setFirstPageRange(value); }
-    public int getTotalPageCount() { return getLastPage()-getFirstPage()+1; }
+    public int getOutputPageCount() { return getLastPage()-getFirstPage()+1; }
 
     private void setLastPageRange(int value) {
         int current = getLastPage();

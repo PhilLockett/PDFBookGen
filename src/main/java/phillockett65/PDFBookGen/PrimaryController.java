@@ -280,7 +280,7 @@ public class PrimaryController {
 
 
     private void setTotalPageCountMessage() {
-        countLabel.setText("Total Page Count: " + model.getTotalPageCount());
+        countLabel.setText("Total Page Count: " + model.getOutputPageCount());
     }
 
     private void syncFirstPageSpinner() {

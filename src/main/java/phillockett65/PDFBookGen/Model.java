@@ -319,8 +319,6 @@ public class Model {
     public SpinnerValueFactory<Integer> getLastPageSVF() { return lastPageSVF; }
     public int getLastPage() { return lastPageSVF.getValue(); }
     public void setLastPage(int value) { lastPageSVF.setValue(value); setFirstPageRange(value); }
-    private int getOutputPageDiff() { return getLastPage()-getFirstPage(); }
-    public int getOutputPageCount() { return getOutputPageDiff() + 1; }
 
     private void setLastPageRange(int value) {
         int current = getLastPage();
@@ -328,6 +326,9 @@ public class Model {
             current = value;
         lastPageSVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(value, getPageCount(), current);
     }
+    
+    private int getOutputPageDiff() { return getLastPage()-getFirstPage(); }
+    public int getOutputPageCount() { return getOutputPageDiff() + 1; }
 
     /**
      * Initialize "Spinners" panel.

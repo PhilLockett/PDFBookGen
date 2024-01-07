@@ -244,8 +244,14 @@ public class Model {
     public String getSigSize() { return sigSizeList.get(sigSizeIndex); }
     public void setSigSizeIndex(int value) { sigSizeIndex = value; }
     public int getSigSizeIndex() { return sigSizeIndex; }
+
     public int getSigSheetCount() { return getSigSizeIndex() + 1; }
     public int getSigPageCount() { return getSigSheetCount() * 4; }
+    public int getCountOfFullSigs() { return getOutputPageCount() / getSigPageCount(); }        // Count of full signatures.
+    public int getSigCount() { return getCountOfFullSigs() + 1; }                               // Total signature count.
+    public int getLastSigPageCount() { return getOutputPageCount() % getSigPageCount(); }       // Source page count in last sig.
+    public int getLastSigBlankCount() { return getSigPageCount() - getLastSigPageCount(); }     // Blank pages in last sig.
+    public int getLastSigFirstPage() { return getFirstPage() + (getSigPageCount() * getCountOfFullSigs()); }
 
     // Must match paperSizeList.
     private PDRectangle[] paperSizeArray = { PDRectangle.A0, PDRectangle.A1, PDRectangle.A2, PDRectangle.A3, 

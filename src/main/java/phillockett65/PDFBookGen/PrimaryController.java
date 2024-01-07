@@ -110,6 +110,7 @@ public class PrimaryController {
 
         paperSizeChoiceBox.setValue(model.getPaperSize());
         sigSizeChoiceBox.setValue(model.getSigSize());
+        setPageCountMessage();
     }
 
 
@@ -224,8 +225,24 @@ public class PrimaryController {
     @FXML
     private Label sigLabel;
 
+    @FXML
+    private Label sigCountLabel;
+
+    @FXML
+    private Label lastSigBeginLabel;
+
+    @FXML
+    private Label lastSigCountLabel;
+
+    @FXML
+    private Label lastSigBlanksLabel;
+
     private void setPageCountMessage() {
-        sigLabel.setText("(" + model.getSigPageCount() + " pages)");
+        sigLabel.setText(String.valueOf(model.getSigPageCount()));
+        sigCountLabel.setText(String.valueOf(model.getSigCount()));
+        lastSigBeginLabel.setText(String.valueOf(model.getLastSigFirstPage()));
+        lastSigCountLabel.setText(String.valueOf(model.getLastSigPageCount()));
+        lastSigBlanksLabel.setText(String.valueOf(model.getLastSigBlankCount()));
     }
 
     /**
@@ -241,12 +258,16 @@ public class PrimaryController {
 
         sigSizeChoiceBox.getSelectionModel().selectedItemProperty().addListener( (v, oldValue, newValue) -> {
             model.setSigSize(newValue);
-            setPageCountMessage();
+            syncUI();
         });
 
         paperSizeChoiceBox.setTooltip(new Tooltip("Paper size of the generated PDF document"));
         sigSizeChoiceBox.setTooltip(new Tooltip("Number of sheets of paper in each signature"));
         sigLabel.setTooltip(new Tooltip("Number of pages from the source document in each signature"));
+        sigCountLabel.setTooltip(new Tooltip("Number of signatures in generated document"));
+        lastSigBeginLabel.setTooltip(new Tooltip("First page from the source document in the last signature"));
+        lastSigCountLabel.setTooltip(new Tooltip("Number of pages from the source document in the last signature"));
+        lastSigBlanksLabel.setTooltip(new Tooltip("Number of blank pages in the last signature"));
 
         setPageCountMessage();
     }
@@ -303,6 +324,7 @@ public class PrimaryController {
             model.setFirstPage(newValue);
             setTotalPageCountMessage();
             syncLastPageSpinner();
+            syncUI();
         });
 
         syncLastPageSpinner();
@@ -313,6 +335,7 @@ public class PrimaryController {
             model.setLastPage(newValue);
             setTotalPageCountMessage();
             syncFirstPageSpinner();
+            syncUI();
         });
         
         firstPageSpinner.setTooltip(new Tooltip("First page of source document to include in the generated document"));

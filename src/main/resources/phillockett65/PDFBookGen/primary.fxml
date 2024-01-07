@@ -16,33 +16,29 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="357.0" prefWidth="703.0" spacing="8.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="phillockett65.PDFBookGen.PrimaryController">
+<VBox alignment="CENTER" prefHeight="481.0" prefWidth="703.0" spacing="8.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="phillockett65.PDFBookGen.PrimaryController">
    <children>
       <TitledPane collapsible="false" text="File Names">
          <content>
-            <VBox spacing="4.0">
+            <GridPane hgap="4.0" vgap="4.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="144.20001220703125" minWidth="10.0" prefWidth="110.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="236.0" minWidth="10.0" prefWidth="236.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="258.0000671386719" minWidth="10.0" prefWidth="206.60001220703128" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="158.20001220703125" minWidth="10.0" prefWidth="101.79999999999995" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
                <children>
-                  <GridPane hgap="4.0" vgap="4.0">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="144.20001220703125" minWidth="10.0" prefWidth="110.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="236.0" minWidth="10.0" prefWidth="236.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="258.0000671386719" minWidth="10.0" prefWidth="206.60001220703128" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="158.20001220703125" minWidth="10.0" prefWidth="101.79999999999995" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                     <children>
-                        <Label text="Source Document:" GridPane.halignment="RIGHT" />
-                        <TextField fx:id="sourceDocumentTextField" editable="false" onKeyTyped="#sourceDocumentTextFieldKeyTyped" GridPane.columnIndex="1" GridPane.columnSpan="2" />
-                        <Label text="Output File Name:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-                        <TextField fx:id="outputFileNameTextField" onKeyTyped="#outputFileNameTextFieldKeyTyped" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Button fx:id="browseButton" mnemonicParsing="false" onAction="#browseButtonActionPerformed" text="Browse..." GridPane.columnIndex="3" GridPane.halignment="RIGHT" />
-                     </children>
-                  </GridPane>
+                  <Label text="Source Document:" GridPane.halignment="RIGHT" />
+                  <TextField fx:id="sourceDocumentTextField" editable="false" onKeyTyped="#sourceDocumentTextFieldKeyTyped" GridPane.columnIndex="1" GridPane.columnSpan="2" />
+                  <Label text="Output File Name:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                  <TextField fx:id="outputFileNameTextField" onKeyTyped="#outputFileNameTextFieldKeyTyped" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Button fx:id="browseButton" mnemonicParsing="false" onAction="#browseButtonActionPerformed" text="Browse..." GridPane.columnIndex="3" GridPane.halignment="RIGHT" />
                </children>
-            </VBox>
+            </GridPane>
          </content>
       </TitledPane>
       <TitledPane collapsible="false" layoutX="30.0" layoutY="137.0" text="Output Content">
@@ -56,23 +52,50 @@
               </columnConstraints>
               <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
                   <CheckBox fx:id="rotateCheckBox" mnemonicParsing="false" onAction="#rotateCheckBoxActionPerformed" text="Rotate Reverse Side of Sheet" GridPane.columnIndex="2" />
-                  <Label text="First Page:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
-                  <Label text="Last Page:" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
-                  <Spinner fx:id="firstPageSpinner" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Spinner fx:id="lastPageSpinner" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <Label fx:id="countLabel" text="Total page count: 1" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <Label text="First Page:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                  <Label text="Last Page:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                  <Spinner fx:id="firstPageSpinner" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Spinner fx:id="lastPageSpinner" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label fx:id="countLabel" text="Total page count: 1" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                   <Label text="Output Paper Size:" GridPane.halignment="RIGHT" />
                   <ChoiceBox fx:id="paperSizeChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" />
-                  <Label text="Signature Size:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-                  <ChoiceBox fx:id="sigSizeChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label fx:id="sigLabel" text="(4 pages)" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                   <Button fx:id="generateButton" disable="true" mnemonicParsing="false" onAction="#generateButtonActionPerformed" text="Generate" GridPane.columnIndex="3" GridPane.halignment="RIGHT" />
+               </children>
+            </GridPane>
+         </content>
+      </TitledPane>
+      <TitledPane collapsible="false" text="Signature State">
+         <content>
+            <GridPane hgap="4.0" vgap="4.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="158.20001220703125" minWidth="10.0" prefWidth="113.60002441406252" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="292.8000015258789" minWidth="10.0" prefWidth="158.3999755859375" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="266.79998779296875" minWidth="10.0" prefWidth="234.5999755859375" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="161.99996948242188" minWidth="10.0" prefWidth="144.80002441406248" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Signature Size:" GridPane.halignment="RIGHT" />
+                  <ChoiceBox fx:id="sigSizeChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" />
+                  <Label text="Pages per Signature:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                  <Label fx:id="sigLabel" text="PagePerSig" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label text="Signature Count:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                  <Label fx:id="sigCountLabel" text="SigCount" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label text="Last Signature begins at page:" GridPane.columnIndex="2" GridPane.halignment="RIGHT" />
+                  <Label text="Last Signature page count:" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                  <Label text="Last Signature blank pages:" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                  <Label fx:id="lastSigBeginLabel" text="LastSigPage" GridPane.columnIndex="3" />
+                  <Label fx:id="lastSigCountLabel" text="LastSigPages" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <Label fx:id="lastSigBlanksLabel" text="LastSigBlanks" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                </children>
             </GridPane>
          </content>

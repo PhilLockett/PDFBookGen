@@ -53,7 +53,6 @@ package phillockett65.PDFBookGen;
 import java.awt.geom.AffineTransform;
 import java.io.File;
 import java.io.IOException;
-import javax.swing.SwingWorker;
 
 import org.apache.pdfbox.cos.COSDictionary;
 import org.apache.pdfbox.cos.COSName;

@@ -22,10 +22,10 @@
          <content>
             <GridPane hgap="4.0" vgap="4.0">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="144.20001220703125" minWidth="10.0" prefWidth="110.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="236.0" minWidth="10.0" prefWidth="236.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="258.0000671386719" minWidth="10.0" prefWidth="206.60001220703128" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="158.20001220703125" minWidth="10.0" prefWidth="101.79999999999995" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="144.20001220703125" minWidth="10.0" prefWidth="117.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="236.0" minWidth="10.0" prefWidth="227.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="258.0000671386719" minWidth="10.0" prefWidth="218.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="158.20001220703125" minWidth="10.0" prefWidth="91.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -45,9 +45,9 @@
          <content>
             <GridPane hgap="4.0" vgap="4.0">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="206.199951171875" minWidth="10.0" prefWidth="120.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="277.6" minWidth="10.0" prefWidth="164.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="327.9999755859375" minWidth="10.0" prefWidth="286.8000366210937" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="206.199951171875" minWidth="10.0" prefWidth="123.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="277.6" minWidth="10.0" prefWidth="150.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="327.9999755859375" minWidth="10.0" prefWidth="262.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="327.9999755859375" minWidth="10.0" prefWidth="120.39996337890625" />
               </columnConstraints>
               <rowConstraints>
@@ -59,8 +59,8 @@
                   <CheckBox fx:id="rotateCheckBox" mnemonicParsing="false" onAction="#rotateCheckBoxActionPerformed" text="Rotate Reverse Side of Sheet" GridPane.columnIndex="2" />
                   <Label text="First Page:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
                   <Label text="Last Page:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
-                  <Spinner fx:id="firstPageSpinner" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Spinner fx:id="lastPageSpinner" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Spinner fx:id="firstPageSpinner" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Spinner fx:id="lastPageSpinner" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <Label fx:id="countLabel" text="Total page count: 1" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                   <Label text="Output Paper Size:" GridPane.halignment="RIGHT" />
                   <ChoiceBox fx:id="paperSizeChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" />
@@ -73,9 +73,9 @@
          <content>
             <GridPane hgap="4.0" vgap="4.0">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="158.20001220703125" minWidth="10.0" prefWidth="113.60002441406252" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="292.8000015258789" minWidth="10.0" prefWidth="158.3999755859375" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="266.79998779296875" minWidth="10.0" prefWidth="234.5999755859375" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="158.20001220703125" minWidth="10.0" prefWidth="118.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="292.8000015258789" minWidth="10.0" prefWidth="149.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="266.79998779296875" minWidth="10.0" prefWidth="239.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="161.99996948242188" minWidth="10.0" prefWidth="144.80002441406248" />
               </columnConstraints>
               <rowConstraints>
@@ -84,8 +84,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="Signature Size:" GridPane.halignment="RIGHT" />
-                  <ChoiceBox fx:id="sigSizeChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" />
+                  <Label prefHeight="17.0" prefWidth="82.0" text="Signature Size:" GridPane.halignment="RIGHT" />
                   <Label text="Pages per Signature:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
                   <Label fx:id="sigLabel" text="PagePerSig" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Label text="Signature Count:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
@@ -96,6 +95,7 @@
                   <Label fx:id="lastSigBeginLabel" text="LastSigPage" GridPane.columnIndex="3" />
                   <Label fx:id="lastSigCountLabel" text="LastSigPages" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                   <Label fx:id="lastSigBlanksLabel" text="LastSigBlanks" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                  <Spinner fx:id="sigSizeSpinner" GridPane.columnIndex="1" />
                </children>
             </GridPane>
          </content>

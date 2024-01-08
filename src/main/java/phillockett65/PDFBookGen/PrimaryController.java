@@ -109,7 +109,7 @@ public class PrimaryController {
         rotateCheckBox.setSelected(model.isRotateCheck());
 
         paperSizeChoiceBox.setValue(model.getPaperSize());
-        sigSizeChoiceBox.setValue(model.getSigSize());
+        syncSigSizeSpinner();
         setPageCountMessage();
     }
 
@@ -220,7 +220,7 @@ public class PrimaryController {
     private ChoiceBox<String> paperSizeChoiceBox;
 
     @FXML
-    private ChoiceBox<String> sigSizeChoiceBox;
+    private Spinner<Integer> sigSizeSpinner;
 
     @FXML
     private Label sigLabel;
@@ -245,29 +245,37 @@ public class PrimaryController {
         lastSigBlanksLabel.setText(String.valueOf(model.getLastSigBlankCount()));
     }
 
+    private void syncSigSizeSpinner() {
+        sigSizeSpinner.setValueFactory(model.getSigSizeSVF());
+    }
+
+
     /**
      * Initialize "Selections" panel.
      */
     private void initializeSelections() {
         paperSizeChoiceBox.setItems(model.getPaperSizeList());
-        sigSizeChoiceBox.setItems(model.getSigSizeList());
 
         paperSizeChoiceBox.getSelectionModel().selectedItemProperty().addListener( (v, oldValue, newValue) -> {
             model.setPaperSize(newValue);
         });
 
-        sigSizeChoiceBox.getSelectionModel().selectedItemProperty().addListener( (v, oldValue, newValue) -> {
-            model.setSigSize(newValue);
-            syncUI();
-        });
-
         paperSizeChoiceBox.setTooltip(new Tooltip("Paper size of the generated PDF document"));
-        sigSizeChoiceBox.setTooltip(new Tooltip("Number of sheets of paper in each signature"));
+        sigSizeSpinner.setTooltip(new Tooltip("Number of sheets of paper in each signature"));
         sigLabel.setTooltip(new Tooltip("Number of pages from the source document in each signature"));
         sigCountLabel.setTooltip(new Tooltip("Number of signatures in generated document"));
         lastSigBeginLabel.setTooltip(new Tooltip("First page from the source document in the last signature"));
         lastSigCountLabel.setTooltip(new Tooltip("Number of pages from the source document in the last signature"));
         lastSigBlanksLabel.setTooltip(new Tooltip("Number of blank pages in the last signature"));
+
+        syncSigSizeSpinner();
+        sigSizeSpinner.getValueFactory().wrapAroundProperty().set(false);
+        
+        sigSizeSpinner.valueProperty().addListener( (v, oldValue, newValue) -> {
+            // System.out.println("sigSizeSpinner.Listener(" + newValue + "))");
+            model.setSigSize(newValue);
+            syncUI();
+        });
 
         setPageCountMessage();
     }

@@ -107,7 +107,7 @@ public class Model {
         setLastPage(1);
 
         setPaperSizeIndex(7);
-        setSigSizeIndex(0);
+        setSigSize(1);
     }
 
 
@@ -129,7 +129,7 @@ public class Model {
         data.setRotateCheck(isRotateCheck());
 
         data.setPaperSizeIndex(getPaperSizeIndex());
-        data.setSigSizeIndex(getSigSizeIndex());
+        data.setSigSize(getSigSize());
 
         data.setFirstPage(getFirstPage());
         data.setLastPage(getLastPage());
@@ -159,7 +159,7 @@ public class Model {
         setRotateCheck(data.isRotateCheck());
 
         setPaperSizeIndex(data.getPaperSizeIndex());
-        setSigSizeIndex(data.getSigSizeIndex());
+        setSigSize(data.getSigSize());
     
         setFirstPage(data.getFirstPage());
         setLastPage(data.getLastPage());
@@ -236,16 +236,14 @@ public class Model {
     public void setPaperSize(String value) { setPaperSizeIndex(paperSizeList.indexOf(value)); }
     public String getPaperSize() { return paperSizeList.get(getPaperSizeIndex()); }
 
-    private int sigSizeIndex;
-    private ObservableList<String> sigSizeList = FXCollections.observableArrayList();
 
-    public ObservableList<String> getSigSizeList() { return sigSizeList; }
-    public void setSigSizeIndex(int value) { sigSizeIndex = value; }
-    public int getSigSizeIndex() { return sigSizeIndex; }
-    public void setSigSize(String value) { setSigSizeIndex(sigSizeList.indexOf(value)); }
-    public String getSigSize() { return sigSizeList.get(getSigSizeIndex()); }
+    private SpinnerValueFactory<Integer> sigSizeSVF;
+    public SpinnerValueFactory<Integer> getSigSizeSVF() { return sigSizeSVF; }
+    public int getSigSize() { return sigSizeSVF.getValue(); }
+    public void setSigSize(int value) { sigSizeSVF.setValue(value); }
 
-    public int getSigSheetCount() { return getSigSizeIndex() + 1; }
+
+    public int getSigSheetCount() { return getSigSize(); }
     public int getSigPageCount() { return getSigSheetCount() * 4; }
 
     private int getFullSigCount() { return getOutputPageDiff() / getSigPageCount(); }           // Total signature count - 1.
@@ -286,7 +284,7 @@ public class Model {
     private void initializeSelections() {
 
         paperSizeList.addAll("A0", "A1", "A2", "A3", "A4", "A5", "A6", "Letter", "Legal");
-        sigSizeList.addAll("1 Sheet", "2 Sheets", "3 Sheets", "4 Sheets", "5 Sheets", "6 Sheets", "7 Sheets", "8 Sheets");
+        sigSizeSVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 8, 1);
     }
 
 

@@ -66,10 +66,9 @@ public class PrimaryController {
         // System.out.println("PrimaryController initialized.");
         model.initialize();
 
-        initializeTextBoxes();
-        initializeCheckBoxes();
-        initializeSelections();
-        initializeSpinners();
+        initializeFileNamesPanel();
+        initializeOutputContentPanel();
+        initializeSignatureStatePanel();
         initializeStatusLine();
     }
 
@@ -120,7 +119,25 @@ public class PrimaryController {
      */
 
     @FXML
+    private TextField sourceDocumentTextField;
+
+    @FXML
+    private TextField outputFileNameTextField;
+
+    @FXML
     private Button browseButton;
+
+    @FXML
+    void sourceDocumentTextFieldKeyTyped(KeyEvent event) {
+        // System.out.println("sourceDocumentTextFieldKeyTyped() " + event.toString());
+        model.setOutputFileName(sourceDocumentTextField.getText());
+    }
+
+    @FXML
+    void outputFileNameTextFieldKeyTyped(KeyEvent event) {
+        // System.out.println("outputFileNameTextFieldKeyTyped() " + event.toString());
+        model.setOutputFileName(outputFileNameTextField.getText());
+    }
 
 
     /**
@@ -158,29 +175,11 @@ public class PrimaryController {
         setStatusMessage("Loaded file: " + model.getSourceFilePath());
     }
 
-    @FXML
-    private TextField sourceDocumentTextField;
-
-    @FXML
-    void sourceDocumentTextFieldKeyTyped(KeyEvent event) {
-        // System.out.println("sourceDocumentTextFieldKeyTyped() " + event.toString());
-        model.setOutputFileName(sourceDocumentTextField.getText());
-    }
-
-    @FXML
-    private TextField outputFileNameTextField;
-
-    @FXML
-    void outputFileNameTextFieldKeyTyped(KeyEvent event) {
-        // System.out.println("outputFileNameTextFieldKeyTyped() " + event.toString());
-        model.setOutputFileName(outputFileNameTextField.getText());
-    }
-
 
     /**
      * Initialize "File Names" panel.
      */
-    private void initializeTextBoxes() {
+    private void initializeFileNamesPanel() {
         sourceDocumentTextField.setTooltip(new Tooltip("Source PDF document"));
         outputFileNameTextField.setTooltip(new Tooltip("Name of generated output file, .pdf will be added automatically"));
         browseButton.setTooltip(new Tooltip("Select source PDF document"));
@@ -189,11 +188,26 @@ public class PrimaryController {
 
 
     /************************************************************************
-     * Support code for "Check Boxes and Radio Buttons" panel.
+     * Support code for "Output Content" panel.
      */
 
     @FXML
+    private ChoiceBox<String> paperSizeChoiceBox;
+
+    @FXML
     private CheckBox rotateCheckBox;
+
+    @FXML
+    private Spinner<Integer> firstPageSpinner;
+
+    @FXML
+    private Spinner<Integer> lastPageSpinner;
+
+    @FXML
+    private Label countLabel;
+
+    @FXML
+    private Button generateButton;
 
     @FXML
     void rotateCheckBoxActionPerformed(ActionEvent event) {
@@ -202,22 +216,76 @@ public class PrimaryController {
         setStatusMessage("Rotate check box is " + state);
     }
 
+    @FXML
+    void generateButtonActionPerformed(ActionEvent event) {
+        final boolean success = model.generate();
+        if (success)
+            setStatusMessage("Generated: " + model.getOutputFilePath());
+        else
+            setStatusMessage("Failed to generate: " + model.getOutputFilePath());
+    }
+
+
+    private void setTotalPageCountMessage() {
+        countLabel.setText("Total Page Count: " + model.getOutputPageCount());
+    }
+
+    private void syncFirstPageSpinner() {
+        firstPageSpinner.setValueFactory(model.getFirstPageSVF());
+    }
+
+    private void syncLastPageSpinner() {
+        lastPageSpinner.setValueFactory(model.getLastPageSVF());
+    }
 
     /**
-     * Initialize "Check Boxes and Radio Buttons" panel.
+     * Initialize "Output Content" panel.
      */
-    private void initializeCheckBoxes() {
+    private void initializeOutputContentPanel() {
+        paperSizeChoiceBox.setItems(model.getPaperSizeList());
+
+        paperSizeChoiceBox.getSelectionModel().selectedItemProperty().addListener( (v, oldValue, newValue) -> {
+            model.setPaperSize(newValue);
+        });
+
+
+        syncFirstPageSpinner();
+        firstPageSpinner.getValueFactory().wrapAroundProperty().set(false);
+        
+        firstPageSpinner.valueProperty().addListener( (v, oldValue, newValue) -> {
+            // System.out.println("intSpinner.Listener(" + newValue + "))");
+            model.setFirstPage(newValue);
+            setTotalPageCountMessage();
+            syncLastPageSpinner();
+            syncUI();
+        });
+
+        syncLastPageSpinner();
+        lastPageSpinner.getValueFactory().wrapAroundProperty().set(false);
+        
+        lastPageSpinner.valueProperty().addListener( (v, oldValue, newValue) -> {
+            // System.out.println("doubleSpinner.Listener(" + newValue + "))");
+            model.setLastPage(newValue);
+            setTotalPageCountMessage();
+            syncFirstPageSpinner();
+            syncUI();
+        });
+        
+        paperSizeChoiceBox.setTooltip(new Tooltip("Paper size of the generated PDF document"));
         rotateCheckBox.setTooltip(new Tooltip("Rotate reverse side of sheet 180 degrees"));
+        firstPageSpinner.setTooltip(new Tooltip("First page of source document to include in the generated document"));
+        lastPageSpinner.setTooltip(new Tooltip("Last page of source document to include in the generated document"));
+        countLabel.setTooltip(new Tooltip("Number of pages from the source document that will be included in the generated document"));
+        generateButton.setTooltip(new Tooltip("Generate the PDF document in booklet form"));
+
+        setTotalPageCountMessage();
     }
 
 
 
     /************************************************************************
-     * Support code for "Selections" panel.
+     * Support code for "Signature State" panel.
      */
-
-    @FXML
-    private ChoiceBox<String> paperSizeChoiceBox;
 
     @FXML
     private Spinner<Integer> sigSizeSpinner;
@@ -251,16 +319,9 @@ public class PrimaryController {
 
 
     /**
-     * Initialize "Selections" panel.
+     * Initialize "Signature State" panel.
      */
-    private void initializeSelections() {
-        paperSizeChoiceBox.setItems(model.getPaperSizeList());
-
-        paperSizeChoiceBox.getSelectionModel().selectedItemProperty().addListener( (v, oldValue, newValue) -> {
-            model.setPaperSize(newValue);
-        });
-
-        paperSizeChoiceBox.setTooltip(new Tooltip("Paper size of the generated PDF document"));
+    private void initializeSignatureStatePanel() {
         sigSizeSpinner.setTooltip(new Tooltip("Number of sheets of paper in each signature"));
         sigLabel.setTooltip(new Tooltip("Number of pages from the source document in each signature"));
         sigCountLabel.setTooltip(new Tooltip("Number of signatures in generated document"));
@@ -278,80 +339,6 @@ public class PrimaryController {
         });
 
         setPageCountMessage();
-    }
-
-
-
-    /************************************************************************
-     * Support code for "Page Range" panel.
-     */
-
-    @FXML
-    private Spinner<Integer> firstPageSpinner;
-
-    @FXML
-    private Spinner<Integer> lastPageSpinner;
-
-    @FXML
-    private Label countLabel;
-
-    @FXML
-    private Button generateButton;
-
-    @FXML
-    void generateButtonActionPerformed(ActionEvent event) {
-        final boolean success = model.generate();
-        if (success)
-            setStatusMessage("Generated: " + model.getOutputFilePath());
-        else
-            setStatusMessage("Failed to generate: " + model.getOutputFilePath());
-    }
-
-
-    private void setTotalPageCountMessage() {
-        countLabel.setText("Total Page Count: " + model.getOutputPageCount());
-    }
-
-    private void syncFirstPageSpinner() {
-        firstPageSpinner.setValueFactory(model.getFirstPageSVF());
-    }
-
-    private void syncLastPageSpinner() {
-        lastPageSpinner.setValueFactory(model.getLastPageSVF());
-    }
-
-    /**
-     * Initialize "Page Range" panel.
-     */
-    private void initializeSpinners() {
-        syncFirstPageSpinner();
-        firstPageSpinner.getValueFactory().wrapAroundProperty().set(false);
-        
-        firstPageSpinner.valueProperty().addListener( (v, oldValue, newValue) -> {
-            // System.out.println("intSpinner.Listener(" + newValue + "))");
-            model.setFirstPage(newValue);
-            setTotalPageCountMessage();
-            syncLastPageSpinner();
-            syncUI();
-        });
-
-        syncLastPageSpinner();
-        lastPageSpinner.getValueFactory().wrapAroundProperty().set(false);
-        
-        lastPageSpinner.valueProperty().addListener( (v, oldValue, newValue) -> {
-            // System.out.println("doubleSpinner.Listener(" + newValue + "))");
-            model.setLastPage(newValue);
-            setTotalPageCountMessage();
-            syncFirstPageSpinner();
-            syncUI();
-        });
-        
-        firstPageSpinner.setTooltip(new Tooltip("First page of source document to include in the generated document"));
-        lastPageSpinner.setTooltip(new Tooltip("Last page of source document to include in the generated document"));
-        countLabel.setTooltip(new Tooltip("Number of pages from the source document that will be included in the generated document"));
-        generateButton.setTooltip(new Tooltip("Generate the PDF document in booklet form"));
-
-        setTotalPageCountMessage();
     }
 
 

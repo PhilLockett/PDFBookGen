@@ -69,10 +69,9 @@ public class Model {
     public void initialize() {
         // System.out.println("Model initialized.");
 
-        initializeTextBoxes();
-        initializeCheckBoxes();
-        initializeSelections();
-        initializeSpinners();
+        initializeFileNamesPanel();
+        initializeOutputContentPanel();
+        initializeSignatureStatePanel();
         initializeStatusLine();
 
         if (!readData())
@@ -200,24 +199,89 @@ public class Model {
     /**
      * Initialize "File Names" panel.
      */
-    private void initializeTextBoxes() {
+    private void initializeFileNamesPanel() {
     }
 
 
 
     /************************************************************************
-     * Support code for "Check Boxes and Radio Buttons" panel.
+     * Support code for "Output Content" panel.
      */
+
+    private int paperSizeIndex;
+    private ObservableList<String> paperSizeList = FXCollections.observableArrayList();
+    
+    public ObservableList<String> getPaperSizeList() { return paperSizeList; }
+    public void setPaperSizeIndex(int value) { paperSizeIndex = value; }
+    public int getPaperSizeIndex() { return paperSizeIndex; }
+    public void setPaperSize(String value) { setPaperSizeIndex(paperSizeList.indexOf(value)); }
+    public String getPaperSize() { return paperSizeList.get(getPaperSizeIndex()); }
+
 
     private boolean rotateCheck;
     public void setRotateCheck(boolean state) { rotateCheck = state; }
     public boolean isRotateCheck() { return rotateCheck; }
-    
+
+
+    private int pageCount = 50;
+    public int getPageCount() { return pageCount; }
+    public void setPageCount(int value) {
+        pageCount = value;
+        firstPageSVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, value, 1);
+        lastPageSVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, value, value);
+        BuildSignature();
+    }
+
+    private SpinnerValueFactory<Integer> firstPageSVF;
+    public SpinnerValueFactory<Integer> getFirstPageSVF() { return firstPageSVF; }
+    public int getFirstPage() { return firstPageSVF.getValue(); }
+    public void setFirstPage(int value) { firstPageSVF.setValue(value); setLastPageRange(value); BuildSignature(); }
+
+    private void setFirstPageRange(int value) {
+        int current = getFirstPage();
+        if (current > value)
+            current = value;
+        firstPageSVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, value, current);
+    }
+
+    private SpinnerValueFactory<Integer> lastPageSVF;
+    public SpinnerValueFactory<Integer> getLastPageSVF() { return lastPageSVF; }
+    public int getLastPage() { return lastPageSVF.getValue(); }
+    public void setLastPage(int value) { lastPageSVF.setValue(value); setFirstPageRange(value); BuildSignature(); }
+
+    private void setLastPageRange(int value) {
+        int current = getLastPage();
+        if (current < value)
+            current = value;
+        lastPageSVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(value, getPageCount(), current);
+    }
+
+    // Use PDFBook object to generate booklet.
+    public boolean generate() {
+        PDFBook booklet = new PDFBook(getSourceFilePath(), getOutputFilePath());
+
+        booklet.setPageSize(getPaperSize());
+        booklet.setSheetCount(getSigSize());
+        booklet.setRotate(isRotateCheck());
+
+        final int first = getFirstPage();
+        final int last = getLastPage();
+        booklet.setFirstPage(first-1);
+        booklet.setLastPage(last);
+
+        booklet.genBooklet();
+
+        return true;
+    }
+
 
     /**
-     * Initialize "Check Boxes and Radio Buttons" panel.
+     * Initialize "Output Content" panel.
      */
-    private void initializeCheckBoxes() {
+    private void initializeOutputContentPanel() {
+        paperSizeList.addAll("A0", "A1", "A2", "A3", "A4", "A5", "A6", "Letter", "Legal");
+        firstPageSVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 1);
+        lastPageSVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 1);
     }
 
 
@@ -279,96 +343,20 @@ public class Model {
 
 
     /************************************************************************
-     * Support code for "Selections" panel.
+     * Support code for "Signature State" panel.
      */
-
-    private int paperSizeIndex;
-    private ObservableList<String> paperSizeList = FXCollections.observableArrayList();
-    
-    public ObservableList<String> getPaperSizeList() { return paperSizeList; }
-    public void setPaperSizeIndex(int value) { paperSizeIndex = value; }
-    public int getPaperSizeIndex() { return paperSizeIndex; }
-    public void setPaperSize(String value) { setPaperSizeIndex(paperSizeList.indexOf(value)); }
-    public String getPaperSize() { return paperSizeList.get(getPaperSizeIndex()); }
-
 
     private SpinnerValueFactory<Integer> sigSizeSVF;
     public SpinnerValueFactory<Integer> getSigSizeSVF() { return sigSizeSVF; }
     public int getSigSize() { return sigSizeSVF.getValue(); }
     public void setSigSize(int value) { sigSizeSVF.setValue(value); BuildSignature(); }
 
-    // Use PDFBook object to generate booklet.
-    public boolean generate() {
-        PDFBook booklet = new PDFBook(getSourceFilePath(), getOutputFilePath());
-
-        booklet.setPageSize(getPaperSize());
-        booklet.setSheetCount(getSigSize());
-        booklet.setRotate(isRotateCheck());
-
-        final int first = getFirstPage();
-        final int last = getLastPage();
-        booklet.setFirstPage(first-1);
-        booklet.setLastPage(last);
-
-        booklet.genBooklet();
-
-        return true;
-    }
 
     /**
-     * Initialize "Selections" panel.
+     * Initialize "Signature State" panel.
      */
-    private void initializeSelections() {
-
-        paperSizeList.addAll("A0", "A1", "A2", "A3", "A4", "A5", "A6", "Letter", "Legal");
+    private void initializeSignatureStatePanel() {
         sigSizeSVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 8, 1);
-    }
-
-
-
-    /************************************************************************
-     * Support code for "Spinners" panel.
-     */
-
-    private int pageCount = 50;
-    public int getPageCount() { return pageCount; }
-    public void setPageCount(int value) {
-        pageCount = value;
-        firstPageSVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, value, 1);
-        lastPageSVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, value, value);
-        BuildSignature();
-    }
-
-    private SpinnerValueFactory<Integer> firstPageSVF;
-    public SpinnerValueFactory<Integer> getFirstPageSVF() { return firstPageSVF; }
-    public int getFirstPage() { return firstPageSVF.getValue(); }
-    public void setFirstPage(int value) { firstPageSVF.setValue(value); setLastPageRange(value); BuildSignature(); }
-
-    private void setFirstPageRange(int value) {
-        int current = getFirstPage();
-        if (current > value)
-            current = value;
-        firstPageSVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, value, current);
-    }
-
-    private SpinnerValueFactory<Integer> lastPageSVF;
-    public SpinnerValueFactory<Integer> getLastPageSVF() { return lastPageSVF; }
-    public int getLastPage() { return lastPageSVF.getValue(); }
-    public void setLastPage(int value) { lastPageSVF.setValue(value); setFirstPageRange(value); BuildSignature(); }
-
-    private void setLastPageRange(int value) {
-        int current = getLastPage();
-        if (current < value)
-            current = value;
-        lastPageSVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(value, getPageCount(), current);
-    }
-
-    /**
-     * Initialize "Spinners" panel.
-     */
-    private void initializeSpinners() {
-        firstPageSVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 1);
-        lastPageSVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 1);
     }
 
 

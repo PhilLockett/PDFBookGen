@@ -37,13 +37,12 @@ public class DataStore implements Serializable {
     private String sourceDocument;
     private String outputFileName;
 
-    private Boolean rotateCheck;
-
     private Integer paperSizeIndex;
-    private Integer sigSize;
-
+    private Boolean rotateCheck;
     private Integer firstPage;
     private Integer lastPage;
+
+    private Integer sigSize;
 
 
 
@@ -59,18 +58,17 @@ public class DataStore implements Serializable {
     public String getOutputFileName() { return outputFileName; }
     public void setOutputFileName(String text) { this.outputFileName = text; }
 
-    public Boolean isRotateCheck() { return rotateCheck; }
-    public void setRotateCheck(Boolean check) { this.rotateCheck = check; }
-
     public Integer getPaperSizeIndex() { return paperSizeIndex; }
     public void setPaperSizeIndex(Integer index) { this.paperSizeIndex = index; }
-    public Integer getSigSize() { return sigSize; }
-    public void setSigSize(Integer index) { this.sigSize = index; }
-
+    public Boolean isRotateCheck() { return rotateCheck; }
+    public void setRotateCheck(Boolean check) { this.rotateCheck = check; }
     public Integer getFirstPage() { return firstPage; }
     public void setFirstPage(Integer value) { this.firstPage = value; }
     public Integer getLastPage() { return lastPage; }
     public void setLastPage(Integer value) { this.lastPage = value; }
+
+    public Integer getSigSize() { return sigSize; }
+    public void setSigSize(Integer index) { this.sigSize = index; }
 
 
 
@@ -84,11 +82,13 @@ public class DataStore implements Serializable {
       public void dump() {
         System.out.println("sourceDocument = " + sourceDocument);
         System.out.println("outputFileName = " + outputFileName);
-        System.out.println("rotateCheck = " + rotateCheck);
+
         System.out.println("paperSizeIndex = " + paperSizeIndex);
-        System.out.println("sigSize = " + sigSize);
+        System.out.println("rotateCheck = " + rotateCheck);
         System.out.println("firstPage = " + firstPage);
         System.out.println("lastPage = " + lastPage);
+
+        System.out.println("sigSize = " + sigSize);
     }
 
 

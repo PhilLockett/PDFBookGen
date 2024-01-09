@@ -299,18 +299,11 @@ public class Model {
     public int getSigSize() { return sigSizeSVF.getValue(); }
     public void setSigSize(int value) { sigSizeSVF.setValue(value); BuildSignature(); }
 
-
-    // Must match paperSizeList.
-    private PDRectangle[] paperSizeArray = { PDRectangle.A0, PDRectangle.A1, PDRectangle.A2, PDRectangle.A3, 
-        PDRectangle.A4, PDRectangle.A5, PDRectangle.A6, PDRectangle.LETTER, PDRectangle.LEGAL };
-
-    public PDRectangle getPDPaperSize() { return paperSizeArray[getPaperSizeIndex()]; }
-
     // Use PDFBook object to generate booklet.
     public boolean generate() {
         PDFBook booklet = new PDFBook(getSourceFilePath(), getOutputFilePath());
 
-        booklet.setPageSize(getPDPaperSize());
+        booklet.setPageSize(getPaperSize());
         booklet.setSheetCount(getSigSize());
         booklet.setRotate(isRotateCheck());
 

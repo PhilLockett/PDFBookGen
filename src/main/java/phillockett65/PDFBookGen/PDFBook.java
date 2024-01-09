@@ -159,6 +159,15 @@ public class PDFBook {
     /**
      * Set the size of the page in the output document.
      * 
+     * @param size of output page defined by getPS() compatible Strings.
+     */
+    public void setPageSize(String size) {
+        pageSize = getPS(size);
+    }
+
+    /**
+     * Set the size of the page in the output document.
+     * 
      * @param size of standard portrait page defined by PDRectangle.
      */
     public void setPageSize(PDRectangle size) {

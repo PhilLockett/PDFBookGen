@@ -86,7 +86,6 @@ public class Model {
         // System.out.println("Model init.");
         
         stage = primaryStage;
-        BuildSignature();
     }
 
     public Stage getStage() { return stage; }
@@ -287,8 +286,14 @@ public class Model {
 
 
     /************************************************************************
-     * Support code for Signature class.
+     * Support code for "Signature State" panel.
      */
+
+    private SpinnerValueFactory<Integer> sigSizeSVF;
+    public SpinnerValueFactory<Integer> getSigSizeSVF() { return sigSizeSVF; }
+    public int getSigSize() { return sigSizeSVF.getValue(); }
+    public void setSigSize(int value) { sigSizeSVF.setValue(value); BuildSignature(); }
+
 
      /**
      * Class to encapsulate necessary calculations for changes to the selected 
@@ -341,22 +346,12 @@ public class Model {
     public int getLastSigBlankCount() { return signature.lastSigBlankCount; }     // Blank pages in last signature.
 
 
-
-    /************************************************************************
-     * Support code for "Signature State" panel.
-     */
-
-    private SpinnerValueFactory<Integer> sigSizeSVF;
-    public SpinnerValueFactory<Integer> getSigSizeSVF() { return sigSizeSVF; }
-    public int getSigSize() { return sigSizeSVF.getValue(); }
-    public void setSigSize(int value) { sigSizeSVF.setValue(value); BuildSignature(); }
-
-
     /**
      * Initialize "Signature State" panel.
      */
     private void initializeSignatureStatePanel() {
         sigSizeSVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 8, 1);
+        BuildSignature();
     }
 
 

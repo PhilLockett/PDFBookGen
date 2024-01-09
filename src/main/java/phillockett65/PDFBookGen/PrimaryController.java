@@ -109,7 +109,9 @@ public class PrimaryController {
 
         paperSizeChoiceBox.setValue(model.getPaperSize());
         syncSigSizeSpinner();
-        setPageCountMessage();
+
+        setTotalPageCountMessage();
+        setSignatureStateMessages();
     }
 
 
@@ -255,7 +257,6 @@ public class PrimaryController {
         firstPageSpinner.valueProperty().addListener( (v, oldValue, newValue) -> {
             // System.out.println("intSpinner.Listener(" + newValue + "))");
             model.setFirstPage(newValue);
-            setTotalPageCountMessage();
             syncLastPageSpinner();
             syncUI();
         });
@@ -266,7 +267,6 @@ public class PrimaryController {
         lastPageSpinner.valueProperty().addListener( (v, oldValue, newValue) -> {
             // System.out.println("doubleSpinner.Listener(" + newValue + "))");
             model.setLastPage(newValue);
-            setTotalPageCountMessage();
             syncFirstPageSpinner();
             syncUI();
         });
@@ -277,8 +277,6 @@ public class PrimaryController {
         lastPageSpinner.setTooltip(new Tooltip("Last page of source document to include in the generated document"));
         countLabel.setTooltip(new Tooltip("Number of pages from the source document that will be included in the generated document"));
         generateButton.setTooltip(new Tooltip("Generate the PDF document in booklet form"));
-
-        setTotalPageCountMessage();
     }
 
 
@@ -305,7 +303,7 @@ public class PrimaryController {
     @FXML
     private Label lastSigBlanksLabel;
 
-    private void setPageCountMessage() {
+    private void setSignatureStateMessages() {
         sigLabel.setText(String.valueOf(model.getSigPageCount()));
         sigCountLabel.setText(String.valueOf(model.getSigCount()));
         lastSigBeginLabel.setText(String.valueOf(model.getLastSigFirstPage()));
@@ -337,8 +335,6 @@ public class PrimaryController {
             model.setSigSize(newValue);
             syncUI();
         });
-
-        setPageCountMessage();
     }
 
 

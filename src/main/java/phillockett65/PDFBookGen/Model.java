@@ -89,6 +89,7 @@ public class Model {
         // System.out.println("Model init.");
         
         stage = primaryStage;
+        BuildSignature();
     }
 
     public Stage getStage() { return stage; }
@@ -224,6 +225,62 @@ public class Model {
 
 
     /************************************************************************
+     * Support code for Signature class.
+     */
+
+     /**
+     * Class to encapsulate necessary calculations for changes to the selected 
+     * first source page, last source page or the count of sheets in a 
+     * signature. A source page is a page from the source document. The 
+     * generated document has 2 source pages on each page. Pages are printed 
+     * on both sides, so there are 4 source pages on each printed sheet.
+     * 
+     * Available values calculated are:
+     *   o Number of source pages in the generated document
+     *   o Number of source pages in a signature
+     *   o Number of signatures that will be generated
+     *   o Source page number that the last signature starts with
+     *   o Number of source pages in the last signature
+     *   o Number of blank pages in the last signature
+     */
+    private class Signature {
+        public final int pageCount;
+        public final int sigPageCount;
+        public final int sigCount;
+        public final int lastSigFirstPage;
+        public final int lastSigPageCount;
+        public final int lastSigBlankCount;
+
+        public Signature(int sigSize, int firstPage, int lastPage)
+        {
+            final int pageDiff = lastPage - firstPage;
+            pageCount = pageDiff + 1;
+            sigPageCount = sigSize * 4;
+            final int fullSigCount = pageDiff / sigPageCount;
+            final int fullSigPageCount = fullSigCount * sigPageCount;
+            sigCount = fullSigCount + 1;
+            lastSigFirstPage = firstPage + fullSigPageCount;
+            lastSigPageCount = pageCount - fullSigPageCount;
+            lastSigBlankCount = sigPageCount - lastSigPageCount;
+        }
+
+    }
+    
+    private Signature signature;
+    private void BuildSignature() {
+        signature = new Signature(getSigSize(), getFirstPage(), getLastPage());
+    }
+
+    public int getOutputPageCount() { return signature.pageCount; }               // Number of pages in generated document.
+    public int getSigPageCount() { return signature.sigPageCount; }               // Number of pages in a signature.
+    public int getSigCount() { return signature.sigCount; }                       // Number of signatures that will be generated.
+    public int getLastSigFirstPage() { return signature.lastSigFirstPage; }       // Last signature starts with that source page.
+    public int getLastSigPageCount() { return signature.lastSigPageCount; }       // Count of source pages in last signature.
+    public int getLastSigBlankCount() { return signature.lastSigBlankCount; }     // Blank pages in last signature.
+
+
+
+    /************************************************************************
      * Support code for "Selections" panel.
      */
 
@@ -240,19 +297,8 @@ public class Model {
     private SpinnerValueFactory<Integer> sigSizeSVF;
     public SpinnerValueFactory<Integer> getSigSizeSVF() { return sigSizeSVF; }
     public int getSigSize() { return sigSizeSVF.getValue(); }
-    public void setSigSize(int value) { sigSizeSVF.setValue(value); }
+    public void setSigSize(int value) { sigSizeSVF.setValue(value); BuildSignature(); }
 
-
-    public int getSigSheetCount() { return getSigSize(); }
-    public int getSigPageCount() { return getSigSheetCount() * 4; }
-
-    private int getFullSigCount() { return getOutputPageDiff() / getSigPageCount(); }           // Total signature count - 1.
-    public int getSigCount() { return getFullSigCount() + 1; }                                  // Total signature count.
-
-    private int getFullSigPageCount() { return getFullSigCount() * getSigPageCount(); }
-    public int getLastSigFirstPage() { return getFirstPage() + getFullSigPageCount(); }
-    public int getLastSigPageCount() { return getOutputPageCount() - getFullSigPageCount(); }   // Count of source pages in last sig.
-    public int getLastSigBlankCount() { return getSigPageCount() - getLastSigPageCount(); }     // Blank pages in last sig.
 
     // Must match paperSizeList.
     private PDRectangle[] paperSizeArray = { PDRectangle.A0, PDRectangle.A1, PDRectangle.A2, PDRectangle.A3, 
@@ -265,7 +311,7 @@ public class Model {
         PDFBook booklet = new PDFBook(getSourceFilePath(), getOutputFilePath());
 
         booklet.setPageSize(getPDPaperSize());
-        booklet.setSheetCount(getSigSheetCount());
+        booklet.setSheetCount(getSigSize());
         booklet.setRotate(isRotateCheck());
 
         final int first = getFirstPage();
@@ -299,12 +345,13 @@ public class Model {
         pageCount = value;
         firstPageSVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, value, 1);
         lastPageSVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, value, value);
+        BuildSignature();
     }
 
     private SpinnerValueFactory<Integer> firstPageSVF;
     public SpinnerValueFactory<Integer> getFirstPageSVF() { return firstPageSVF; }
     public int getFirstPage() { return firstPageSVF.getValue(); }
-    public void setFirstPage(int value) { firstPageSVF.setValue(value); setLastPageRange(value); }
+    public void setFirstPage(int value) { firstPageSVF.setValue(value); setLastPageRange(value); BuildSignature(); }
 
     private void setFirstPageRange(int value) {
         int current = getFirstPage();
@@ -313,10 +360,10 @@ public class Model {
         firstPageSVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, value, current);
     }
 
-    private SpinnerValueFactory<Integer>  lastPageSVF;
+    private SpinnerValueFactory<Integer> lastPageSVF;
     public SpinnerValueFactory<Integer> getLastPageSVF() { return lastPageSVF; }
     public int getLastPage() { return lastPageSVF.getValue(); }
-    public void setLastPage(int value) { lastPageSVF.setValue(value); setFirstPageRange(value); }
+    public void setLastPage(int value) { lastPageSVF.setValue(value); setFirstPageRange(value); BuildSignature(); }
 
     private void setLastPageRange(int value) {
         int current = getLastPage();
@@ -324,9 +371,6 @@ public class Model {
             current = value;
         lastPageSVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(value, getPageCount(), current);
     }
-    
-    private int getOutputPageDiff() { return getLastPage()-getFirstPage(); }
-    public int getOutputPageCount() { return getOutputPageDiff() + 1; }
 
     /**
      * Initialize "Spinners" panel.

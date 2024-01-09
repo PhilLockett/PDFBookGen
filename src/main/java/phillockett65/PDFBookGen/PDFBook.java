@@ -124,30 +124,6 @@ public class PDFBook {
         lastPage = maxPage;
     }
 
-    /**
-     * Constructor.
-     *
-     * @param inPDF file path for source PDF.
-     * @param outPDF file path for generated PDF.
-     */
-    // public PDFBook(String inPDF, String outPDF) {
-    //     sourcePDF = inPDF;
-    //     outputPDF = outPDF;
-
-    //     try {
-    //         maxPage = inputDoc.getNumberOfPages();
-    //         lastPage = maxPage;
-    //         inputDoc = PDDocument.load(new File(sourcePDF));
-
-    //         if (inputDoc != null) {
-    //             inputDoc.close();
-    //         }
-
-    //     } catch (IOException e) {
-    //         System.out.println(e.getMessage());
-    //     }
-    // }
-
     private static PDRectangle getPS(String size) {
         switch (size) {
             case "A0":      return PDRectangle.A0;

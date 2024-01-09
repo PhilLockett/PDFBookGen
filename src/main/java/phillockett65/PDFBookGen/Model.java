@@ -26,8 +26,6 @@ package phillockett65.PDFBookGen;
 
 import java.io.File;
 
-import org.apache.pdfbox.pdmodel.common.PDRectangle;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.SpinnerValueFactory;

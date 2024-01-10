@@ -214,8 +214,6 @@ public class PrimaryController {
     @FXML
     void rotateCheckBoxActionPerformed(ActionEvent event) {
         model.setRotateCheck(rotateCheckBox.isSelected());
-        final String state = model.isRotateCheck() ? "selected." : "unselected.";
-        setStatusMessage("Rotate check box is " + state);
     }
 
     @FXML

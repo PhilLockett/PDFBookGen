@@ -148,7 +148,7 @@ public class PrimaryController {
      */
     private boolean openFile() {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Open Script File");
+        fileChooser.setTitle("Open PDF Document File");
 
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF", "*.pdf"));
 

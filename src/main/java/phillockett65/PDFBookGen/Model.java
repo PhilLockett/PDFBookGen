@@ -103,7 +103,7 @@ public class Model {
         setFirstPage(1);
         setLastPage(1);
 
-        setPaperSizeIndex(7);
+        setPaperSize("Letter");
         setSigSize(1);
     }
 
@@ -125,7 +125,7 @@ public class Model {
 
         data.setRotateCheck(isRotateCheck());
 
-        data.setPaperSizeIndex(getPaperSizeIndex());
+        data.setPaperSize(getPaperSize());
         data.setSigSize(getSigSize());
 
         data.setFirstPage(getFirstPage());
@@ -155,7 +155,7 @@ public class Model {
 
         setRotateCheck(data.isRotateCheck());
 
-        setPaperSizeIndex(data.getPaperSizeIndex());
+        setPaperSize(data.getPaperSize());
         setSigSize(data.getSigSize());
     
         setFirstPage(data.getFirstPage());
@@ -235,7 +235,7 @@ public class Model {
      * Support code for "Output Content" panel.
      */
 
-    private int paperSizeIndex;
+    private String paperSize;
     private ObservableList<String> paperSizeList = FXCollections.observableArrayList();
 
     private boolean rotateCheck;
@@ -250,19 +250,16 @@ public class Model {
      */
     public ObservableList<String> getPaperSizeList() { return paperSizeList; }
 
-    private void setPaperSizeIndex(int value) { paperSizeIndex = value; }
-    private int getPaperSizeIndex() { return paperSizeIndex; }
-
     /**
      * Note the selected paper size.
      * @param value of the currently selected paper size as a string.
      */
-    public void setPaperSize(String value) { setPaperSizeIndex(paperSizeList.indexOf(value)); }
+    public void setPaperSize(String value) { paperSize = value; }
 
     /**
      * @return the currently selected paper size string.
      */
-    public String getPaperSize() { return paperSizeList.get(getPaperSizeIndex()); }
+    public String getPaperSize() { return paperSize; }
 
 
     /**

@@ -256,7 +256,7 @@ public class PrimaryController {
         
         firstPageSpinner.valueProperty().addListener( (v, oldValue, newValue) -> {
             // System.out.println("intSpinner.Listener(" + newValue + "))");
-            model.setFirstPage(newValue);
+            model.syncFirstPage();
             syncLastPageSpinner();
             syncUI();
         });
@@ -266,7 +266,7 @@ public class PrimaryController {
         
         lastPageSpinner.valueProperty().addListener( (v, oldValue, newValue) -> {
             // System.out.println("doubleSpinner.Listener(" + newValue + "))");
-            model.setLastPage(newValue);
+            model.syncLastPage();
             syncFirstPageSpinner();
             syncUI();
         });
@@ -332,7 +332,7 @@ public class PrimaryController {
         
         sigSizeSpinner.valueProperty().addListener( (v, oldValue, newValue) -> {
             // System.out.println("sigSizeSpinner.Listener(" + newValue + "))");
-            model.setSigSize(newValue);
+            model.syncSigSize();
             syncUI();
         });
     }

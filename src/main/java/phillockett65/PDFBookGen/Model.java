@@ -233,10 +233,15 @@ public class Model {
 
     private SpinnerValueFactory<Integer> firstPageSVF;
     public SpinnerValueFactory<Integer> getFirstPageSVF() { return firstPageSVF; }
-    public int getFirstPage() { return firstPageSVF.getValue(); }
-    public void setFirstPage(int value) { setLastPageRange(value); BuildSignature(); }
 
     private void setFirstPageRange(int value) {
+    private int getFirstPage() { return firstPageSVF.getValue(); }
+    private void setFirstPage(int value) { firstPageSVF.setValue(value); }
+    /**
+     * Selected first page has changed, so synchronize values.
+     */
+    public void syncFirstPage() { setLastPageRange(); BuildSignature(); }
+
         int current = getFirstPage();
         if (current > value)
             current = value;
@@ -245,10 +250,15 @@ public class Model {
 
     private SpinnerValueFactory<Integer> lastPageSVF;
     public SpinnerValueFactory<Integer> getLastPageSVF() { return lastPageSVF; }
-    public int getLastPage() { return lastPageSVF.getValue(); }
-    public void setLastPage(int value) { setFirstPageRange(value); BuildSignature(); }
 
     private void setLastPageRange(int value) {
+    private int getLastPage() { return lastPageSVF.getValue(); }
+    private void setLastPage(int value) { lastPageSVF.setValue(value); }
+    /**
+     * Selected last page has changed, so synchronize values.
+     */
+    public void syncLastPage() { setFirstPageRange(); BuildSignature(); }
+
         int current = getLastPage();
         if (current < value)
             current = value;
@@ -291,8 +301,14 @@ public class Model {
 
     private SpinnerValueFactory<Integer> sigSizeSVF;
     public SpinnerValueFactory<Integer> getSigSizeSVF() { return sigSizeSVF; }
-    public int getSigSize() { return sigSizeSVF.getValue(); }
-    public void setSigSize(int value) { BuildSignature(); }
+
+    private int getSigSize() { return sigSizeSVF.getValue(); }
+    private void setSigSize(int value) { sigSizeSVF.setValue(value); }
+
+    /**
+     * Signature size has changed, so synchronize values.
+     */
+    public void syncSigSize() { BuildSignature(); }
 
 
      /**

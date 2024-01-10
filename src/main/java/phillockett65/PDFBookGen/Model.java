@@ -171,24 +171,52 @@ public class Model {
      */
 
     private String sourceDocument;
+    private String outputFileName;
+
+    /**
+     * Set the file path for the source PDF document.
+     * @param text string of the source document file path.
+     */
     public void setSourceFilePath(String text) {
         sourceDocument = text;
         setPageCount(fetchPageCount());
     }
 
-    public int fetchPageCount() {
+    /**
+     * @return the number of pages in the current source document.
+     */
+    private int fetchPageCount() {
         if (isSourceFilePath())
             return PDFBook.getPDFPageCount(sourceDocument);
 
         return 1;
     }
 
+    /**
+     * @return the file path for the current source PDF document.
+     */
     public String getSourceFilePath() { return sourceDocument; }
+
+    /**
+     * @return true if a source document has been selected, false otherwise.
+     */
     public boolean isSourceFilePath() { return !sourceDocument.isBlank(); }
 
-    private String outputFileName;
+
+    /**
+     * Set the file name for the generated PDF document.
+     * @param text string of the file name for the generated document.
+     */
     public void setOutputFileName(String text) { outputFileName = text; }
+
+    /**
+     * @return the file name for the generated PDF document.
+     */
     public String getOutputFileName() { return outputFileName; }
+
+    /**
+     * @return the full file path for the generated PDF document.
+     */
     public String getOutputFilePath() {
         File current = new File(getSourceFilePath());
 
@@ -209,63 +237,102 @@ public class Model {
 
     private int paperSizeIndex;
     private ObservableList<String> paperSizeList = FXCollections.observableArrayList();
-    
+
+    private boolean rotateCheck;
+    private int pageCount = 50;
+
+    private SpinnerValueFactory<Integer> firstPageSVF;
+    private SpinnerValueFactory<Integer> lastPageSVF;
+
+
+    /**
+     * @return the Observable List for the paper size choice box.
+     */
     public ObservableList<String> getPaperSizeList() { return paperSizeList; }
-    public void setPaperSizeIndex(int value) { paperSizeIndex = value; }
-    public int getPaperSizeIndex() { return paperSizeIndex; }
+
+    private void setPaperSizeIndex(int value) { paperSizeIndex = value; }
+    private int getPaperSizeIndex() { return paperSizeIndex; }
+
+    /**
+     * Note the selected paper size.
+     * @param value of the currently selected paper size as a string.
+     */
     public void setPaperSize(String value) { setPaperSizeIndex(paperSizeList.indexOf(value)); }
+
+    /**
+     * @return the currently selected paper size string.
+     */
     public String getPaperSize() { return paperSizeList.get(getPaperSizeIndex()); }
 
 
-    private boolean rotateCheck;
+    /**
+     * Indicate whether the reverse side page is to be rotated.
+     * @param state true if the reverse page is to be rotated, false otherwise.
+     */
     public void setRotateCheck(boolean state) { rotateCheck = state; }
+
+    /**
+     * @return true if the reverse side page is to be rotated, false otherwise.
+     */
     public boolean isRotateCheck() { return rotateCheck; }
 
 
-    private int pageCount = 50;
-    public int getPageCount() { return pageCount; }
-    public void setPageCount(int value) {
+    private int getPageCount() { return pageCount; }
+    private void setPageCount(int value) {
         pageCount = value;
         firstPageSVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, value, 1);
         lastPageSVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, value, value);
         BuildSignature();
     }
 
-    private SpinnerValueFactory<Integer> firstPageSVF;
+
+    /**
+     * @return the Value Factory for the first page spinner.
+     */
     public SpinnerValueFactory<Integer> getFirstPageSVF() { return firstPageSVF; }
 
-    private void setFirstPageRange(int value) {
     private int getFirstPage() { return firstPageSVF.getValue(); }
     private void setFirstPage(int value) { firstPageSVF.setValue(value); }
+
     /**
      * Selected first page has changed, so synchronize values.
      */
     public void syncFirstPage() { setLastPageRange(); BuildSignature(); }
 
+    private void setFirstPageRange() {
+        final int last = getLastPage();
         int current = getFirstPage();
-        if (current > value)
-            current = value;
-        firstPageSVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, value, current);
+        if (current > last)
+            current = last;
+        firstPageSVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, last, current);
     }
 
-    private SpinnerValueFactory<Integer> lastPageSVF;
+    /**
+     * @return the Value Factory for the last page spinner.
+     */
     public SpinnerValueFactory<Integer> getLastPageSVF() { return lastPageSVF; }
 
-    private void setLastPageRange(int value) {
     private int getLastPage() { return lastPageSVF.getValue(); }
     private void setLastPage(int value) { lastPageSVF.setValue(value); }
+
     /**
      * Selected last page has changed, so synchronize values.
      */
     public void syncLastPage() { setFirstPageRange(); BuildSignature(); }
 
+    private void setLastPageRange() {
+        final int first = getFirstPage();
         int current = getLastPage();
-        if (current < value)
-            current = value;
-        lastPageSVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(value, getPageCount(), current);
+        if (current < first)
+            current = first;
+        lastPageSVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(first, getPageCount(), current);
     }
 
-    // Use PDFBook object to generate booklet.
+
+    /**
+     * Use a PDFBook instance to generate booklet.
+     * @return true if document was generated, false otherwise.
+     */
     public boolean generate() {
         PDFBook booklet = new PDFBook(getSourceFilePath(), getOutputFilePath());
 
@@ -300,6 +367,11 @@ public class Model {
      */
 
     private SpinnerValueFactory<Integer> sigSizeSVF;
+    private Signature signature;
+
+    /**
+     * @return the Value Factory for the signature size spinner.
+     */
     public SpinnerValueFactory<Integer> getSigSizeSVF() { return sigSizeSVF; }
 
     private int getSigSize() { return sigSizeSVF.getValue(); }
@@ -349,17 +421,39 @@ public class Model {
 
     }
     
-    private Signature signature;
     private void BuildSignature() {
         signature = new Signature(getSigSize(), getFirstPage(), getLastPage());
     }
 
-    public int getOutputPageCount() { return signature.pageCount; }               // Number of pages in generated document.
-    public int getSigPageCount() { return signature.sigPageCount; }               // Number of pages in a signature.
-    public int getSigCount() { return signature.sigCount; }                       // Number of signatures that will be generated.
-    public int getLastSigFirstPage() { return signature.lastSigFirstPage; }       // Last signature starts with that source page.
-    public int getLastSigPageCount() { return signature.lastSigPageCount; }       // Count of source pages in last signature.
-    public int getLastSigBlankCount() { return signature.lastSigBlankCount; }     // Blank pages in last signature.
+    /**
+     * @return the number of source pages in the generated document.
+     */
+    public int getOutputPageCount() { return signature.pageCount; }
+
+    /**
+     * @return the number of source pages in a signature.
+     */
+    public int getSigPageCount() { return signature.sigPageCount; }
+
+    /**
+     * @return the number of signatures that will be generated.
+     */
+    public int getSigCount() { return signature.sigCount; }
+
+    /**
+     * @return the source page number that the last signature starts with.
+     */
+    public int getLastSigFirstPage() { return signature.lastSigFirstPage; }
+
+    /**
+     * @return the number of source pages in the last signature.
+     */
+    public int getLastSigPageCount() { return signature.lastSigPageCount; }
+
+    /**
+     * @return the number of blank pages in the last signature.
+     */
+    public int getLastSigBlankCount() { return signature.lastSigBlankCount; }
 
 
     /**

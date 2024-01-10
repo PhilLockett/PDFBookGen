@@ -234,7 +234,7 @@ public class Model {
     private SpinnerValueFactory<Integer> firstPageSVF;
     public SpinnerValueFactory<Integer> getFirstPageSVF() { return firstPageSVF; }
     public int getFirstPage() { return firstPageSVF.getValue(); }
-    public void setFirstPage(int value) { firstPageSVF.setValue(value); setLastPageRange(value); BuildSignature(); }
+    public void setFirstPage(int value) { setLastPageRange(value); BuildSignature(); }
 
     private void setFirstPageRange(int value) {
         int current = getFirstPage();
@@ -246,7 +246,7 @@ public class Model {
     private SpinnerValueFactory<Integer> lastPageSVF;
     public SpinnerValueFactory<Integer> getLastPageSVF() { return lastPageSVF; }
     public int getLastPage() { return lastPageSVF.getValue(); }
-    public void setLastPage(int value) { lastPageSVF.setValue(value); setFirstPageRange(value); BuildSignature(); }
+    public void setLastPage(int value) { setFirstPageRange(value); BuildSignature(); }
 
     private void setLastPageRange(int value) {
         int current = getLastPage();
@@ -292,7 +292,7 @@ public class Model {
     private SpinnerValueFactory<Integer> sigSizeSVF;
     public SpinnerValueFactory<Integer> getSigSizeSVF() { return sigSizeSVF; }
     public int getSigSize() { return sigSizeSVF.getValue(); }
-    public void setSigSize(int value) { sigSizeSVF.setValue(value); BuildSignature(); }
+    public void setSigSize(int value) { BuildSignature(); }
 
 
      /**

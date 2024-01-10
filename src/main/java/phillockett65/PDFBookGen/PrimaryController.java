@@ -96,7 +96,7 @@ public class PrimaryController {
      * Synchronise all controls with the model. This should be the last step 
      * in the initialisation.
      */
-    public void syncUI() {
+    private void syncUI() {
         sourceDocumentTextField.setText(model.getSourceFilePath());
         generateButton.setDisable(!model.isSourceFilePath());
 

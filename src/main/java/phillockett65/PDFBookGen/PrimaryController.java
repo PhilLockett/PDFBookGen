@@ -452,14 +452,6 @@ public class PrimaryController {
     @FXML
     private Label statusLabel;
 
-    @FXML
-    private Button clearDataButton;
-
-    @FXML
-    private void clearDataButtonActionPerformed(ActionEvent event) {
-        clearData();
-    }
-
     private void clearData() {
         model.defaultSettings();
         syncUI();
@@ -475,7 +467,6 @@ public class PrimaryController {
      */
     private void initializeStatusLine() {
         statusLabel.setTooltip(new Tooltip("Current status"));
-        clearDataButton.setTooltip(new Tooltip("Caution! This irreversible action will reset the form data to default values"));
     }
 
 }

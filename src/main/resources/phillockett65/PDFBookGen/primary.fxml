@@ -57,7 +57,7 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
-              <MenuItem fx:id="helpAboutOnAction" mnemonicParsing="false" onAction="#helpAboutOnAction" text="About">
+              <MenuItem fx:id="helpAboutOnAction" mnemonicParsing="false" onAction="#helpAboutOnAction" text="About...">
                      <accelerator>
                         <KeyCodeCombination alt="DOWN" code="A" control="UP" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
@@ -112,7 +112,6 @@
                   <Label fx:id="countLabel" text="Total page count: 1" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                   <Label text="Output Paper Size:" GridPane.halignment="RIGHT" />
                   <ChoiceBox fx:id="paperSizeChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" />
-                  <Button fx:id="generateButton" disable="true" mnemonicParsing="false" onAction="#generateButtonActionPerformed" text="Generate" GridPane.columnIndex="3" GridPane.halignment="RIGHT" />
                </children>
             </GridPane>
          </content>
@@ -155,7 +154,7 @@
                   <Font size="14.0" />
                </font></Label>
             <Region HBox.hgrow="ALWAYS" />
-            <Button fx:id="clearDataButton" onAction="#clearDataButtonActionPerformed" text="Clear Data" />
+            <Button fx:id="generateButton" disable="true" mnemonicParsing="false" onAction="#generateButtonActionPerformed" text="Generate" />
          </children>
       </HBox>
    </children>

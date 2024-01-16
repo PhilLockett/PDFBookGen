@@ -28,6 +28,7 @@ import java.io.File;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
@@ -35,6 +36,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -118,6 +120,70 @@ public class PrimaryController {
 
 
     /************************************************************************
+     * Support code for Pull-down Menu structure.
+     */
+
+    @FXML
+    private void fileLoadOnAction() {
+        launchLoadWindow();
+    }
+
+    @FXML
+    private void fileSaveOnAction() {
+        if (model.isOutputFilePath()) {
+            if (model.generate())
+                setStatusMessage("Saved to: " + model.getOutputFilePath());
+        }
+        else
+            launchSaveAsWindow();
+    }
+
+    @FXML
+    private void fileSaveAsOnAction() {
+        launchSaveAsWindow();
+    }
+
+    @FXML
+    private void fileCloseOnAction() {
+        model.getStage().close();
+    }
+ 
+    @FXML
+    private void editClearOnAction() {
+        clearData();
+    }
+
+    @FXML
+    private void helpAboutOnAction() {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        final String title = model.getTitle();
+        alert.setTitle("About " + title);
+        alert.setHeaderText(title);
+        alert.setContentText(title + " is an application for converting a PDF document into a 2-up booklet form.");
+
+        alert.showAndWait();
+    }
+
+    /**
+     * Use a file chooser to select a test file.
+    * @return true if a file was selected and loaded, false otherwise.
+    */
+    private boolean launchLoadWindow() {
+        final boolean loaded = openFile();
+        setStatusMessage("Loaded file: " + model.getSourceFilePath());
+
+        return loaded;
+    }
+
+    private boolean launchSaveAsWindow() {
+        final boolean saved = saveAs();
+        setStatusMessage("Saved file: " + model.getOutputFilePath());
+
+        return saved;
+    }
+
+
+    /************************************************************************
      * Support code for "File Names" panel.
      */
 
@@ -140,6 +206,11 @@ public class PrimaryController {
     private void outputFileNameTextFieldKeyTyped(KeyEvent event) {
         // System.out.println("outputFileNameTextFieldKeyTyped() " + event.toString());
         model.setOutputFileName(outputFileNameTextField.getText());
+    }
+
+    @FXML
+    private void browseButtonActionPerformed(ActionEvent event) {
+        launchLoadWindow();
     }
 
 
@@ -172,10 +243,35 @@ public class PrimaryController {
         return false;
     }
 
-    @FXML
-    private void browseButtonActionPerformed(ActionEvent event) {
-        openFile();
-        setStatusMessage("Loaded file: " + model.getSourceFilePath());
+    private boolean saveAs() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save PDF Document File");
+
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF", "*.pdf"));
+
+        if (model.isOutputFilePath()) {
+            File current = new File(model.getOutputFilePath());
+            fileChooser.setInitialFileName(current.getName());
+
+            File parent = new File(current.getParent());
+            if (parent.exists())
+                fileChooser.setInitialDirectory(parent);
+        }
+        else
+        if (model.isSourceFilePath()) {
+            File current = new File(model.getSourceFilePath());
+            File parent = new File(current.getParent());
+            if (parent.exists())
+                fileChooser.setInitialDirectory(parent);
+        }
+        File file = fileChooser.showSaveDialog(model.getStage());
+        if (file != null) {
+            model.setOutputFilePath(file.getAbsolutePath());
+
+            return model.generate();
+        }
+
+        return false;
     }
 
 
@@ -350,6 +446,10 @@ public class PrimaryController {
 
     @FXML
     private void clearDataButtonActionPerformed(ActionEvent event) {
+        clearData();
+    }
+
+    private void clearData() {
         model.defaultSettings();
         syncUI();
         setStatusMessage("Data reset.");

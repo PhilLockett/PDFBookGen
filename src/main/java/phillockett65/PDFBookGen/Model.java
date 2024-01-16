@@ -89,6 +89,7 @@ public class Model {
     }
 
     public Stage getStage() { return stage; }
+    public String getTitle() { return stage.getTitle(); }
 
     /**
      * Set all attributes to the default values.
@@ -171,7 +172,7 @@ public class Model {
      */
 
     private String sourceDocument;
-    private String outputFileName;
+    private String outputFilePath;
 
     /**
      * Set the file path for the source PDF document.
@@ -200,28 +201,62 @@ public class Model {
     /**
      * @return true if a source document has been selected, false otherwise.
      */
-    public boolean isSourceFilePath() { return !sourceDocument.isBlank(); }
+    public boolean isSourceFilePath() { if (sourceDocument == null) return false; return !sourceDocument.isBlank(); }
 
+    private String fileStem(String fileName) {
+        if (!fileName.contains("."))
+            return fileName;
+
+        return fileName.substring(0,fileName.lastIndexOf("."));
+    }
+
+    private String getFileParent(String file) {
+        if (file.isBlank())
+            return "."; 
+
+        File current = new File(file);
+        return current.getParent();
+    }
+
+    private String getOutputFileParent() {
+        if (isOutputFilePath())
+            return getFileParent(getOutputFilePath());
+
+        if (isSourceFilePath())
+            return getFileParent(getSourceFilePath());
+
+        return ".";
+    }
 
     /**
      * Set the file name for the generated PDF document.
      * @param text string of the file name for the generated document.
      */
-    public void setOutputFileName(String text) { outputFileName = text; }
+    public void setOutputFileName(String text) { outputFilePath = getOutputFileParent() + "\\" + text + ".pdf"; }
+
+    /**
+     * Set the file name for the generated PDF document.
+     * @param text string of the file name for the generated document.
+     */
+    public void setOutputFilePath(String text) { outputFilePath = text; }
 
     /**
      * @return the file name for the generated PDF document.
      */
-    public String getOutputFileName() { return outputFileName; }
+    public String getOutputFileName() {
+        File current = new File(getOutputFilePath());
+        return fileStem(current.getName());
+    }
 
     /**
      * @return the full file path for the generated PDF document.
      */
-    public String getOutputFilePath() {
-        File current = new File(getSourceFilePath());
+    public String getOutputFilePath() { return outputFilePath; }
 
-        return current.getParent() + "\\" + outputFileName + ".pdf";
-    }
+    /**
+     * @return true if a source document has been selected, false otherwise.
+     */
+    public boolean isOutputFilePath() { if (outputFilePath == null) return false; return !outputFilePath.isBlank(); }
 
     /**
      * Initialize "File Names" panel.

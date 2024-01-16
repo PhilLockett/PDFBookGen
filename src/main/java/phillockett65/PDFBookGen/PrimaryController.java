@@ -25,11 +25,13 @@
 package phillockett65.PDFBookGen;
 
 import java.io.File;
+import java.util.Optional;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -453,9 +455,17 @@ public class PrimaryController {
     private Label statusLabel;
 
     private void clearData() {
-        model.defaultSettings();
-        syncUI();
-        setStatusMessage("Data reset.");
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Clear Data");
+        alert.setHeaderText("Caution! This irreversible action will reset the form data to default values");
+        alert.setContentText("Do you wish to continue?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            model.defaultSettings();
+            syncUI();
+            setStatusMessage("Data reset.");
+        }
     }
 
     private void setStatusMessage(String message) {

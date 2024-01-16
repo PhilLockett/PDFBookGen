@@ -62,7 +62,8 @@ public class PrimaryController {
      * Called by the FXML mechanism to initialize the controller. Called after 
      * the constructor to initialise all the controls.
      */
-    @FXML public void initialize() {
+    @FXML
+    public void initialize() {
         // System.out.println("PrimaryController initialized.");
         model.initialize();
 
@@ -130,13 +131,13 @@ public class PrimaryController {
     private Button browseButton;
 
     @FXML
-    void sourceDocumentTextFieldKeyTyped(KeyEvent event) {
+    private void sourceDocumentTextFieldKeyTyped(KeyEvent event) {
         // System.out.println("sourceDocumentTextFieldKeyTyped() " + event.toString());
         model.setOutputFileName(sourceDocumentTextField.getText());
     }
 
     @FXML
-    void outputFileNameTextFieldKeyTyped(KeyEvent event) {
+    private void outputFileNameTextFieldKeyTyped(KeyEvent event) {
         // System.out.println("outputFileNameTextFieldKeyTyped() " + event.toString());
         model.setOutputFileName(outputFileNameTextField.getText());
     }
@@ -172,7 +173,7 @@ public class PrimaryController {
     }
 
     @FXML
-    void browseButtonActionPerformed(ActionEvent event) {
+    private void browseButtonActionPerformed(ActionEvent event) {
         openFile();
         setStatusMessage("Loaded file: " + model.getSourceFilePath());
     }
@@ -212,12 +213,12 @@ public class PrimaryController {
     private Button generateButton;
 
     @FXML
-    void rotateCheckBoxActionPerformed(ActionEvent event) {
+    private void rotateCheckBoxActionPerformed(ActionEvent event) {
         model.setRotateCheck(rotateCheckBox.isSelected());
     }
 
     @FXML
-    void generateButtonActionPerformed(ActionEvent event) {
+    private void generateButtonActionPerformed(ActionEvent event) {
         final boolean success = model.generate();
         if (success)
             setStatusMessage("Generated: " + model.getOutputFilePath());
@@ -348,7 +349,7 @@ public class PrimaryController {
     private Button clearDataButton;
 
     @FXML
-    void clearDataButtonActionPerformed(ActionEvent event) {
+    private void clearDataButtonActionPerformed(ActionEvent event) {
         model.defaultSettings();
         syncUI();
         setStatusMessage("Data reset.");

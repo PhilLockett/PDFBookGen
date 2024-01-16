@@ -32,12 +32,12 @@
                         <KeyCodeCombination alt="DOWN" code="L" control="UP" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
                   </MenuItem>
-                  <MenuItem mnemonicParsing="false" onAction="#fileSaveOnAction" text="Save">
+                  <MenuItem fx:id="genMenuItem" mnemonicParsing="false" onAction="#fileSaveOnAction" text="Generate Booklet">
                      <accelerator>
-                        <KeyCodeCombination alt="DOWN" code="S" control="UP" meta="UP" shift="UP" shortcut="UP" />
+                        <KeyCodeCombination alt="DOWN" code="G" control="UP" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
                   </MenuItem>
-                  <MenuItem mnemonicParsing="false" onAction="#fileSaveAsOnAction" text="Save As..." />
+                  <MenuItem fx:id="asMenuItem" mnemonicParsing="false" onAction="#fileSaveAsOnAction" text="Generate Booklet As..." />
                   <SeparatorMenuItem mnemonicParsing="false" />
               <MenuItem mnemonicParsing="false" onAction="#fileCloseOnAction" text="Close">
                      <accelerator>

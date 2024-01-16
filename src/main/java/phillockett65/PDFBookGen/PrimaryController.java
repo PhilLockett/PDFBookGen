@@ -33,6 +33,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
@@ -101,7 +102,11 @@ public class PrimaryController {
      */
     private void syncUI() {
         sourceDocumentTextField.setText(model.getSourceFilePath());
-        generateButton.setDisable(!model.isSourceFilePath());
+
+        final boolean genAvailable = model.isSourceFilePath();
+        generateButton.setDisable(!genAvailable);
+        genMenuItem.setDisable(!genAvailable);
+        asMenuItem.setDisable(!genAvailable);
 
         outputFileNameTextField.setText(model.getOutputFileName());
 
@@ -122,6 +127,12 @@ public class PrimaryController {
     /************************************************************************
      * Support code for Pull-down Menu structure.
      */
+
+    @FXML
+    private MenuItem genMenuItem;
+
+    @FXML
+    private MenuItem asMenuItem;
 
     @FXML
     private void fileLoadOnAction() {

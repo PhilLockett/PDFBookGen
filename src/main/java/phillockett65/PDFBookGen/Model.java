@@ -76,6 +76,9 @@ public class Model {
 
         if (!readData())
             defaultSettings();
+
+        // Calculate the signature data AFTER reading previous settings.
+        BuildSignature();
     }
 
     /**
@@ -493,7 +496,6 @@ public class Model {
      */
     private void initializeSignatureStatePanel() {
         sigSizeSVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 8, 1);
-        BuildSignature();
     }
 
 

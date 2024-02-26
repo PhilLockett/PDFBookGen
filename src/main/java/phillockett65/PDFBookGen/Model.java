@@ -104,8 +104,7 @@ public class Model {
         setRotateCheck(true);
 
         setPageCount(100);
-        setFirstPage(1);
-        setLastPage(1);
+        setPageRanges(1, 100);
 
         setPaperSize("Letter");
         setSigSize(1);
@@ -162,8 +161,7 @@ public class Model {
         setPaperSize(data.getPaperSize());
         setSigSize(data.getSigSize());
     
-        setFirstPage(data.getFirstPage());
-        setLastPage(data.getLastPage());
+        setPageRanges(data.getFirstPage(), data.getLastPage());
     
         return true;
     }
@@ -327,7 +325,6 @@ public class Model {
     public SpinnerValueFactory<Integer> getFirstPageSVF() { return firstPageSVF; }
 
     private int getFirstPage() { return firstPageSVF.getValue(); }
-    private void setFirstPage(int value) { firstPageSVF.setValue(value); }
 
     /**
      * Selected first page has changed, so synchronize values.
@@ -348,7 +345,6 @@ public class Model {
     public SpinnerValueFactory<Integer> getLastPageSVF() { return lastPageSVF; }
 
     private int getLastPage() { return lastPageSVF.getValue(); }
-    private void setLastPage(int value) { lastPageSVF.setValue(value); }
 
     /**
      * Selected last page has changed, so synchronize values.
@@ -363,6 +359,25 @@ public class Model {
         lastPageSVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(first, getPageCount(), current);
     }
 
+    /**
+     * Used on start up to ensure first and last are well behaved, particularly
+     * if the source PDF has been reduced in size potentially making first or 
+     * last invalid.
+     * @param first selected page of source PDF to output.
+     * @param last selected page of source PDF to output.
+     */
+    private void setPageRanges(int first, int last) {
+        final int count = getPageCount();
+
+        if (last > count)
+            last = count;
+        if (first > last)
+            first = last;
+
+        firstPageSVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, last, first);
+        lastPageSVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(first, count, last);
+        BuildSignature();
+    }
 
     /**
      * Use a PDFBook instance to generate booklet.

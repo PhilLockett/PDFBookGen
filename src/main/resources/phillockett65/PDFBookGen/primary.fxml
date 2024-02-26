@@ -93,10 +93,10 @@
          <content>
             <GridPane hgap="4.0" vgap="4.0">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="206.199951171875" minWidth="10.0" prefWidth="123.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="277.6" minWidth="10.0" prefWidth="150.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="327.9999755859375" minWidth="10.0" prefWidth="262.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="327.9999755859375" minWidth="10.0" prefWidth="120.39996337890625" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="206.199951171875" minWidth="10.0" prefWidth="117.60001678466799" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="277.6" minWidth="10.0" prefWidth="155.99998321533207" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="327.9999755859375" minWidth="10.0" prefWidth="108.800048828125" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="327.9999755859375" minWidth="10.0" prefWidth="271.199951171875" />
               </columnConstraints>
               <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -104,17 +104,19 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <CheckBox fx:id="rotateCheckBox" mnemonicParsing="false" onAction="#rotateCheckBoxActionPerformed" text="Rotate Reverse Side of Sheet" GridPane.columnIndex="2" />
+                  <CheckBox fx:id="rotateCheckBox" mnemonicParsing="false" onAction="#rotateCheckBoxActionPerformed" text="Rotate Reverse Side of Sheet" GridPane.columnIndex="2" GridPane.columnSpan="2147483647" />
                   <Label text="First Page:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
                   <Label text="Last Page:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
                   <Spinner fx:id="firstPageSpinner" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Spinner fx:id="lastPageSpinner" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Label fx:id="countLabel" prefHeight="18.0" prefWidth="140.0" text="Total page count: 1" GridPane.columnIndex="2" GridPane.rowIndex="2">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font></Label>
+                  <Label text="Total page count:" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.rowSpan="2147483647" />
                   <Label text="Output Paper Size:" GridPane.halignment="RIGHT" />
                   <ChoiceBox fx:id="paperSizeChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" />
+                  <Label fx:id="countLabel" text="PageCount" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.rowSpan="2147483647">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
                </children>
             </GridPane>
          </content>

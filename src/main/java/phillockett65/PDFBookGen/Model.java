@@ -329,14 +329,15 @@ public class Model {
     /**
      * Selected first page has changed, so synchronize values.
      */
-    public void syncFirstPage() { setLastPageRange(); BuildSignature(); }
+    public void syncFirstPage() {
+        // Make sure Last Page spinner has a minimum of the new First Page value.
+        final int first = getFirstPage();
+        int current = getLastPage();
+        if (current < first)
+            current = first;
+        lastPageSVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(first, getPageCount(), current);
 
-    private void setFirstPageRange() {
-        final int last = getLastPage();
-        int current = getFirstPage();
-        if (current > last)
-            current = last;
-        firstPageSVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, last, current);
+        BuildSignature();
     }
 
     /**
@@ -349,15 +350,17 @@ public class Model {
     /**
      * Selected last page has changed, so synchronize values.
      */
-    public void syncLastPage() { setFirstPageRange(); BuildSignature(); }
+    public void syncLastPage() {
+        // Make sure First Page spinner has a maximum of the new Last Page value.
+        final int last = getLastPage();
+        int current = getFirstPage();
+        if (current > last)
+            current = last;
+        firstPageSVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, last, current);
 
-    private void setLastPageRange() {
-        final int first = getFirstPage();
-        int current = getLastPage();
-        if (current < first)
-            current = first;
-        lastPageSVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(first, getPageCount(), current);
+        BuildSignature();
     }
+
 
     /**
      * Used on start up to ensure first and last are well behaved, particularly

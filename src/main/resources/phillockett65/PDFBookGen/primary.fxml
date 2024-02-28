@@ -21,7 +21,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="507.0" prefWidth="703.0" spacing="8.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="phillockett65.PDFBookGen.PrimaryController">
+<VBox alignment="CENTER" prefHeight="548.0" prefWidth="703.0" spacing="8.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="phillockett65.PDFBookGen.PrimaryController">
    <children>
       <MenuBar>
         <menus>
@@ -78,6 +78,7 @@
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
                   <Label text="Source Document:" GridPane.halignment="RIGHT" />
@@ -85,6 +86,8 @@
                   <Label text="Output File Name:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
                   <TextField fx:id="outputFileNameTextField" onKeyTyped="#outputFileNameTextFieldKeyTyped" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Button fx:id="browseButton" mnemonicParsing="false" onAction="#browseButtonActionPerformed" text="Load..." GridPane.columnIndex="3" GridPane.halignment="RIGHT" />
+                  <Label text="Generate Document:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                  <TextField fx:id="outputDocumentTextField" editable="false" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" />
                </children>
             </GridPane>
          </content>
@@ -94,8 +97,8 @@
             <GridPane hgap="4.0" vgap="4.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="206.199951171875" minWidth="10.0" prefWidth="117.60001678466799" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="277.6" minWidth="10.0" prefWidth="155.99998321533207" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="327.9999755859375" minWidth="10.0" prefWidth="108.800048828125" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="277.6" minWidth="10.0" prefWidth="148.5999755859375" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="327.9999755859375" minWidth="10.0" prefWidth="115.00002441406252" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="327.9999755859375" minWidth="10.0" prefWidth="271.199951171875" />
               </columnConstraints>
               <rowConstraints>

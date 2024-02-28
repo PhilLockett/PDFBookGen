@@ -111,6 +111,7 @@ public class PrimaryController {
         asMenuItem.setDisable(!genAvailable);
 
         outputFileNameTextField.setText(model.getOutputFileName());
+        outputDocumentTextField.setText(model.getOutputFilePath());
 
         syncFirstPageSpinner();
         syncLastPageSpinner();
@@ -207,6 +208,9 @@ public class PrimaryController {
     private TextField outputFileNameTextField;
 
     @FXML
+    private TextField outputDocumentTextField;
+
+    @FXML
     private Button browseButton;
 
     @FXML
@@ -219,6 +223,7 @@ public class PrimaryController {
     private void outputFileNameTextFieldKeyTyped(KeyEvent event) {
         // System.out.println("outputFileNameTextFieldKeyTyped() " + event.toString());
         model.setOutputFileName(outputFileNameTextField.getText());
+        outputDocumentTextField.setText(model.getOutputFilePath());
     }
 
     @FXML
@@ -280,6 +285,8 @@ public class PrimaryController {
         File file = fileChooser.showSaveDialog(model.getStage());
         if (file != null) {
             model.setOutputFilePath(file.getAbsolutePath());
+            outputFileNameTextField.setText(model.getOutputFileName());
+            outputDocumentTextField.setText(model.getOutputFilePath());
 
             return model.generate();
         }
@@ -294,6 +301,7 @@ public class PrimaryController {
     private void initializeFileNamesPanel() {
         sourceDocumentTextField.setTooltip(new Tooltip("Source PDF document"));
         outputFileNameTextField.setTooltip(new Tooltip("Name of generated output file, .pdf will be added automatically"));
+        outputDocumentTextField.setTooltip(new Tooltip("Full path of generated output file"));
         browseButton.setTooltip(new Tooltip("Select source PDF document"));
     }
 

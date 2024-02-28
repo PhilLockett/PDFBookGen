@@ -99,7 +99,7 @@ public class Model {
      */
     public void defaultSettings() {
         setSourceFilePath("");
-        setOutputFileName("booklet");
+        setOutputFilePath("./booklet");
 
         setRotateCheck(true);
 
@@ -124,7 +124,7 @@ public class Model {
         DataStore data = new DataStore();
 
         data.setSourceDocument(getSourceFilePath());
-        data.setOutputFileName(getOutputFileName());
+        data.setOutputFilePath(getOutputFilePath());
 
         data.setRotateCheck(isRotateCheck());
 
@@ -154,7 +154,7 @@ public class Model {
             return false;
 
         setSourceFilePath(data.getSourceDocument());
-        setOutputFileName(data.getOutputFileName());
+        setOutputFilePath(data.getOutputFilePath());
 
         setRotateCheck(data.isRotateCheck());
 
@@ -236,8 +236,8 @@ public class Model {
     public void setOutputFileName(String text) { outputFilePath = getOutputFileParent() + "\\" + text + ".pdf"; }
 
     /**
-     * Set the file name for the generated PDF document.
-     * @param text string of the file name for the generated document.
+     * Set the file path for the generated PDF document.
+     * @param text string of the file path for the generated document.
      */
     public void setOutputFilePath(String text) { outputFilePath = text; }
 

@@ -55,8 +55,8 @@ public class DataStore implements Serializable {
 
     public String getSourceDocument() { return sourceDocument; }
     public void setSourceDocument(String text) { this.sourceDocument = text; }
-    public String getOutputFileName() { return outputFileName; }
-    public void setOutputFileName(String text) { this.outputFileName = text; }
+    public String getOutputFilePath() { return outputFileName; }
+    public void setOutputFilePath(String text) { this.outputFileName = text; }
 
     public String getPaperSize() { return paperSize; }
     public void setPaperSize(String value) { this.paperSize = value; }

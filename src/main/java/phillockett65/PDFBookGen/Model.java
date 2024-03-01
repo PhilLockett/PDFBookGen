@@ -513,7 +513,7 @@ public class Model {
      * Initialize "Signature State" panel.
      */
     private void initializeSignatureStatePanel() {
-        sigSizeSVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 8, 1);
+        sigSizeSVF = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 12, 1);
     }
 
 

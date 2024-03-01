@@ -37,7 +37,10 @@
                         <KeyCodeCombination alt="DOWN" code="G" control="UP" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
                   </MenuItem>
-                  <MenuItem fx:id="asMenuItem" mnemonicParsing="false" onAction="#fileSaveAsOnAction" text="Generate Booklet As..." />
+                  <MenuItem fx:id="asMenuItem" mnemonicParsing="false" onAction="#fileSaveAsOnAction" text="Generate Booklet As...">
+                     <accelerator>
+                        <KeyCodeCombination alt="DOWN" code="G" control="UP" meta="UP" shift="DOWN" shortcut="UP" />
+                     </accelerator></MenuItem>
                   <SeparatorMenuItem mnemonicParsing="false" />
               <MenuItem mnemonicParsing="false" onAction="#fileCloseOnAction" text="Close">
                      <accelerator>

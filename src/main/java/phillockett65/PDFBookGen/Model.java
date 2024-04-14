@@ -436,44 +436,6 @@ public class Model {
     public void syncSigSize() { BuildSignature(); }
 
 
-     /**
-     * Class to encapsulate necessary calculations for changes to the selected 
-     * first source page, last source page or the count of sheets in a 
-     * signature. A source page is a page from the source document. The 
-     * generated document has 2 source pages on each page. Pages are printed 
-     * on both sides, so there are 4 source pages on each printed sheet.
-     * 
-     * Available values calculated are:
-     *   o Number of source pages in the generated document
-     *   o Number of source pages in a signature
-     *   o Number of signatures that will be generated
-     *   o Source page number that the last signature starts with
-     *   o Number of source pages in the last signature
-     *   o Number of blank pages in the last signature
-     */
-    private class Signature {
-        public final int pageCount;
-        public final int sigPageCount;
-        public final int sigCount;
-        public final int lastSigFirstPage;
-        public final int lastSigPageCount;
-        public final int lastSigBlankCount;
-
-        public Signature(int sigSize, int firstPage, int lastPage)
-        {
-            final int pageDiff = lastPage - firstPage;
-            pageCount = pageDiff + 1;
-            sigPageCount = sigSize * 4;
-            final int fullSigCount = pageDiff / sigPageCount;
-            final int fullSigPageCount = fullSigCount * sigPageCount;
-            sigCount = fullSigCount + 1;
-            lastSigFirstPage = firstPage + fullSigPageCount;
-            lastSigPageCount = pageCount - fullSigPageCount;
-            lastSigBlankCount = sigPageCount - lastSigPageCount;
-        }
-
-    }
-    
     private void BuildSignature() {
         signature = new Signature(getSigSize(), getFirstPage(), getLastPage());
     }
@@ -481,32 +443,32 @@ public class Model {
     /**
      * @return the number of source pages in the generated document.
      */
-    public int getOutputPageCount() { return signature.pageCount; }
+    public int getOutputPageCount() { return signature.getOutputPageCount(); }
 
     /**
      * @return the number of source pages in a signature.
      */
-    public int getSigPageCount() { return signature.sigPageCount; }
+    public int getSigPageCount() { return signature.getSigPageCount(); }
 
     /**
      * @return the number of signatures that will be generated.
      */
-    public int getSigCount() { return signature.sigCount; }
+    public int getSigCount() { return signature.getSigCount(); }
 
     /**
      * @return the source page number that the last signature starts with.
      */
-    public int getLastSigFirstPage() { return signature.lastSigFirstPage; }
+    public int getLastSigFirstPage() { return signature.getLastSigFirstPage(); }
 
     /**
      * @return the number of source pages in the last signature.
      */
-    public int getLastSigPageCount() { return signature.lastSigPageCount; }
+    public int getLastSigPageCount() { return signature.getLastSigPageCount(); }
 
     /**
      * @return the number of blank pages in the last signature.
      */
-    public int getLastSigBlankCount() { return signature.lastSigBlankCount; }
+    public int getLastSigBlankCount() { return signature.getLastSigBlankCount(); }
 
 
     /**

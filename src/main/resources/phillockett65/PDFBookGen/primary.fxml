@@ -21,7 +21,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="548.0" prefWidth="703.0" spacing="8.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="phillockett65.PDFBookGen.PrimaryController">
+
+<VBox stylesheets="@application.css" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="phillockett65.PDFBookGen.PrimaryController">
    <children>
       <MenuBar>
         <menus>
@@ -40,7 +41,8 @@
                   <MenuItem fx:id="asMenuItem" mnemonicParsing="false" onAction="#fileSaveAsOnAction" text="Generate Booklet As...">
                      <accelerator>
                         <KeyCodeCombination alt="DOWN" code="G" control="UP" meta="UP" shift="DOWN" shortcut="UP" />
-                     </accelerator></MenuItem>
+                     </accelerator>
+                  </MenuItem>
                   <SeparatorMenuItem mnemonicParsing="false" />
               <MenuItem mnemonicParsing="false" onAction="#fileCloseOnAction" text="Close">
                      <accelerator>
@@ -69,122 +71,135 @@
           </Menu>
         </menus>
       </MenuBar>
-      <TitledPane collapsible="false" text="File Names">
-         <content>
-            <GridPane hgap="4.0" vgap="4.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="144.20001220703125" minWidth="10.0" prefWidth="117.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="236.0" minWidth="10.0" prefWidth="227.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="258.0000671386719" minWidth="10.0" prefWidth="237.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="158.20001220703125" minWidth="10.0" prefWidth="72.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <Label text="Source Document:" GridPane.halignment="RIGHT" />
-                  <TextField fx:id="sourceDocumentTextField" editable="false" onKeyTyped="#sourceDocumentTextFieldKeyTyped" GridPane.columnIndex="1" GridPane.columnSpan="2" />
-                  <Label text="Output File Name:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-                  <TextField fx:id="outputFileNameTextField" onKeyTyped="#outputFileNameTextFieldKeyTyped" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Button fx:id="browseButton" mnemonicParsing="false" onAction="#browseButtonActionPerformed" text="Load..." GridPane.columnIndex="3" GridPane.halignment="RIGHT" />
-                  <Label text="Generate Document:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
-                  <TextField fx:id="outputDocumentTextField" editable="false" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" />
-               </children>
-            </GridPane>
-         </content>
-      </TitledPane>
-      <TitledPane collapsible="false" layoutX="30.0" layoutY="137.0" text="Output Content">
-         <content>
-            <GridPane hgap="4.0" vgap="4.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="206.199951171875" minWidth="10.0" prefWidth="117.60001678466799" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="277.6" minWidth="10.0" prefWidth="148.5999755859375" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="327.9999755859375" minWidth="10.0" prefWidth="115.00002441406252" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="327.9999755859375" minWidth="10.0" prefWidth="271.199951171875" />
-              </columnConstraints>
-              <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <CheckBox fx:id="rotateCheckBox" mnemonicParsing="false" onAction="#rotateCheckBoxActionPerformed" text="Rotate Reverse Side of Sheet" GridPane.columnIndex="2" GridPane.columnSpan="2147483647" />
-                  <Label text="First Page:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-                  <Label text="Last Page:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
-                  <Spinner fx:id="firstPageSpinner" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Spinner fx:id="lastPageSpinner" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Label text="Total page count:" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.rowSpan="2147483647" />
-                  <Label text="Output Paper Size:" GridPane.halignment="RIGHT" />
-                  <ChoiceBox fx:id="paperSizeChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" />
-                  <Label fx:id="countLabel" text="PageCount" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.rowSpan="2147483647">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-               </children>
-            </GridPane>
-         </content>
-      </TitledPane>
-      <TitledPane collapsible="false" text="Signature State">
-         <content>
-            <GridPane hgap="4.0" vgap="4.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="158.20001220703125" minWidth="10.0" prefWidth="118.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="292.8000015258789" minWidth="10.0" prefWidth="149.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="266.79998779296875" minWidth="10.0" prefWidth="239.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="161.99996948242188" minWidth="10.0" prefWidth="144.80002441406248" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <Label prefHeight="17.0" prefWidth="82.0" text="Signature Size:" GridPane.halignment="RIGHT" />
-                  <Label text="Pages per Signature:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-                  <Label fx:id="sigLabel" text="PagePerSig" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font></Label>
-                  <Label text="Signature Count:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
-                  <Label fx:id="sigCountLabel" text="SigCount" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font></Label>
-                  <Label text="Last Signature begins at page:" GridPane.columnIndex="2" GridPane.halignment="RIGHT" />
-                  <Label text="Last Signature page count:" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-                  <Label text="Last Signature blank pages:" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
-                  <Label fx:id="lastSigBeginLabel" text="LastSigPage" GridPane.columnIndex="3">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font></Label>
-                  <Label fx:id="lastSigCountLabel" text="LastSigPages" GridPane.columnIndex="3" GridPane.rowIndex="1">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font></Label>
-                  <Label fx:id="lastSigBlanksLabel" text="LastSigBlanks" GridPane.columnIndex="3" GridPane.rowIndex="2">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font></Label>
-                  <Spinner fx:id="sigSizeSpinner" GridPane.columnIndex="1" />
-               </children>
-            </GridPane>
-         </content>
-      </TitledPane>
-      <HBox>
+      <VBox alignment="CENTER" prefWidth="703.0" spacing="4.0">
+         <children>
+            <TitledPane collapsible="false" text="File Names">
+               <content>
+                  <GridPane hgap="4.0" vgap="4.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="144.20001220703125" minWidth="10.0" prefWidth="117.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="236.0" minWidth="10.0" prefWidth="227.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="258.0000671386719" minWidth="10.0" prefWidth="237.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="158.20001220703125" minWidth="10.0" prefWidth="72.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="Source Document:" GridPane.halignment="RIGHT" />
+                        <TextField fx:id="sourceDocumentTextField" editable="false" onKeyTyped="#sourceDocumentTextFieldKeyTyped" GridPane.columnIndex="1" GridPane.columnSpan="2" />
+                        <Label text="Output File Name:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                        <TextField fx:id="outputFileNameTextField" onKeyTyped="#outputFileNameTextFieldKeyTyped" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Button fx:id="browseButton" mnemonicParsing="false" onAction="#browseButtonActionPerformed" text="Load..." GridPane.columnIndex="3" GridPane.halignment="RIGHT" />
+                        <Label text="Generate Document:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                        <TextField fx:id="outputDocumentTextField" editable="false" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+                     </children>
+                  </GridPane>
+               </content>
+            </TitledPane>
+            <TitledPane collapsible="false" layoutX="30.0" layoutY="137.0" text="Output Content">
+               <content>
+                  <GridPane hgap="4.0" vgap="4.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="206.199951171875" minWidth="10.0" prefWidth="117.60001678466799" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="277.6" minWidth="10.0" prefWidth="148.5999755859375" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="327.9999755859375" minWidth="10.0" prefWidth="115.00002441406252" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="327.9999755859375" minWidth="10.0" prefWidth="271.199951171875" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <CheckBox fx:id="rotateCheckBox" mnemonicParsing="false" onAction="#rotateCheckBoxActionPerformed" text="Rotate Reverse Side of Sheet" GridPane.columnIndex="2" GridPane.columnSpan="2147483647" />
+                        <Label text="First Page:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                        <Label text="Last Page:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                        <Spinner fx:id="firstPageSpinner" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Spinner fx:id="lastPageSpinner" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label text="Total page count:" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.rowSpan="2147483647" />
+                        <Label text="Output Paper Size:" GridPane.halignment="RIGHT" />
+                        <ChoiceBox fx:id="paperSizeChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" />
+                        <Label fx:id="countLabel" text="PageCount" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.rowSpan="2147483647">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </GridPane>
+               </content>
+            </TitledPane>
+            <TitledPane collapsible="false" text="Signature State">
+               <content>
+                  <GridPane hgap="4.0" vgap="4.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="158.20001220703125" minWidth="10.0" prefWidth="118.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="292.8000015258789" minWidth="10.0" prefWidth="149.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="266.79998779296875" minWidth="10.0" prefWidth="239.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="161.99996948242188" minWidth="10.0" prefWidth="144.80002441406248" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="82.0" text="Signature Size:" GridPane.halignment="RIGHT" />
+                        <Label text="Pages per Signature:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                        <Label fx:id="sigLabel" text="PagePerSig" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label text="Signature Count:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                        <Label fx:id="sigCountLabel" text="SigCount" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label text="Last Signature begins at page:" GridPane.columnIndex="2" GridPane.halignment="RIGHT" />
+                        <Label text="Last Signature page count:" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                        <Label text="Last Signature blank pages:" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                        <Label fx:id="lastSigBeginLabel" text="LastSigPage" GridPane.columnIndex="3">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lastSigCountLabel" text="LastSigPages" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lastSigBlanksLabel" text="LastSigBlanks" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Spinner fx:id="sigSizeSpinner" GridPane.columnIndex="1" />
+                     </children>
+                  </GridPane>
+               </content>
+            </TitledPane>
+         </children>
+         <padding>
+            <Insets left="4.0" right="4.0" top="4.0" />
+         </padding>
+      </VBox>
+      <HBox alignment="CENTER">
          <children>
             <Label fx:id="statusLabel" text="Ready">
                <font>
                   <Font size="14.0" />
-               </font></Label>
+               </font>
+            </Label>
             <Region HBox.hgrow="ALWAYS" />
             <Button fx:id="generateButton" disable="true" mnemonicParsing="false" onAction="#generateButtonActionPerformed" text="Generate" />
          </children>
+         <padding>
+            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+         </padding>
       </HBox>
    </children>
-   <padding>
-      <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-   </padding>
 </VBox>
